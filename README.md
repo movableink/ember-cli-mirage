@@ -1,3 +1,9 @@
+# What is this thing??
+
+We are currently stuck on `ember-cli-mirage@0.2.9`. This is a custom fork of it, modified to fit better into a modern Ember build process.
+
+***
+
 [![Build Status](https://travis-ci.org/samselikoff/ember-cli-mirage.svg?branch=master)](https://travis-ci.org/samselikoff/ember-cli-mirage)
 [![npm version](https://badge.fury.io/js/ember-cli-mirage.svg)](http://badge.fury.io/js/ember-cli-mirage)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-mirage.svg)](http://emberobserver.com/addons/ember-cli-mirage)
