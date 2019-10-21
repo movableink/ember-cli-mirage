@@ -1,36 +1,32 @@
-import Ember from 'ember';
-import {module, test} from 'qunit';
-import startApp from '../helpers/start-app';
+import { currentRouteName, find, visit } from '@ember/test-helpers';
+import { module, skip } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import { startMirage } from 'dummy/initializers/ember-cli-mirage';
 import ENV from 'dummy/config/environment';
+import setupMirage from '../helpers/setup-mirage';
 
-const { run } = Ember;
+module('Acceptance: Manually starting Mirage', function(hooks) {
+  setupApplicationTest(hooks);
 
-let App;
-
-module('Acceptance: Manually starting Mirage', {
-  beforeEach() {
+  hooks.beforeEach(function() {
     ENV['ember-cli-mirage'] = { enabled: false };
-    App = startApp();
-  },
+  });
 
-  afterEach() {
-    server.shutdown();
-    run(App, 'destroy');
+  setupMirage(hooks);
+
+  hooks.afterEach(function() {
     ENV['ember-cli-mirage'].enabled = undefined;
-  }
-});
+  });
 
-test('The server can be started manually when configured with { enabled: false }', function(assert) {
-  assert.equal(window.server, undefined, 'There is no server at first');
-  startMirage();
-  assert.ok(window.server, 'There is a server after starting');
+  skip('The server can be started manually when configured with { enabled: false }', async function(assert) {
+    assert.equal(this.server, undefined, 'There is no server at first');
+    this.server = startMirage();
+    assert.ok(this.server, 'There is a server after starting');
 
-  let contact = server.create('contact');
-  visit('/1');
+    let contact = this.server.create('contact');
+    await visit('/1');
 
-  andThen(function() {
     assert.equal(currentRouteName(), 'contact');
-    assert.equal(find('p:first').text(), `The contact is ${contact.name}`, 'The manually started server works');
+    assert.dom(find('p:first')).hasText(`The contact is ${contact.name}`, 'The manually started server works');
   });
 });

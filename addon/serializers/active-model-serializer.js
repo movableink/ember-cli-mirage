@@ -1,5 +1,10 @@
 import Serializer from '../serializer';
-import { underscore, pluralize, dasherize, singularize } from '../utils/inflector';
+import {
+  underscore,
+  pluralize,
+  dasherize,
+  singularize
+} from '../utils/inflector';
 
 export default Serializer.extend({
 

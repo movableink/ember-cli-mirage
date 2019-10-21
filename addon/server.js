@@ -1,8 +1,9 @@
 /* eslint no-console: 0 */
 
+import { Promise } from 'rsvp';
+
 import { pluralize, camelize } from './utils/inflector';
 import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
-import Ember from 'ember';
 import isAssociation from 'ember-cli-mirage/utils/is-association';
 import Pretender from 'pretender';
 import Db from './db';
@@ -16,8 +17,6 @@ import _assign from 'lodash/assign';
 import _find from 'lodash/find';
 import _isPlainObject from 'lodash/isPlainObject';
 import _isInteger from 'lodash/isInteger';
-
-const { RSVP: { Promise } } = Ember;
 
 /**
  * Creates a new Pretender instance.

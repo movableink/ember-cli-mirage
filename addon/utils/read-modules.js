@@ -1,13 +1,11 @@
-/* global requirejs, require */
+/* global requirejs */
 /* eslint-env node */
+import { assert } from '@ember/debug';
+
 'use strict';
 
-import Ember from 'ember';
 import _camelCase from 'lodash/camelCase';
 import { pluralize } from 'ember-cli-mirage/utils/inflector';
-import require from 'require';
-
-const { assert } = Ember;
 
 /*
   This function looks through all files that have been loaded by Ember CLI and

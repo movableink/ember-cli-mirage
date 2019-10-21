@@ -1,13 +1,20 @@
-/* eslint-env node */
 'use strict';
+
 var path = require('path');
 var mergeTrees = require('broccoli-merge-trees');
 var Funnel = require('broccoli-funnel');
 
 module.exports = {
-  name: 'ember-cli-mirage',
+  name: require('./package').name,
 
   options: {
+    babel: {
+      include: [
+        // Some code relies on being able to call an ES class constructor without `new`
+        '@babel/plugin-transform-classes'
+      ]
+    },
+
     nodeAssets: {
       'route-recognizer': npmAsset({
         path: 'dist/route-recognizer.js',
@@ -19,7 +26,7 @@ module.exports = {
     }
   },
 
-  included: function included() {
+  included() {
     var app;
 
     // If the addon has the _findHost() method (in ember-cli >= 2.7.0), we'll just
@@ -60,11 +67,11 @@ module.exports = {
     }
   },
 
-  blueprintsPath: function() {
+  blueprintsPath() {
     return path.join(__dirname, 'blueprints');
   },
 
-  treeFor: function(name) {
+  treeFor() {
     if (!this._shouldIncludeFiles()) {
       return;
     }
@@ -72,7 +79,7 @@ module.exports = {
     return this._super.treeFor.apply(this, arguments);
   },
 
-  _lintMirageTree: function(mirageTree) {
+  _lintMirageTree(mirageTree) {
     var lintedMirageTrees;
     // _eachProjectAddonInvoke was added in ember-cli@2.5.0
     // this conditional can be removed when we no longer support
@@ -97,7 +104,7 @@ module.exports = {
     });
   },
 
-  treeForApp: function(appTree) {
+  treeForApp(appTree) {
     var trees = [ appTree ];
     var mirageFilesTree = new Funnel(this.mirageDirectory, {
       destDir: 'mirage'
@@ -111,7 +118,7 @@ module.exports = {
     return mergeTrees(trees);
   },
 
-  _shouldIncludeFiles: function() {
+  _shouldIncludeFiles() {
     if (process.env.EMBER_CLI_FASTBOOT) {
       return false;
     }

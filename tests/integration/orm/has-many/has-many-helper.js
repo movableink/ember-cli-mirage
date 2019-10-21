@@ -2,7 +2,12 @@ import Model from 'ember-cli-mirage/orm/model';
 import Schema from 'ember-cli-mirage/orm/schema';
 import Db from 'ember-cli-mirage/db';
 import { hasMany } from 'ember-cli-mirage';
-import { pluralize, singularize, capitalize, camelize } from 'ember-cli-mirage/utils/inflector';
+import {
+  pluralize,
+  singularize,
+  capitalize,
+  camelize
+} from 'ember-cli-mirage/utils/inflector';
 import _ from 'lodash';
 
 /*

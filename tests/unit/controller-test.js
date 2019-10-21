@@ -2,7 +2,7 @@
 // import Db from 'ember-cli-mirage/db';
 // import Response from 'ember-cli-mirage/response';
 
-// import {module, test} from 'qunit';
+// import { module, test } from 'qunit';
 
 // var contacts = [{id: 1, name: 'Link', address_ids: [1]}, {id: 2, name: 'Zelda', address_ids: [2]}];
 // var addresses = [{id: 1, name: '123 Hyrule Way', contact_id: 1}, {id: 2, name: '456 Hyrule Way', contact_id: 2}];

@@ -1,29 +1,30 @@
-import {test} from 'qunit';
-import moduleForAcceptance from '../helpers/module-for-acceptance';
+import { click, currentRouteName, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import setupMirage from '../helpers/setup-mirage';
 
 let contact;
 
-moduleForAcceptance('Acceptance | Contact', {
-  beforeEach() {
-    contact = server.create('contact');
-  }
-});
+module('Acceptance | Contact', function(hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
 
-test('I can view a contact', function(assert) {
-  visit('/1');
-
-  andThen(function() {
-    assert.equal(currentRouteName(), 'contact');
-    assert.equal(find('p:first').text(), `The contact is ${contact.name}`);
+  hooks.beforeEach(function() {
+    contact = this.server.create('contact');
   });
-});
 
-test('I can delete a contact', function(assert) {
-  visit('/1');
-  click('button:contains(Delete)');
+  test('I can view a contact', async function(assert) {
+    await visit('/1');
 
-  andThen(function() {
+    assert.equal(currentRouteName(), 'contact');
+    assert.dom('p').hasText(`The contact is ${contact.name}`);
+  });
+
+  test('I can delete a contact', async function(assert) {
+    await visit('/1');
+    await click('[data-test-delete-button]');
+
     assert.equal(currentRouteName(), 'contacts');
-    assert.equal(find('p').length, 0);
+    assert.dom('p').doesNotExist();
   });
 });

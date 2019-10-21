@@ -2,4 +2,6 @@ import DS from 'ember-data';
 
 const { JSONAPIAdapter }  = DS;
 
-export default JSONAPIAdapter;
+export default JSONAPIAdapter.extend({
+  useFetch: false
+});

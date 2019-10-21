@@ -1,5 +1,6 @@
 /* eslint-env node */
 'use strict';
+
 var fs = require('fs');
 
 function usingProxy() {
@@ -12,7 +13,9 @@ function usingProxy() {
   try {
     fs.lstatSync(proxiesDir);
     hasGeneratedProxies = true;
-  } catch (e) {}
+  } catch (e) {
+    // Swallow error
+  }
 
   return usingProxyArg || hasGeneratedProxies;
 }

@@ -1,33 +1,38 @@
-import {test} from 'qunit';
-import moduleForAcceptance from '../helpers/module-for-acceptance';
+import { click, fillIn, currentRouteName, findAll, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import setupMirage from '../helpers/setup-mirage';
 
 let pets;
 
-moduleForAcceptance('Acceptance | Pets', {
-  beforeEach() {
-    pets = server.createList('pet', 3);
-  }
-});
+module('Acceptance | Pets', function(hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
 
-test('I can view the pets', function(assert) {
-  visit('/pets');
-
-  andThen(function() {
-    assert.equal(currentRouteName(), 'pets');
-    assert.equal(find('li').length, 3);
-    assert.equal(find('li:first .name').text().trim(), pets[0].name);
+  hooks.beforeEach(function() {
+    pets = this.server.createList('pet', 3);
   });
-});
 
-test('I can create a new pet', function(assert) {
-  visit('/pets');
+  test('I can view the pets', async function(assert) {
+    await visit('/pets');
 
-  fillIn('input', 'Brownie');
-  click('button:contains(create)');
-
-  andThen(function() {
     assert.equal(currentRouteName(), 'pets');
-    assert.equal(find('li').length, 4);
-    assert.equal(find('li:last .name').text(), 'Brownie');
+    assert.dom('li').exists({ count: 3 });
+
+    const petNameElements = findAll('li .name');
+    assert.dom(petNameElements[0]).hasText(pets[0].name);
+  });
+
+  test('I can create a new pet', async function(assert) {
+    await visit('/pets');
+
+    await fillIn('input', 'Brownie');
+    await click('[data-test-create-button]');
+
+    assert.equal(currentRouteName(), 'pets');
+    assert.dom('li').exists({ count: 4 });
+
+    const names = findAll('li .name');
+    assert.dom(names[names.length - 1]).hasText('Brownie');
   });
 });

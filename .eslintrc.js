@@ -1,31 +1,61 @@
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2018,
     sourceType: 'module'
   },
+  plugins: [
+    'ember'
+  ],
   extends: [
     'eslint:recommended',
-    'plugin:ember-suave/recommended'
+    'plugin:ember/recommended'
   ],
   env: {
-    'browser': true
+    browser: true
   },
   rules: {
-    'camelcase': 0,
-    'ember-suave/no-direct-property-access': 0,
-    'ember-suave/prefer-destructuring': 0,
-    'object-curly-spacing': 0,
-    'quotes': 0,
-    'array-bracket-spacing': 0,
-    'no-var': 0,
-    'object-shorthand': 0,
-    'arrow-parens': 0,
-    'no-unused-vars': ['error', { 'args': 'none' }]
+    // Get old code working with new Ember lint rules
+    'ember/avoid-leaking-state-in-ember-objects': 'off',
+    'ember/jquery-ember-run': 'off',
+    'ember/no-attrs-in-components': 'off',
+    'ember/no-invalid-debug-function-arguments': 'off',
+    'ember/no-jquery': 'off',
   },
   globals: {
-    faker: true,
-    server: true,
-    $: true
-  }
+    faker: true
+  },
+  overrides: [
+    // node files
+    {
+      files: [
+        '.eslintrc.js',
+        '.template-lintrc.js',
+        'ember-cli-build.js',
+        'index.js',
+        'testem.js',
+        'blueprints/*/index.js',
+        'config/**/*.js',
+        'tests/dummy/config/**/*.js'
+      ],
+      excludedFiles: [
+        'addon/**',
+        'addon-test-support/**',
+        'app/**',
+        'tests/dummy/app/**'
+      ],
+      parserOptions: {
+        sourceType: 'script'
+      },
+      env: {
+        browser: false,
+        node: true
+      },
+      plugins: ['node'],
+      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
+        // add your custom rules and overrides for node files here
+      })
+    }
+  ]
 };

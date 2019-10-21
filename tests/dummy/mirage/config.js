@@ -1,7 +1,5 @@
+import { isBlank } from '@ember/utils';
 import Mirage from 'ember-cli-mirage';
-import Ember from 'ember';
-
-const { isBlank } = Ember;
 
 export default function() {
   // Contacts

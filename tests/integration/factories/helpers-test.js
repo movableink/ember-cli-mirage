@@ -1,9 +1,16 @@
 import { module, test } from 'qunit';
-import { Model, Factory, belongsTo, hasMany, trait, association } from 'ember-cli-mirage';
+import {
+  Model,
+  Factory,
+  belongsTo,
+  hasMany,
+  trait,
+  association
+} from 'ember-cli-mirage';
 import Server from 'ember-cli-mirage/server';
 
-module('Integration | Server | Factories | helpers', {
-  beforeEach() {
+module('Integration | Server | Factories | helpers', function(hooks) {
+  hooks.beforeEach(function() {
     this.server = new Server({
       environment: 'test',
       models: {
@@ -36,48 +43,49 @@ module('Integration | Server | Factories | helpers', {
         })
       }
     });
-  },
-  afterEach() {
+  });
+
+  hooks.afterEach(function() {
     this.server.shutdown();
-  }
-});
+  });
 
-test('it creates associations with "association" helper combininig with traits', function(assert) {
-  this.server.create('post', 'withCategory');
+  test('it creates associations with "association" helper combininig with traits', function(assert) {
+    this.server.create('post', 'withCategory');
 
-  assert.equal(this.server.db.posts.length, 1);
-  assert.deepEqual(
-    this.server.db.posts[0],
-    { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
-  );
-  assert.deepEqual(
-    this.server.schema.posts.find(1).author.attrs,
-    { id: '1', name: 'Sam' }
-  );
-  assert.deepEqual(
-    this.server.schema.posts.find(1).kind.attrs,
-    { id: '1', name: 'awesome software' }
-  );
+    assert.equal(this.server.db.posts.length, 1);
+    assert.deepEqual(
+      this.server.db.posts[0],
+      { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
+    );
+    assert.deepEqual(
+      this.server.schema.posts.find(1).author.attrs,
+      { id: '1', name: 'Sam' }
+    );
+    assert.deepEqual(
+      this.server.schema.posts.find(1).kind.attrs,
+      { id: '1', name: 'awesome software' }
+    );
 
-  assert.equal(this.server.db.authors.length, 1);
-  assert.deepEqual(
-    this.server.db.authors[0],
-    { id: '1', name: 'Sam' }
-  );
-  assert.equal(this.server.schema.authors.find(1).posts.models.length, 1);
-  assert.deepEqual(
-    this.server.schema.authors.find(1).posts.models[0].attrs,
-    { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
-  );
+    assert.equal(this.server.db.authors.length, 1);
+    assert.deepEqual(
+      this.server.db.authors[0],
+      { id: '1', name: 'Sam' }
+    );
+    assert.equal(this.server.schema.authors.find(1).posts.models.length, 1);
+    assert.deepEqual(
+      this.server.schema.authors.find(1).posts.models[0].attrs,
+      { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
+    );
 
-  assert.equal(this.server.db.categories.length, 1);
-  assert.deepEqual(
-    this.server.db.categories[0],
-    { id: '1', name: 'awesome software' }
-  );
-  assert.equal(this.server.schema.categories.find(1).posts.models.length, 1);
-  assert.deepEqual(
-    this.server.schema.categories.find(1).posts.models[0].attrs,
-    { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
-  );
+    assert.equal(this.server.db.categories.length, 1);
+    assert.deepEqual(
+      this.server.db.categories[0],
+      { id: '1', name: 'awesome software' }
+    );
+    assert.equal(this.server.schema.categories.find(1).posts.models.length, 1);
+    assert.deepEqual(
+      this.server.schema.categories.find(1).posts.models[0].attrs,
+      { id: '1', title: 'Lorem ipsum', authorId: '1', kindId: '1' }
+    );
+  });
 });

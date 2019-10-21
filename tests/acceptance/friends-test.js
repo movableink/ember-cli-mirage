@@ -1,52 +1,57 @@
-import {test} from 'qunit';
-import moduleForAcceptance from '../helpers/module-for-acceptance';
+import { currentRouteName, findAll, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import setupMirage from '../helpers/setup-mirage';
 
-moduleForAcceptance('Acceptance | Friends');
+module('Acceptance | Friends', function(hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
 
-test('I can view the friends', function(assert) {
-  let friend = server.create('friend');
-  let youngFriend = server.create('friend', { name: 'Tommy', age: 10 });
+  test('I can view the friends', async function(assert) {
+    let friend = this.server.create('friend');
+    let youngFriend = this.server.create('friend', { name: 'Tommy', age: 10 });
 
-  visit('/friends');
+    await visit('/friends');
 
-  andThen(function() {
     assert.equal(currentRouteName(), 'friends');
-    assert.equal(find('p').length, 2);
+    assert.dom('p').exists({ count: 2 });
     assert.equal(friend.isYoung, false);
     assert.equal(youngFriend.isYoung, true);
 
-    assert.ok(find('p:first').text().match(friend.name));
-    assert.ok(find('p:first').text().match(friend.age));
-    assert.ok(find('p:last').text().match('Tommy'));
-    assert.ok(find('p:last').text().match(10));
+    const paragraphs = findAll('p');
+    const first = paragraphs[0];
+    const last = paragraphs[paragraphs.length - 1];
+    assert.dom(first).containsText(friend.name);
+    assert.dom(first).containsText(friend.age);
+    assert.dom(last).containsText('Tommy');
+    assert.dom(last).containsText('10');
   });
-});
 
-test('I can view the selected friends', function(assert) {
-  server.create('friend', { name: 'Jane', age: 30 });
-  server.create('friend', { name: 'Tommy', age: 10 });
-  server.create('friend', { name: 'Bob', age: 28 });
+  test('I can view the selected friends', async function(assert) {
+    this.server.create('friend', { name: 'Jane', age: 30 });
+    this.server.create('friend', { name: 'Tommy', age: 10 });
+    this.server.create('friend', { name: 'Bob', age: 28 });
 
-  visit('/close-friends');
+    await visit('/close-friends');
 
-  andThen(function() {
     assert.equal(currentRouteName(), 'close-friends');
-    assert.equal(find('p').length, 2);
+    assert.dom('p').exists({ count: 2 });
 
-    assert.ok(find('p:first').text().match('Jane'));
-    assert.ok(find('p:first').text().match(30));
-    assert.ok(find('p:last').text().match('Bob'));
-    assert.ok(find('p:last').text().match(28));
+    const paragraphs = findAll('p');
+    const first = paragraphs[0];
+    const last = paragraphs[paragraphs.length - 1];
+    assert.dom(first).containsText('Jane');
+    assert.dom(first).containsText('30');
+    assert.dom(last).containsText('Bob');
+    assert.dom(last).containsText('28');
   });
-});
 
-test('I can view a friend that was configured only for test mode', function(assert) {
-  let friend = server.create('friend', { name: 'The Dude' });
+  test('I can view a friend that was configured only for test mode', async function(assert) {
+    let friend = this.server.create('friend', { name: 'The Dude' });
 
-  visit(`/friends/${friend.id}`);
+    await visit(`/friends/${friend.id}`);
 
-  andThen(function() {
     assert.equal(currentRouteName(), 'friend');
-    assert.ok(find('h2.friend-name').text().match('The Dude'));
+    assert.dom('h2.friend-name').containsText('The Dude');
   });
 });

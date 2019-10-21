@@ -73,7 +73,7 @@ class BelongsTo extends Association {
       set(id) {
         assert(
           !id || schema.db[toCollectionName(association.modelName)].find(id),
-          `Couldn\'t find ${association.modelName} with id = ${id}`
+          `Couldn't find ${association.modelName} with id = ${id}`
         );
 
         this.attrs[foreignKey] = id;

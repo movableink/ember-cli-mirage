@@ -1,11 +1,16 @@
-import { ActiveModelSerializer, Model, hasMany, belongsTo } from 'ember-cli-mirage';
+import {
+  ActiveModelSerializer,
+  Model,
+  hasMany,
+  belongsTo
+} from 'ember-cli-mirage';
 import Schema from 'ember-cli-mirage/orm/schema';
 import Db from 'ember-cli-mirage/db';
 import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
 import { module, test } from 'qunit';
 
-module('Integration | Serializer | ActiveModelSerializer', {
-  beforeEach() {
+module('Integration | Serializer | ActiveModelSerializer', function(hooks) {
+  hooks.beforeEach(function() {
     let db = new Db();
     this.schema = new Schema(db);
     this.schema.registerModels({
@@ -47,97 +52,97 @@ module('Integration | Serializer | ActiveModelSerializer', {
         embed: true
       })
     });
-  },
-
-  afterEach() {
-    this.schema.db.emptyData();
-  }
-});
-
-test('it sideloads associations and snake-cases relationships and attributes correctly for a model', function(assert) {
-  let link = this.schema.wordSmiths.find(1);
-  let result = this.registry.serialize(link);
-
-  assert.deepEqual(result, {
-    word_smith: {
-      id: '1',
-      name: 'Link',
-      blog_post_ids: ['1', '2']
-    },
-    blog_posts: [
-      {
-        id: '1',
-        title: 'Lorem',
-        word_smith_id: '1'
-      },
-      {
-        id: '2',
-        title: 'Ipsum',
-        word_smith_id: '1'
-      }
-    ]
   });
-});
 
-test('it sideloads associations and snake-cases relationships and attributes correctly for a collection', function(assert) {
-  let wordSmiths = this.schema.wordSmiths.all();
-  let result = this.registry.serialize(wordSmiths);
+  hooks.afterEach(function() {
+    this.schema.db.emptyData();
+  });
 
-  assert.deepEqual(result, {
-    word_smiths: [
-      {
+  test('it sideloads associations and snake-cases relationships and attributes correctly for a model', function(assert) {
+    let link = this.schema.wordSmiths.find(1);
+    let result = this.registry.serialize(link);
+
+    assert.deepEqual(result, {
+      word_smith: {
         id: '1',
         name: 'Link',
         blog_post_ids: ['1', '2']
       },
-      {
-        id: '2',
-        name: 'Zelda',
-        blog_post_ids: []
-      }
-    ],
-    blog_posts: [
-      {
-        id: '1',
-        title: 'Lorem',
-        word_smith_id: '1'
-      },
-      {
-        id: '2',
-        title: 'Ipsum',
-        word_smith_id: '1'
-      }
-    ]
+      blog_posts: [
+        {
+          id: '1',
+          title: 'Lorem',
+          word_smith_id: '1'
+        },
+        {
+          id: '2',
+          title: 'Ipsum',
+          word_smith_id: '1'
+        }
+      ]
+    });
   });
-});
 
-test('it embeds associations and snake-cases relationships and attributes correctly for a collection', function(assert) {
-  let users = this.schema.users.all();
-  let result = this.registry.serialize(users);
+  test('it sideloads associations and snake-cases relationships and attributes correctly for a collection', function(assert) {
+    let wordSmiths = this.schema.wordSmiths.all();
+    let result = this.registry.serialize(wordSmiths);
 
-  assert.deepEqual(result, {
-    users: [
-      {
-        id: '1',
-        name: 'John Peach',
-        contact_infos: [
-          {
-            id: '1',
-            email: 'peach@bb.me',
-            user_id: '1'
-          },
-          {
-            id: '2',
-            email: 'john3000@mail.com',
-            user_id: '1'
-          }
-        ]
-      },
-      {
-        id: '2',
-        name: 'Pine Apple',
-        contact_infos: []
-      }
-    ]
+    assert.deepEqual(result, {
+      word_smiths: [
+        {
+          id: '1',
+          name: 'Link',
+          blog_post_ids: ['1', '2']
+        },
+        {
+          id: '2',
+          name: 'Zelda',
+          blog_post_ids: []
+        }
+      ],
+      blog_posts: [
+        {
+          id: '1',
+          title: 'Lorem',
+          word_smith_id: '1'
+        },
+        {
+          id: '2',
+          title: 'Ipsum',
+          word_smith_id: '1'
+        }
+      ]
+    });
+  });
+
+  test('it embeds associations and snake-cases relationships and attributes correctly for a collection', function(assert) {
+    let users = this.schema.users.all();
+    let result = this.registry.serialize(users);
+
+    assert.deepEqual(result, {
+      users: [
+        {
+          id: '1',
+          name: 'John Peach',
+          contact_infos: [
+            {
+              id: '1',
+              email: 'peach@bb.me',
+              user_id: '1'
+            },
+            {
+              id: '2',
+              email: 'john3000@mail.com',
+              user_id: '1'
+            }
+          ]
+        },
+        {
+          id: '2',
+          name: 'Pine Apple',
+          contact_infos: []
+        }
+      ]
+    });
   });
 });

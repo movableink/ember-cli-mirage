@@ -1,19 +1,22 @@
-import moduleForAcceptance from '../helpers/module-for-acceptance';
-import { test } from 'qunit';
+import { visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import setupMirage from '../helpers/setup-mirage';
 
-moduleForAcceptance('Acceptance | Serializers', {
-  beforeEach() {
-    this.store = this.application.__container__.lookup('service:store');
-  }
-});
+module('Acceptance | Serializers', function(hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
 
-test('Serializers can provide default includes', function(assert) {
-  let wordSmith = server.create('word-smith');
-  server.createList('blog-post', 3, { wordSmithId: wordSmith.id });
+  hooks.beforeEach(function() {
+    this.store = this.owner.lookup('service:store');
+  });
 
-  visit(`/word-smiths/${wordSmith.id}`);
+  test('Serializers can provide default includes', async function(assert) {
+    let wordSmith = this.server.create('word-smith');
+    this.server.createList('blog-post', 3, { wordSmithId: wordSmith.id });
 
-  andThen(() => {
+    await visit(`/word-smiths/${wordSmith.id}`);
+
     let wordSmithsInStore = this.store.peekAll('word-smith');
     let blogPostsInStore = this.store.peekAll('blog-post');
 

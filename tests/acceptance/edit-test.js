@@ -1,19 +1,22 @@
-import {test} from 'qunit';
-import moduleForAcceptance from '../helpers/module-for-acceptance';
+import { click, fillIn, currentRouteName, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import setupMirage from '../helpers/setup-mirage';
 
-moduleForAcceptance('Acceptance | Edit');
+module('Acceptance | Edit', function(hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
 
-test('I can edit a contact', function(assert) {
-  server.create('contact');
+  test('I can edit a contact', async function(assert) {
+    this.server.create('contact');
 
-  visit('/1');
-  click('button:contains(Edit)');
-  fillIn('input', 'Shiek');
-  click('button:contains(Save)');
+    await visit('/1');
+    await click('[data-test-edit-button]');
+    await fillIn('input', 'Shiek');
+    await click('[data-test-save-button]');
 
-  andThen(function() {
     assert.equal(currentRouteName(), 'contact');
-    assert.equal(find('p:first').text(), 'The contact is Shiek');
+    assert.dom('p').hasText('The contact is Shiek');
   });
 });
 
