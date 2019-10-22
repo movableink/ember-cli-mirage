@@ -6,7 +6,7 @@ Update notes: none
 
 Changes:
 
-  - [ENHANCEMENT] [#1006](https://github.com/samselikoff/ember-cli-mirage/pull/1006) Make host/namespace support more robust @zinyando
+  - [ENHANCEMENT] [#1006](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1006) Make host/namespace support more robust @zinyando
 
 ## 0.2.8
 
@@ -14,19 +14,19 @@ Update notes: none
 
 Changes:
 
-  - [BUGFIX] [#1026](https://github.com/samselikoff/ember-cli-mirage/pull/1040) Import `require` to avoid issue in babel@6 @rwjblue
-  - [BUGFIX] [#1026](https://github.com/samselikoff/ember-cli-mirage/pull/1026) Fixes generated code for destroy app helper @NLincoln
+  - [BUGFIX] [#1026](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1040) Import `require` to avoid issue in babel@6 @rwjblue
+  - [BUGFIX] [#1026](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1026) Fixes generated code for destroy app helper @NLincoln
 
 ## 0.2.7
 
-Update notes: 0.2.6 introduced a breaking change for PhantomJS users, so we've reverted a change and published 0.2.7. See [#1024](https://github.com/samselikoff/ember-cli-mirage/pull/1024) for details.
+Update notes: 0.2.6 introduced a breaking change for PhantomJS users, so we've reverted a change and published 0.2.7. See [#1024](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1024) for details.
 
 Changes:
 
-  - [BUGFIX [#1025](https://github.com/samselikoff/ember-cli-mirage/pull/1025) Fix factory association feature @yratanov
-  - [BUGFIX [#1024](https://github.com/samselikoff/ember-cli-mirage/pull/1024) Replace Number.isInteger with lodash isInteger @ilucin
-  - [ENHANCEMENT [#1023](https://github.com/samselikoff/ember-cli-mirage/pull/1023) Allow route handlers to return empty string responses @bendemboski
-  - [ENHANCEMENT [#1030](https://github.com/samselikoff/ember-cli-mirage/pull/1030) Code Climate config with ESLint and duplication @larkinscott
+  - [BUGFIX [#1025](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1025) Fix factory association feature @yratanov
+  - [BUGFIX [#1024](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1024) Replace Number.isInteger with lodash isInteger @ilucin
+  - [ENHANCEMENT [#1023](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1023) Allow route handlers to return empty string responses @bendemboski
+  - [ENHANCEMENT [#1030](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1030) Code Climate config with ESLint and duplication @larkinscott
 
 ## 0.2.6
 
@@ -34,10 +34,10 @@ Update notes: None
 
 Changes:
 
-  - [ENHANCEMENT] [#1010](https://github.com/samselikoff/ember-cli-mirage/pull/1010) Better support for nested addons @samselikoff
-  - [ENHANCEMENT] [#998](https://github.com/samselikoff/ember-cli-mirage/pull/998) Adapting to use lodash 4 using latest ember-lodash @eturino
-  - [ENHANCEMENT] [#1008](https://github.com/samselikoff/ember-cli-mirage/pull/1008) Upgrade to Ember CLI 2.9 @cibernox
-  - [ENHANCEMENT] [#995](https://github.com/samselikoff/ember-cli-mirage/pull/995) Invoke _getAttrsForRequest with correct model name @bwbuchanan
+  - [ENHANCEMENT] [#1010](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1010) Better support for nested addons @samselikoff
+  - [ENHANCEMENT] [#998](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/998) Adapting to use lodash 4 using latest ember-lodash @eturino
+  - [ENHANCEMENT] [#1008](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/1008) Upgrade to Ember CLI 2.9 @cibernox
+  - [ENHANCEMENT] [#995](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/995) Invoke _getAttrsForRequest with correct model name @bwbuchanan
   - General improvements @azdaroth
 
 ## 0.2.5
@@ -46,15 +46,15 @@ Update notes: None
 
 Changes:
 
-  - [FEATURE] [#880](https://github.com/samselikoff/ember-cli-mirage/pull/880) Add association helper @azdaroth
-  - [FEATURE] [#948](https://github.com/samselikoff/ember-cli-mirage/pull/948) Add length to collections @mfazekas
-  - [FEATURE] [#957](https://github.com/samselikoff/ember-cli-mirage/pull/957) Add slice method to collections @alexparker
-  - [ENHANCEMENT] [#796](https://github.com/samselikoff/ember-cli-mirage/pull/796) improve `normalizedRequestAttrs` helper @jbailey4
-  - [ENHANCEMENT] [#928](https://github.com/samselikoff/ember-cli-mirage/pull/928) add a default passthrough @anulman
-  - [ENHANCEMENT] [#987](https://github.com/samselikoff/ember-cli-mirage/pull/987) Added falsy condition to exclude faker.js & pretender.js in production build @renpinto
-  - [BUGFIX] [#984](https://github.com/samselikoff/ember-cli-mirage/pull/984) Blueprint.prototype.insertIntoFile is async @stefanpennar
-  - [BUGFIX] [#905](https://github.com/samselikoff/ember-cli-mirage/pull/905) Serialize on key instead of modelName @jessedijkstra
-  - [BUGFIX] [#950](https://github.com/samselikoff/ember-cli-mirage/pull/950) fix JSON:API includes @deepflame
+  - [FEATURE] [#880](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/880) Add association helper @azdaroth
+  - [FEATURE] [#948](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/948) Add length to collections @mfazekas
+  - [FEATURE] [#957](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/957) Add slice method to collections @alexparker
+  - [ENHANCEMENT] [#796](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/796) improve `normalizedRequestAttrs` helper @jbailey4
+  - [ENHANCEMENT] [#928](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/928) add a default passthrough @anulman
+  - [ENHANCEMENT] [#987](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/987) Added falsy condition to exclude faker.js & pretender.js in production build @renpinto
+  - [BUGFIX] [#984](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/984) Blueprint.prototype.insertIntoFile is async @stefanpennar
+  - [BUGFIX] [#905](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/905) Serialize on key instead of modelName @jessedijkstra
+  - [BUGFIX] [#950](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/950) fix JSON:API includes @deepflame
   - General improvements @jessedijkstra @bantic @alecho @alexparker @mfazekas @azdaroth
 
 ## 0.2.4
@@ -65,7 +65,7 @@ Changes:
 
   - [ENHANCEMENT] Let faker float from 3.0.0 @Dhaulagiri
 
-    To improve backwards compatibility concerns raised by the changes from [#863](https://github.com/samselikoff/ember-cli-mirage/pull/863), [#932](https://github.com/samselikoff/ember-cli-mirage/pull/932) allows the version of Faker.js used in ember-cli-mirage to float from `3.0.0`.  If you need to use a specific older `3.x` version in your project you can specify it in your project's package.json.
+    To improve backwards compatibility concerns raised by the changes from [#863](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/863), [#932](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/932) allows the version of Faker.js used in @movable/ember-cli-mirage to float from `3.0.0`.  If you need to use a specific older `3.x` version in your project you can specify it in your project's package.json.
   - General improvements @Gaurav0
 
 ## 0.2.3
@@ -77,18 +77,18 @@ Changes:
     if you forget to shut down a pretender server before starting another one.  Mirage does this
     for you in acceptance tests, but if you are starting Mirage manually in other tests, remember
     to shut down the server when you are done.
-    (see [#925](https://github.com/samselikoff/ember-cli-mirage/pull/925))
+    (see [#925](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/925))
 
 Changes:
 
   - [FEATURE] Add support for promises in route functions
-    ([#924](https://github.com/samselikoff/ember-cli-mirage/pull/924))
+    ([#924](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/924))
     @dustinfarris
   - [BUGFIX] Adjust afterCreate callbacks execution order
-    ([#893](https://github.com/samselikoff/ember-cli-mirage/pull/893))
+    ([#893](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/893))
     @Azdaroth
   - [INTERNAL] Shutdown pretender servers in unit tests
-    ([#917](https://github.com/samselikoff/ember-cli-mirage/pull/917))
+    ([#917](https://github.com/samselikoff/@movable/ember-cli-mirage/pull/917))
     @dustinfarris
 
 ## 0.2.2
@@ -190,7 +190,7 @@ Update notes:
     Instead, if you need to use array-methods on `Collections`, access the `.models` property. You can always convert your transformed array back to a `Collection`, for example to tell Mirage to serialize your response:
 
     ```js
-    import { Collection } from 'ember-cli-mirage';
+    import { Collection } from '@movable/ember-cli-mirage';
 
     let authors = schema.authors.all().models;
     let topPosts = authors.map((a) => a.topPost);
@@ -313,7 +313,7 @@ Update notes:
   });
   ```
 
-  - We now use `destroyApp` test helper in Ember-CLI to shutdown the Mirage server after each test to resolve a memory leak reported in #226. It's important to run `ember g ember-cli-mirage` when upgrading to take advantage of this fix.
+  - We now use `destroyApp` test helper in Ember-CLI to shutdown the Mirage server after each test to resolve a memory leak reported in #226. It's important to run `ember g @movable/ember-cli-mirage` when upgrading to take advantage of this fix.
   - Inserting records with numerical IDs that have already have been used will throw an error per changes from #417
   - `model.type` was renamed to `model.modelName`, and is dasherized (instead of camelized)
 
@@ -332,7 +332,7 @@ Changes:
   - [ENHANCEMENT] createList perf enhancement @alvinvogelzang
   - [ENHANCEMENT] improve DB autoincrement @jherdman
   - [ENHANCEMENT] #493 Ability to set timing parameter for individual routes @bekzod
-  - [FEATURE] [Allow nested factory objects](https://github.com/samselikoff/ember-cli-mirage/commit/a73a195c1b991d226429ee369e2af688a95c7d95) @john-kurkowski
+  - [FEATURE] [Allow nested factory objects](https://github.com/samselikoff/@movable/ember-cli-mirage/commit/a73a195c1b991d226429ee369e2af688a95c7d95) @john-kurkowski
   - Other bugfixes/enhancements @jherdman, @ef4, @seanpdoyle, @alecho, @bekzod
 
 ## 0.2.0.beta-1
@@ -499,7 +499,7 @@ Update notes: none.
 Changes:
   - [ENHANCEMENT] #70 Allow function route handler to customize status
     code, HTTP headers and data. See [the
-wiki](https://github.com/samselikoff/ember-cli-mirage/wiki/HTTP%20Verb%20function%20handler#dynamic-status-codes-and-http-headers)
+wiki](https://github.com/samselikoff/@movable/ember-cli-mirage/wiki/HTTP%20Verb%20function%20handler#dynamic-status-codes-and-http-headers)
 for details.
   - [BUGFIX] #81 Include assets in dev build, in case users visit /tests
     from `ember s`.
@@ -514,12 +514,12 @@ for details.
 
 ## 0.0.24
 
-Update notes: The config options `force` or `disable` aren't support anymore, please use `enabled` as explained here: https://github.com/samselikoff/ember-cli-mirage/wiki/Configuration#enabled
+Update notes: The config options `force` or `disable` aren't support anymore, please use `enabled` as explained here: https://github.com/samselikoff/@movable/ember-cli-mirage/wiki/Configuration#enabled
 
 Changes:
   - [BREAKING CHANGE] There's no more `force` or `disable` option, simply specify
 
-        ENV['ember-cli-mirage'].enabled = [true|false]
+        ENV['@movable/ember-cli-mirage'].enabled = [true|false]
 
     in whichever environment you need to override the default behavior.
 
@@ -557,7 +557,7 @@ Changes:
 ## 0.0.21
 Update notes:
 
-This project has been renamed from ember-pretenderify to ember-cli-mirage. Please update your `package.json` dependency accordingly, and
+This project has been renamed from ember-pretenderify to @movable/ember-cli-mirage. Please update your `package.json` dependency accordingly, and
  - rename the `/app/pretender` dir to `/app/mirage`
  - if you have factories, change
 
@@ -565,7 +565,7 @@ This project has been renamed from ember-pretenderify to ember-cli-mirage. Pleas
 
     to
 
-        import Mirage from 'ember-cli-mirage';
+        import Mirage from '@movable/ember-cli-mirage';
 
 Changes:
 

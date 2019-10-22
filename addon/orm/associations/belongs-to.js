@@ -1,8 +1,11 @@
 import Association from './association';
 import { assign as _assign } from 'lodash-es';
-import { capitalize, camelize } from 'ember-cli-mirage/utils/inflector';
-import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
-import assert from 'ember-cli-mirage/assert';
+import {
+  capitalize,
+  camelize
+} from '@movable/ember-cli-mirage/utils/inflector';
+import { toCollectionName } from '@movable/ember-cli-mirage/utils/normalize-name';
+import assert from '@movable/ember-cli-mirage/assert';
 
 /**
  * @class BelongsTo

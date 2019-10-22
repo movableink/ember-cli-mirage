@@ -1,6 +1,6 @@
-import Model from 'ember-cli-mirage/orm/model';
-import Schema from 'ember-cli-mirage/orm/schema';
-import Db from 'ember-cli-mirage/db';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import Db from '@movable/ember-cli-mirage/db';
 import Inflector from 'ember-inflector';
 import { module, test } from 'qunit';
 

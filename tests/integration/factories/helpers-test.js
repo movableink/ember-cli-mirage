@@ -6,8 +6,8 @@ import {
   hasMany,
   trait,
   association
-} from 'ember-cli-mirage';
-import Server from 'ember-cli-mirage/server';
+} from '@movable/ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
 
 module('Integration | Server | Factories | helpers', function(hooks) {
   hooks.beforeEach(function() {

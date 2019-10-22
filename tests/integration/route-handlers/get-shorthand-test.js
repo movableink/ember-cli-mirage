@@ -5,10 +5,10 @@ import {
   belongsTo,
   JSONAPISerializer,
   Response
-} from 'ember-cli-mirage';
-import Collection from 'ember-cli-mirage/orm/collection';
-import Server from 'ember-cli-mirage/server';
-import GetShorthandRouteHandler from 'ember-cli-mirage/route-handlers/shorthands/get';
+} from '@movable/ember-cli-mirage';
+import Collection from '@movable/ember-cli-mirage/orm/collection';
+import Server from '@movable/ember-cli-mirage/server';
+import GetShorthandRouteHandler from '@movable/ember-cli-mirage/route-handlers/shorthands/get';
 
 module('Integration | Route Handlers | GET shorthand', function(hooks) {
   hooks.beforeEach(function() {

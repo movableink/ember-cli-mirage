@@ -1,7 +1,7 @@
-import Mirage from 'ember-cli-mirage';
-import Server from 'ember-cli-mirage/server';
-import Model from 'ember-cli-mirage/orm/model';
-import Serializer from 'ember-cli-mirage/serializer';
+import Mirage from '@movable/ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import Serializer from '@movable/ember-cli-mirage/serializer';
 import { module, test } from 'qunit';
 import $ from 'jquery';
 

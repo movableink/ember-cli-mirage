@@ -1,8 +1,8 @@
 import { module, test } from 'qunit';
-import Server from 'ember-cli-mirage/server';
-import Model from 'ember-cli-mirage/orm/model';
-import PostShorthandRouteHandler from 'ember-cli-mirage/route-handlers/shorthands/post';
-import JSONAPISerializer from 'ember-cli-mirage/serializers/json-api-serializer';
+import Server from '@movable/ember-cli-mirage/server';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import PostShorthandRouteHandler from '@movable/ember-cli-mirage/route-handlers/shorthands/post';
+import JSONAPISerializer from '@movable/ember-cli-mirage/serializers/json-api-serializer';
 
 module('Integration | Route Handlers | POST shorthand', function(hooks) {
   hooks.beforeEach(function() {

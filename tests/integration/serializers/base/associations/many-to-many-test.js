@@ -5,10 +5,10 @@ import {
   hasMany,
   belongsTo,
   Serializer
-} from 'ember-cli-mirage';
-import Db from 'ember-cli-mirage/db';
-import Schema from 'ember-cli-mirage/orm/schema';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
+} from '@movable/ember-cli-mirage';
+import Db from '@movable/ember-cli-mirage/db';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
 
 module(
   'Integration | Serializers | Base | Associations | Many To Many',

@@ -1,7 +1,7 @@
 import {
   toCollectionName,
   toModelName
-} from 'ember-cli-mirage/utils/normalize-name';
+} from '@movable/ember-cli-mirage/utils/normalize-name';
 import Inflector from 'ember-inflector';
 
 import { module, test } from 'qunit';

@@ -1,4 +1,4 @@
-import Model from 'ember-cli-mirage/orm/model';
+import Model from '@movable/ember-cli-mirage/orm/model';
 import { module, test } from 'qunit';
 
 module('Unit | Model', function() {

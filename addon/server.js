@@ -3,8 +3,8 @@
 import { Promise } from 'rsvp';
 
 import { pluralize, camelize } from './utils/inflector';
-import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
-import isAssociation from 'ember-cli-mirage/utils/is-association';
+import { toCollectionName } from '@movable/ember-cli-mirage/utils/normalize-name';
+import isAssociation from '@movable/ember-cli-mirage/utils/is-association';
 import Pretender from 'pretender';
 import Db from './db';
 import Schema from './orm/schema';
@@ -747,7 +747,7 @@ export default class Server {
     );
     if (!association) {
       throw new Error(
-        `You're using the \`association\` factory helper on the '${associationAttribute}' attribute of your ${modelType} factory, but that attribute is not a \`belongsTo\` association. Read the Factories docs for more information: http://www.ember-cli-mirage.com/docs/v0.2.x/factories/#factories-and-relationships`
+        `You're using the \`association\` factory helper on the '${associationAttribute}' attribute of your ${modelType} factory, but that attribute is not a \`belongsTo\` association. Read the Factories docs for more information: http://www.@movable/ember-cli-mirage.com/docs/v0.2.x/factories/#factories-and-relationships`
       );
     }
     return camelize(association.modelName);

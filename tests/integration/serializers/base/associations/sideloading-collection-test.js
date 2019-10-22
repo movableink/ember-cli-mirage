@@ -1,5 +1,5 @@
-import Serializer from 'ember-cli-mirage/serializer';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
+import Serializer from '@movable/ember-cli-mirage/serializer';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
 import schemaHelper from '../../schema-helper';
 import { module, test } from 'qunit';
 

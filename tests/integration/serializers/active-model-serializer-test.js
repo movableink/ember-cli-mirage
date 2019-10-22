@@ -3,10 +3,10 @@ import {
   Model,
   hasMany,
   belongsTo
-} from 'ember-cli-mirage';
-import Schema from 'ember-cli-mirage/orm/schema';
-import Db from 'ember-cli-mirage/db';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
+} from '@movable/ember-cli-mirage';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import Db from '@movable/ember-cli-mirage/db';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
 import { module, test } from 'qunit';
 
 module('Integration | Serializer | ActiveModelSerializer', function(hooks) {

@@ -2,7 +2,7 @@
 /* eslint-env node */
 import { assert } from '@ember/debug';
 import { camelCase as _camelCase } from 'lodash-es';
-import { pluralize } from 'ember-cli-mirage/utils/inflector';
+import { pluralize } from '@movable/ember-cli-mirage/utils/inflector';
 
 /*
   This function looks through all files that have been loaded by Ember CLI and

@@ -1,5 +1,5 @@
-import Mirage from 'ember-cli-mirage';
-import { trait } from 'ember-cli-mirage';
+import Mirage from '@movable/ember-cli-mirage';
+import { trait } from '@movable/ember-cli-mirage';
 
 import { module, test } from 'qunit';
 

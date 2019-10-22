@@ -1,7 +1,7 @@
-import assert from 'ember-cli-mirage/assert';
+import assert from '@movable/ember-cli-mirage/assert';
 import BaseShorthandRouteHandler from './base';
-import { Response } from 'ember-cli-mirage';
-import { camelize } from 'ember-cli-mirage/utils/inflector';
+import { Response } from '@movable/ember-cli-mirage';
+import { camelize } from '@movable/ember-cli-mirage/utils/inflector';
 
 export default class HeadShorthandRouteHandler extends BaseShorthandRouteHandler {
   /*

@@ -1,4 +1,4 @@
-import BaseShorthandRouteHandler from 'ember-cli-mirage/route-handlers/shorthands/base';
+import BaseShorthandRouteHandler from '@movable/ember-cli-mirage/route-handlers/shorthands/base';
 
 import { module, test } from 'qunit';
 

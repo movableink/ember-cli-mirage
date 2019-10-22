@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
-import { Model, ActiveModelSerializer } from 'ember-cli-mirage';
-import { camelize } from 'ember-cli-mirage/utils/inflector';
-import Server from 'ember-cli-mirage/server';
+import { Model, ActiveModelSerializer } from '@movable/ember-cli-mirage';
+import { camelize } from '@movable/ember-cli-mirage/utils/inflector';
+import Server from '@movable/ember-cli-mirage/server';
 import $ from 'jquery';
 
 module('Integration | Server | Customized normalize method', function(hooks) {

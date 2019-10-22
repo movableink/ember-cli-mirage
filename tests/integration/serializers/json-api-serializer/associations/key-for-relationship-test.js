@@ -1,8 +1,8 @@
-import Schema from 'ember-cli-mirage/orm/schema';
-import Db from 'ember-cli-mirage/db';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
-import { Model, hasMany, JSONAPISerializer } from 'ember-cli-mirage';
-import { underscore } from 'ember-cli-mirage/utils/inflector';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import Db from '@movable/ember-cli-mirage/db';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
+import { Model, hasMany, JSONAPISerializer } from '@movable/ember-cli-mirage';
+import { underscore } from '@movable/ember-cli-mirage/utils/inflector';
 import { module, test } from 'qunit';
 
 module(

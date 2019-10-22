@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import Server from 'ember-cli-mirage/server';
+import Server from '@movable/ember-cli-mirage/server';
 
 module('Integration | Server #loadFixtures', function(hooks) {
   hooks.beforeEach(function() {

@@ -1,13 +1,13 @@
-import readModules from 'ember-cli-mirage/utils/read-modules';
+import readModules from '@movable/ember-cli-mirage/utils/read-modules';
 import ENV from '../config/environment';
 import baseConfig, { testConfig } from '../mirage/config';
-import Server from 'ember-cli-mirage/server';
+import Server from '@movable/ember-cli-mirage/server';
 import { assign as _assign } from 'lodash-es';
 
 export default {
-  name: 'ember-cli-mirage',
+  name: '@movable/ember-cli-mirage',
   initialize() {
-    if (_shouldUseMirage(ENV.environment, ENV['ember-cli-mirage'])) {
+    if (_shouldUseMirage(ENV.environment, ENV['@movable/ember-cli-mirage'])) {
       startMirage(ENV);
     }
   }

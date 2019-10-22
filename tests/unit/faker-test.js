@@ -1,4 +1,4 @@
-import faker from 'ember-cli-mirage/faker';
+import faker from '@movable/ember-cli-mirage/faker';
 
 import { module, test } from 'qunit';
 

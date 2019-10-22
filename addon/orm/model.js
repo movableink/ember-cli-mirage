@@ -1,4 +1,4 @@
-import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
+import { toCollectionName } from '@movable/ember-cli-mirage/utils/normalize-name';
 import extend from '../utils/extend';
 import assert from '../assert';
 import Collection from './collection';

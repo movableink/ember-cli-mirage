@@ -1,5 +1,5 @@
 import { isBlank } from '@ember/utils';
-import Mirage from 'ember-cli-mirage';
+import Mirage from '@movable/ember-cli-mirage';
 
 export default function() {
   // Contacts

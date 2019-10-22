@@ -5,9 +5,9 @@ import {
   capitalize,
   camelize,
   singularize
-} from 'ember-cli-mirage/utils/inflector';
-import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
-import assert from 'ember-cli-mirage/assert';
+} from '@movable/ember-cli-mirage/utils/inflector';
+import { toCollectionName } from '@movable/ember-cli-mirage/utils/normalize-name';
+import assert from '@movable/ember-cli-mirage/assert';
 
 /**
  * @class HasMany

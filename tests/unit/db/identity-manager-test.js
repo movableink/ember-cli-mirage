@@ -1,4 +1,4 @@
-import { IdentityManager } from 'ember-cli-mirage/db-collection';
+import { IdentityManager } from '@movable/ember-cli-mirage/db-collection';
 
 import { module, test } from 'qunit';
 

@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
-import { Model, JSONAPISerializer, Response } from 'ember-cli-mirage';
-import Server from 'ember-cli-mirage/server';
-import HeadShorthandRouteHandler from 'ember-cli-mirage/route-handlers/shorthands/head';
+import { Model, JSONAPISerializer, Response } from '@movable/ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
+import HeadShorthandRouteHandler from '@movable/ember-cli-mirage/route-handlers/shorthands/head';
 
 module('Integration | Route Handlers | HEAD shorthand', function(hooks) {
   hooks.beforeEach(function() {

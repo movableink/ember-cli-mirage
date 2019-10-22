@@ -1,4 +1,4 @@
-import Collection from 'ember-cli-mirage/orm/collection';
+import Collection from '@movable/ember-cli-mirage/orm/collection';
 import { module, test } from 'qunit';
 
 module('Unit | Collection', function() {

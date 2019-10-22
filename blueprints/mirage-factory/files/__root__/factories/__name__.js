@@ -1,4 +1,4 @@
-import { Factory } from 'ember-cli-mirage';
+import { Factory } from '@movable/ember-cli-mirage';
 
 export default Factory.extend({
 });

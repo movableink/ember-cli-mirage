@@ -1,4 +1,4 @@
-import Server, { defaultPassthroughs } from 'ember-cli-mirage/server';
+import Server, { defaultPassthroughs } from '@movable/ember-cli-mirage/server';
 import { module, test } from 'qunit';
 import {
   Model,
@@ -7,7 +7,7 @@ import {
   hasMany,
   trait,
   association
-} from 'ember-cli-mirage';
+} from '@movable/ember-cli-mirage';
 
 module('Unit | Server', function() {
   test('it can be instantiated', function(assert) {

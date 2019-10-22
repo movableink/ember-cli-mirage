@@ -9,13 +9,13 @@ module('Acceptance: Manually starting Mirage', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(function() {
-    ENV['ember-cli-mirage'] = { enabled: false };
+    ENV['@movable/ember-cli-mirage'] = { enabled: false };
   });
 
   setupMirage(hooks);
 
   hooks.afterEach(function() {
-    ENV['ember-cli-mirage'].enabled = undefined;
+    ENV['@movable/ember-cli-mirage'].enabled = undefined;
   });
 
   skip('The server can be started manually when configured with { enabled: false }', async function(assert) {

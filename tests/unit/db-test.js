@@ -1,4 +1,4 @@
-import Db from 'ember-cli-mirage/db';
+import Db from '@movable/ember-cli-mirage/db';
 
 import { module, test } from 'qunit';
 

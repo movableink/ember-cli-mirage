@@ -1,6 +1,6 @@
 import { Promise } from 'rsvp';
 import { typeOf, isBlank } from '@ember/utils';
-import { MirageError } from 'ember-cli-mirage/assert';
+import { MirageError } from '@movable/ember-cli-mirage/assert';
 import Response from './response';
 import FunctionHandler from './route-handlers/function';
 import ObjectHandler from './route-handlers/object';

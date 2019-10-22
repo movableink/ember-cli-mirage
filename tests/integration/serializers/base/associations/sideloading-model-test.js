@@ -1,8 +1,8 @@
-import Schema from 'ember-cli-mirage/orm/schema';
-import { Model, hasMany, belongsTo } from 'ember-cli-mirage';
-import Db from 'ember-cli-mirage/db';
-import Serializer from 'ember-cli-mirage/serializer';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import { Model, hasMany, belongsTo } from '@movable/ember-cli-mirage';
+import Db from '@movable/ember-cli-mirage/db';
+import Serializer from '@movable/ember-cli-mirage/serializer';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
 import schemaHelper from '../../schema-helper';
 import { module, test } from 'qunit';
 

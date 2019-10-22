@@ -1,9 +1,9 @@
 import { Promise } from 'rsvp';
 import { module, test } from 'qunit';
-import { Model, Collection, Serializer } from 'ember-cli-mirage';
-import Server from 'ember-cli-mirage/server';
-import Response from 'ember-cli-mirage/response';
-import FunctionRouteHandler from 'ember-cli-mirage/route-handlers/function';
+import { Model, Collection, Serializer } from '@movable/ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
+import Response from '@movable/ember-cli-mirage/response';
+import FunctionRouteHandler from '@movable/ember-cli-mirage/route-handlers/function';
 import { uniqBy as _uniqBy } from 'lodash-es';
 import $ from 'jquery';
 

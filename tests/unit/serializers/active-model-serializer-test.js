@@ -1,4 +1,4 @@
-import ActiveModelSerializer from 'ember-cli-mirage/serializers/active-model-serializer';
+import ActiveModelSerializer from '@movable/ember-cli-mirage/serializers/active-model-serializer';
 
 import { module, test } from 'qunit';
 

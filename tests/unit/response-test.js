@@ -1,4 +1,4 @@
-import Response from 'ember-cli-mirage/response';
+import Response from '@movable/ember-cli-mirage/response';
 
 import { module, test } from 'qunit';
 

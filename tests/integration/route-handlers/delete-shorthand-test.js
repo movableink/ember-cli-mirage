@@ -1,9 +1,9 @@
 import { module, test } from 'qunit';
-import Server from 'ember-cli-mirage/server';
-import Model from 'ember-cli-mirage/orm/model';
-import Mirage from 'ember-cli-mirage';
-import DeleteShorthandRouteHandler from 'ember-cli-mirage/route-handlers/shorthands/delete';
-import JSONAPISerializer from 'ember-cli-mirage/serializers/json-api-serializer';
+import Server from '@movable/ember-cli-mirage/server';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import Mirage from '@movable/ember-cli-mirage';
+import DeleteShorthandRouteHandler from '@movable/ember-cli-mirage/route-handlers/shorthands/delete';
+import JSONAPISerializer from '@movable/ember-cli-mirage/serializers/json-api-serializer';
 
 module('Integration | Route Handlers | DELETE shorthand', function(hooks) {
   hooks.beforeEach(function() {

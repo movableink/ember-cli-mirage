@@ -1,19 +1,19 @@
 # What is this thing??
 
-We are currently stuck on `ember-cli-mirage@0.2.9`. This is a custom fork of it, modified to fit better into a modern Ember build process.
+We are currently stuck on `@movable/ember-cli-mirage@0.2.9`. This is a custom fork of it, modified to fit better into a modern Ember build process.
 
 ***
 
-[![Build Status](https://travis-ci.org/samselikoff/ember-cli-mirage.svg?branch=master)](https://travis-ci.org/samselikoff/ember-cli-mirage)
-[![npm version](https://badge.fury.io/js/ember-cli-mirage.svg)](http://badge.fury.io/js/ember-cli-mirage)
-[![Ember Observer Score](http://emberobserver.com/badges/ember-cli-mirage.svg)](http://emberobserver.com/addons/ember-cli-mirage)
+[![Build Status](https://travis-ci.org/samselikoff/@movable/ember-cli-mirage.svg?branch=master)](https://travis-ci.org/samselikoff/@movable/ember-cli-mirage)
+[![npm version](https://badge.fury.io/js/@movable/ember-cli-mirage.svg)](http://badge.fury.io/js/@movable/ember-cli-mirage)
+[![Ember Observer Score](http://emberobserver.com/badges/@movable/ember-cli-mirage.svg)](http://emberobserver.com/addons/@movable/ember-cli-mirage)
 
 # Ember CLI Mirage
 
 
 A client-side server to develop, test and prototype your Ember CLI app.
 
-<http://www.ember-cli-mirage.com/>
+<http://www.@movable/ember-cli-mirage.com/>
 
 ----
 
@@ -28,7 +28,7 @@ Ember CLI Mirage may be for you! It lets you create a client-side server using [
 ## Installation
 
 ```sh
-ember install ember-cli-mirage  # install:addon for Ember CLI < 0.2.3
+ember install @movable/ember-cli-mirage  # install:addon for Ember CLI < 0.2.3
 ```
 
 ## Updating
@@ -37,7 +37,7 @@ This project is new and the API is subject to change. When updating your project
 
 ## Getting started
 
-Check out the [Docs](http://www.ember-cli-mirage.com/docs/v0.2.x/)!
+Check out the [Docs](http://www.@movable/ember-cli-mirage.com/docs/v0.2.x/)!
 
 ## Support
 

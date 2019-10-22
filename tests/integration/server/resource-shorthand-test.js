@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
-import { Model, ActiveModelSerializer } from 'ember-cli-mirage';
-import Server from 'ember-cli-mirage/server';
+import { Model, ActiveModelSerializer } from '@movable/ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
 import $ from 'jquery';
 
 module('Integration | Server | Resource shorthand', function(hooks) {

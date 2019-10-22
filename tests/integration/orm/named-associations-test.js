@@ -1,8 +1,8 @@
 import { module, test } from 'qunit';
-import Schema from 'ember-cli-mirage/orm/schema';
-import Model from 'ember-cli-mirage/orm/model';
-import Db from 'ember-cli-mirage/db';
-import { hasMany, belongsTo } from 'ember-cli-mirage';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import Db from '@movable/ember-cli-mirage/db';
+import { hasMany, belongsTo } from '@movable/ember-cli-mirage';
 
 module('Integration | ORM | Named associations test', function() {
   test('schemas with a single hasMany have correct foreign keys', function(assert) {

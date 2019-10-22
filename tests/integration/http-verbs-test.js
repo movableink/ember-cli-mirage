@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
-import Server from 'ember-cli-mirage/server';
-import { Model } from 'ember-cli-mirage';
+import Server from '@movable/ember-cli-mirage/server';
+import { Model } from '@movable/ember-cli-mirage';
 import $ from 'jquery';
 
 module('Integration | HTTP Verbs', function(hooks) {

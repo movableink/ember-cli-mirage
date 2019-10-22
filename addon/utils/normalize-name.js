@@ -3,7 +3,7 @@ import {
   pluralize,
   singularize,
   dasherize
-} from 'ember-cli-mirage/utils/inflector';
+} from '@movable/ember-cli-mirage/utils/inflector';
 
 export function toCollectionName(type) {
   let modelName = dasherize(type);

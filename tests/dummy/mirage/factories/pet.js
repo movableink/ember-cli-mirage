@@ -1,4 +1,4 @@
-import Mirage from 'ember-cli-mirage';
+import Mirage from '@movable/ember-cli-mirage';
 
 const names = ['Rex', 'Toby', 'Sam', 'Andy', 'Lassie', 'Annibal', 'Spark'];
 

@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-mirage",
+  "name": "@movable/ember-cli-mirage",
   "version": "0.2.9",
   "description": "A client-side HTTP server to develop, test and demo your Ember app",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/samselikoff/ember-cli-mirage.git"
+    "url": "https://github.com/movableink/ember-cli-mirage.git"
   },
   "license": "MIT",
   "author": "Sam Selikoff",
@@ -81,9 +81,9 @@
     "node": "8.* || >= 10.*"
   },
   "bugs": {
-    "url": "https://github.com/samselikoff/ember-cli-mirage/issues"
+    "url": "https://github.com/movableink/ember-cli-mirage/issues"
   },
-  "homepage": "https://github.com/samselikoff/ember-cli-mirage",
+  "homepage": "https://github.com/movableink/ember-cli-mirage",
   "ember-addon": {
     "configPath": "tests/dummy/config"
   }

@@ -1,9 +1,9 @@
-import RestSerializer from 'ember-cli-mirage/serializers/rest-serializer';
-import { hasMany, belongsTo } from 'ember-cli-mirage';
-import Schema from 'ember-cli-mirage/orm/schema';
-import Model from 'ember-cli-mirage/orm/model';
-import Db from 'ember-cli-mirage/db';
-import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
+import RestSerializer from '@movable/ember-cli-mirage/serializers/rest-serializer';
+import { hasMany, belongsTo } from '@movable/ember-cli-mirage';
+import Schema from '@movable/ember-cli-mirage/orm/schema';
+import Model from '@movable/ember-cli-mirage/orm/model';
+import Db from '@movable/ember-cli-mirage/db';
+import SerializerRegistry from '@movable/ember-cli-mirage/serializer-registry';
 import { module, test } from 'qunit';
 
 module('Integration | Serializer | RestSerializer', function(hooks) {

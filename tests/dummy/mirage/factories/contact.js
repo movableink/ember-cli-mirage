@@ -1,5 +1,5 @@
-import Mirage from 'ember-cli-mirage';
-import { faker } from 'ember-cli-mirage';
+import Mirage from '@movable/ember-cli-mirage';
+import { faker } from '@movable/ember-cli-mirage';
 
 export default Mirage.Factory.extend({
   title: faker.list.cycle('Duke', 'Developer', 'Artist'),
