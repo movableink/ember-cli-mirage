@@ -64,6 +64,8 @@ module.exports = {
     } else {
       this.mirageDirectory = path.join(this.app.project.root, '/mirage');
     }
+
+    app.import('vendor/movable-ember-cli-mirage/alias-ember-cli-mirage.js');
   },
 
   blueprintsPath() {
