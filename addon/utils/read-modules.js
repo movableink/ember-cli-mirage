@@ -1,10 +1,7 @@
 /* global requirejs */
 /* eslint-env node */
 import { assert } from '@ember/debug';
-
-'use strict';
-
-import _camelCase from 'lodash/camelCase';
+import { camelCase as _camelCase } from 'lodash-es';
 import { pluralize } from 'ember-cli-mirage/utils/inflector';
 
 /*

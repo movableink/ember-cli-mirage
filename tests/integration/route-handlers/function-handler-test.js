@@ -4,7 +4,7 @@ import { Model, Collection, Serializer } from 'ember-cli-mirage';
 import Server from 'ember-cli-mirage/server';
 import Response from 'ember-cli-mirage/response';
 import FunctionRouteHandler from 'ember-cli-mirage/route-handlers/function';
-import _uniqBy from 'lodash/uniqBy';
+import { uniqBy as _uniqBy } from 'lodash-es';
 import $ from 'jquery';
 
 module('Integration | Route handlers | Function handler', function(hooks) {

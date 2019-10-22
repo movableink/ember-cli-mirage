@@ -1,4 +1,4 @@
-import _invokeMap from 'lodash/invokeMap';
+import { invokeMap as _invokeMap } from 'lodash-es';
 import assert from '../assert';
 
 /**

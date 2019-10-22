@@ -8,7 +8,7 @@ import {
   capitalize,
   camelize
 } from 'ember-cli-mirage/utils/inflector';
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 /*
   A model with a hasMany association can be in eight states

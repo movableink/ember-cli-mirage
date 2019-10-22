@@ -23,9 +23,6 @@ module.exports = {
     'ember/no-invalid-debug-function-arguments': 'off',
     'ember/no-jquery': 'off',
   },
-  globals: {
-    faker: true
-  },
   overrides: [
     // node files
     {

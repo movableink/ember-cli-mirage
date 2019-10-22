@@ -8,21 +8,20 @@ module.exports = {
   name: require('./package').name,
 
   options: {
+    autoImport: {
+      webpack: {
+        node: {
+          // Mock `process` to force Pretender to use `require` to resolve dependencies
+          process: 'mock'
+        }
+      }
+    },
+
     babel: {
       include: [
         // Some code relies on being able to call an ES class constructor without `new`
         '@babel/plugin-transform-classes'
       ]
-    },
-
-    nodeAssets: {
-      'route-recognizer': npmAsset({
-        path: 'dist/route-recognizer.js',
-        sourceMap: 'dist/route-recognizer.js.map'
-      }),
-      'fake-xml-http-request': npmAsset('fake_xml_http_request.js'),
-      'pretender': npmAsset('pretender.js'),
-      'faker': npmAsset('build/build/faker.js')
     }
   },
 
@@ -57,13 +56,6 @@ module.exports = {
       this.mirageDirectory = path.resolve(app.project.root, path.join('tests', 'dummy', 'mirage'));
     } else {
       this.mirageDirectory = path.join(this.app.project.root, '/mirage');
-    }
-
-    if (this._shouldIncludeFiles()) {
-      app.import('vendor/ember-cli-mirage/pretender-shim.js', {
-        type: 'vendor',
-        exports: { 'pretender': ['default'] }
-      });
     }
   },
 
@@ -134,12 +126,3 @@ module.exports = {
     return enabledInProd || (environment && environment !== 'production' && explicitExcludeFiles !== true);
   }
 };
-
-function npmAsset(filePath) {
-  return function() {
-    return {
-      enabled: this._shouldIncludeFiles(),
-      import: [filePath]
-    };
-  };
-}

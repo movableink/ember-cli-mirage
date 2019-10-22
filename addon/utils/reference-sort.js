@@ -1,6 +1,8 @@
 // jscs:disable disallowVar, requireArrayDestructuring
-import _uniq from 'lodash/uniq';
-import _flatten from 'lodash/flatten';
+import {
+  uniq as _uniq,
+  flatten as _flatten
+} from 'lodash-es';
 
 export default function(edges) {
   let nodes = _uniq(_flatten(edges));

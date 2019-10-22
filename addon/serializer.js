@@ -3,13 +3,14 @@ import Collection from './orm/collection';
 import extend from './utils/extend';
 import { singularize, pluralize, camelize } from './utils/inflector';
 
-import _isFunction from 'lodash/isFunction';
-import _isArray from 'lodash/isArray';
-import _isEmpty from 'lodash/isEmpty';
-import _includes from 'lodash/includes';
-import _assign from 'lodash/assign';
-import _get from 'lodash/get';
-import _ from 'lodash';
+import _, {
+  get as _get,
+  assign as _assign,
+  includes as _includes,
+  isEmpty as _isEmpty,
+  isArray as _isArray,
+  isFunction as _isFunction
+} from 'lodash-es';
 
 class Serializer {
 

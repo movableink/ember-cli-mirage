@@ -2,9 +2,12 @@ import { pluralize, camelize, dasherize } from '../utils/inflector';
 import { toCollectionName, toModelName } from 'ember-cli-mirage/utils/normalize-name';
 import Association from './associations/association';
 import Collection from './collection';
-import _forIn from 'lodash/forIn';
-import _includes from 'lodash/includes';
 import assert from '../assert';
+
+import {
+  forIn as _forIn,
+  includes as _includes
+} from 'lodash-es';
 
 /**
  * @class Schema

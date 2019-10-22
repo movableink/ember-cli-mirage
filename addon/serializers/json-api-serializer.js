@@ -1,8 +1,7 @@
 import Serializer from '../serializer';
 import { dasherize, pluralize, camelize } from '../utils/inflector';
 
-import _get from 'lodash/get';
-import _ from 'lodash';
+import _, { get as _get } from 'lodash-es';
 
 export default Serializer.extend({
 

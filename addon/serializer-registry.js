@@ -5,7 +5,7 @@ import JsonApiSerializer from 'ember-cli-mirage/serializers/json-api-serializer'
 import { pluralize, camelize } from './utils/inflector';
 import assert from './assert';
 
-import _assign from 'lodash/assign';
+import { assign as _assign } from 'lodash-es';
 
 export default class SerializerRegistry {
 
