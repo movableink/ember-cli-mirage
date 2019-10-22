@@ -4,9 +4,8 @@ We are currently stuck on `@movable/ember-cli-mirage@0.2.9`. This is a custom fo
 
 ***
 
-[![Build Status](https://travis-ci.org/samselikoff/@movable/ember-cli-mirage.svg?branch=master)](https://travis-ci.org/samselikoff/@movable/ember-cli-mirage)
-[![npm version](https://badge.fury.io/js/@movable/ember-cli-mirage.svg)](http://badge.fury.io/js/@movable/ember-cli-mirage)
-[![Ember Observer Score](http://emberobserver.com/badges/@movable/ember-cli-mirage.svg)](http://emberobserver.com/addons/@movable/ember-cli-mirage)
+[![Build Status](https://travis-ci.com/movableink/ember-cli-mirage.svg?branch=master)](https://travis-ci.com/movableink/ember-cli-mirage)
+[![npm version](https://badge.fury.io/js/%40movable%2Fember-cli-mirage.svg)](https://badge.fury.io/js/%40movable%2Fember-cli-mirage)
 
 # Ember CLI Mirage
 
