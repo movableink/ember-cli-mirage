@@ -11,7 +11,6 @@ import assert from 'ember-cli-mirage/assert';
  * @public
  */
 class BelongsTo extends Association {
-
   /*
     The belongsTo association adds a fk to the owner of the association
   */
@@ -52,12 +51,14 @@ class BelongsTo extends Association {
 
     let associationHash = {};
     associationHash[key] = this;
-    modelPrototype.belongsToAssociations = _assign(modelPrototype.belongsToAssociations, associationHash);
+    modelPrototype.belongsToAssociations = _assign(
+      modelPrototype.belongsToAssociations,
+      associationHash
+    );
     modelPrototype.associationKeys.push(key);
     modelPrototype.associationIdKeys.push(foreignKey);
 
     Object.defineProperty(modelPrototype, this.getForeignKey(), {
-
       /*
         object.parentId
           - returns the associated parent's id
@@ -90,8 +91,9 @@ class BelongsTo extends Association {
         let foreignKeyId = this[foreignKey];
         if (foreignKeyId != null) {
           association._tempParent = null;
-          return schema[toCollectionName(association.modelName)].find(foreignKeyId);
-
+          return schema[toCollectionName(association.modelName)].find(
+            foreignKeyId
+          );
         } else if (association._tempParent) {
           return association._tempParent;
         } else {
@@ -134,7 +136,9 @@ class BelongsTo extends Association {
         - creates a new saved associated parent, and immediately persists both models
     */
     modelPrototype[`create${capitalize(key)}`] = function(attrs) {
-      let parent = schema[toCollectionName(association.modelName)].create(attrs);
+      let parent = schema[toCollectionName(association.modelName)].create(
+        attrs
+      );
 
       this[key] = parent;
       this.save();
@@ -142,7 +146,6 @@ class BelongsTo extends Association {
       return parent;
     };
   }
-
 }
 
 export default BelongsTo;

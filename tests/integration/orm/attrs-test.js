@@ -7,9 +7,7 @@ var db, schema, User;
 
 module('Integration | ORM | attrs', function(hooks) {
   hooks.beforeEach(function() {
-    db = new Db({ users: [
-      { id: 1, name: 'Link', evil: false }
-    ] });
+    db = new Db({ users: [{ id: 1, name: 'Link', evil: false }] });
 
     User = Model.extend();
     schema = new Schema(db, {

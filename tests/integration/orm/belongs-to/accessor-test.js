@@ -21,15 +21,21 @@ module('Integration | ORM | belongsTo #accessor', function(hooks) {
     'newChildNoParent',
     'newChildNewParent',
     'newChildSavedParent'
-  ].forEach((state) => {
-
+  ].forEach(state => {
     test(`the references of a ${state} are correct`, function(assert) {
       let [address, user] = this.helper[state]();
 
-      assert.deepEqual(address.user, user ? user : null, 'the model reference is correct');
-      assert.equal(address.userId, user ? user.id : null, 'the modelId reference is correct');
+      assert.deepEqual(
+        address.user,
+        user ? user : null,
+        'the model reference is correct'
+      );
+      assert.equal(
+        address.userId,
+        user ? user.id : null,
+        'the modelId reference is correct'
+      );
     });
-
   });
 
   test('belongsTo accessors works when foreign key is present but falsy', function(assert) {

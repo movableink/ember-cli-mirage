@@ -1,5 +1,4 @@
 export default class Association {
-
   constructor(modelName, opts) {
     if (typeof modelName === 'object') {
       // Received opts only
@@ -17,5 +16,4 @@ export default class Association {
     // The modelName that owns this association
     this.ownerModelName = '';
   }
-
 }

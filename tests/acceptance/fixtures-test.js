@@ -35,4 +35,3 @@ module('Acceptance | Fixtures', function(hooks) {
     assert.equal(blogPostsInStore.get('length'), 3);
   });
 });
-

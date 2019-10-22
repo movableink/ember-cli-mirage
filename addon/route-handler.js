@@ -11,14 +11,23 @@ import DeleteShorthandHandler from './route-handlers/shorthands/delete';
 import HeadShorthandHandler from './route-handlers/shorthands/head';
 
 function isNotBlankResponse(response) {
-  return response
-    && !(typeOf(response) === 'object' && Object.keys(response).length === 0)
-    && (Array.isArray(response) || !isBlank(response));
+  return (
+    response &&
+    !(typeOf(response) === 'object' && Object.keys(response).length === 0) &&
+    (Array.isArray(response) || !isBlank(response))
+  );
 }
 
-const DEFAULT_CODES = { get: 200, put: 204, post: 201, 'delete': 204 };
+const DEFAULT_CODES = { get: 200, put: 204, post: 201, delete: 204 };
 
-function createHandler({ verb, schema, serializerOrRegistry, path, rawHandler, options }) {
+function createHandler({
+  verb,
+  schema,
+  serializerOrRegistry,
+  path,
+  rawHandler,
+  options
+}) {
   let handler;
   let args = [schema, serializerOrRegistry, rawHandler, path, options];
   let type = typeOf(rawHandler);
@@ -42,20 +51,36 @@ function createHandler({ verb, schema, serializerOrRegistry, path, rawHandler, o
 }
 
 export default class RouteHandler {
-
-  constructor({ schema, verb, rawHandler, customizedCode, options, path, serializerOrRegistry }) {
+  constructor({
+    schema,
+    verb,
+    rawHandler,
+    customizedCode,
+    options,
+    path,
+    serializerOrRegistry
+  }) {
     this.verb = verb;
     this.customizedCode = customizedCode;
     this.serializerOrRegistry = serializerOrRegistry;
-    this.handler = createHandler({ verb, schema, path, serializerOrRegistry, rawHandler, options });
+    this.handler = createHandler({
+      verb,
+      schema,
+      path,
+      serializerOrRegistry,
+      rawHandler,
+      options
+    });
   }
 
   handle(request) {
     return new Promise(resolve => {
       this._getMirageResponseForRequest(request).then(mirageResponse => {
-        this.serialize(mirageResponse, request).then(serializedMirageResponse => {
-          resolve(serializedMirageResponse.toRackResponse());
-        });
+        this.serialize(mirageResponse, request).then(
+          serializedMirageResponse => {
+            resolve(serializedMirageResponse.toRackResponse());
+          }
+        );
       });
     });
   }
@@ -72,12 +97,14 @@ export default class RouteHandler {
       }
 
       result = this.handler.handle(request);
-    } catch(e) {
+    } catch (e) {
       if (e instanceof MirageError) {
         throw e;
       } else {
-        let message = (typeOf(e) === 'string') ? e : e.message;
-        throw new MirageError(`Your handler for the url ${request.url} threw an error: ${message}`);
+        let message = typeOf(e) === 'string' ? e : e.message;
+        throw new MirageError(
+          `Your handler for the url ${request.url} threw an error: ${message}`
+        );
       }
     }
 
@@ -97,7 +124,6 @@ export default class RouteHandler {
         }
         resolve(mirageResponse);
       });
-
     });
   }
 
@@ -117,7 +143,10 @@ export default class RouteHandler {
   serialize(mirageResponsePromise, request) {
     return new Promise(resolve => {
       Promise.resolve(mirageResponsePromise).then(mirageResponse => {
-        mirageResponse.data = this.serializerOrRegistry.serialize(mirageResponse.data, request);
+        mirageResponse.data = this.serializerOrRegistry.serialize(
+          mirageResponse.data,
+          request
+        );
         resolve(mirageResponse);
       });
     });

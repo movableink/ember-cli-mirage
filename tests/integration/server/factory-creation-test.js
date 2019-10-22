@@ -49,13 +49,19 @@ module('Integration | Server | Factory creation', function(hooks) {
   test('create returns a Model if one is defined, when using a compound name', function(assert) {
     let contact = this.server.create('amazing-contact');
 
-    assert.ok(contact instanceof this.AmazingContact, 'expected an AmazingContact');
+    assert.ok(
+      contact instanceof this.AmazingContact,
+      'expected an AmazingContact'
+    );
   });
 
   test('createList returns Models if one is defined, when using a compound name', function(assert) {
     let contacts = this.server.createList('amazing-contact', 1);
 
-    assert.ok(contacts[0] instanceof this.AmazingContact, 'expected an AmazingContact');
+    assert.ok(
+      contacts[0] instanceof this.AmazingContact,
+      'expected an AmazingContact'
+    );
   });
 
   test('create falls back to a model if no factory is defined', function(assert) {

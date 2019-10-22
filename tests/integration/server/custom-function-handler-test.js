@@ -1,9 +1,5 @@
 import { module, test } from 'qunit';
-import {
-  Model,
-  Factory,
-  ActiveModelSerializer
-} from 'ember-cli-mirage';
+import { Model, Factory, ActiveModelSerializer } from 'ember-cli-mirage';
 import Server from 'ember-cli-mirage/server';
 import $ from 'jquery';
 
@@ -35,14 +31,14 @@ module('Integration | Server | Custom function handler', function(hooks) {
     let { server } = this;
 
     server.createList('contact', 3);
-    server.get('/contacts', (schema) => {
+    server.get('/contacts', schema => {
       return schema.contacts.all().models;
     });
 
     $.ajax({
       method: 'GET',
       url: '/contacts'
-    }).done((res) => {
+    }).done(res => {
       assert.deepEqual(res, [{ id: '1' }, { id: '2' }, { id: '3' }]);
       done();
     });
@@ -89,11 +85,15 @@ module('Integration | Server | Custom function handler', function(hooks) {
     server.post('/form-test', function() {
       let attrs = this.normalizedRequestAttrs();
 
-      assert.deepEqual(attrs, {
-        name: 'Sam Selikoff',
-        company: 'TED',
-        email: 'sam.selikoff@gmail.com'
-      }, '#normalizedRequestAttrs successfully returned the parsed x-www-form-urlencoded request body');
+      assert.deepEqual(
+        attrs,
+        {
+          name: 'Sam Selikoff',
+          company: 'TED',
+          email: 'sam.selikoff@gmail.com'
+        },
+        '#normalizedRequestAttrs successfully returned the parsed x-www-form-urlencoded request body'
+      );
 
       return {};
     });

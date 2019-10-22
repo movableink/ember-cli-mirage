@@ -4,7 +4,9 @@ import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
 import { Model, JSONAPISerializer } from 'ember-cli-mirage';
 import { module, test } from 'qunit';
 
-module('Integration | Serializers | JSON API Serializer | Base', function(hooks) {
+module('Integration | Serializers | JSON API Serializer | Base', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     this.schema = new Schema(new Db(), {
       wordSmith: Model
@@ -39,21 +41,24 @@ module('Integration | Serializers | JSON API Serializer | Base', function(hooks)
     let result = this.registry.serialize(collection);
 
     assert.deepEqual(result, {
-      data: [{
-        type: 'word-smiths',
-        id: '1',
-        attributes: {
-          'first-name': 'Link',
-          age: 123
+      data: [
+        {
+          type: 'word-smiths',
+          id: '1',
+          attributes: {
+            'first-name': 'Link',
+            age: 123
+          }
+        },
+        {
+          type: 'word-smiths',
+          id: '2',
+          attributes: {
+            'first-name': 'Zelda',
+            age: 456
+          }
         }
-      }, {
-        type: 'word-smiths',
-        id: '2',
-        attributes: {
-          'first-name': 'Zelda',
-          age: 456
-        }
-      }]
+      ]
     });
   });
 

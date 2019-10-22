@@ -57,10 +57,7 @@ module('Integration | Serializers | Base | Basic', function(hooks) {
     let result = this.registry.serialize(wordSmiths);
 
     assert.deepEqual(result, {
-      wordSmiths: [
-        { id: '1', name: 'Link' },
-        { id: '2', name: 'Zelda' }
-      ]
+      wordSmiths: [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }]
     });
   });
 

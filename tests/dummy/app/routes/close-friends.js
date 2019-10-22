@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-
   model() {
     let store = this.get('store');
     return store.query('friend', { ids: [1, 3] }).then(function() {
@@ -10,5 +9,4 @@ export default Route.extend({
       return store.peekAll('friend');
     });
   }
-
 });

@@ -6,12 +6,12 @@ import { module, test } from 'qunit';
 
 var schema, link;
 
-module('Integration | ORM | belongsTo instantiating with params', function(hooks) {
+module('Integration | ORM | belongsTo instantiating with params', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     let db = new Db({
-      users: [
-        { id: 1, name: 'Link' }
-      ],
+      users: [{ id: 1, name: 'Link' }],
       addresses: []
     });
 

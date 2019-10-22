@@ -6,7 +6,9 @@ import { module, test } from 'qunit';
 
 var db, schema, HeadOfState;
 
-module('Integration | ORM | inflector-collectionName integration', function(hooks) {
+module('Integration | ORM | inflector-collectionName integration', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     Inflector.inflector.irregular('head-of-state', 'heads-of-state');
 

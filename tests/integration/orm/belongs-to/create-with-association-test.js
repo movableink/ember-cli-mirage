@@ -4,7 +4,9 @@ import Schema from 'ember-cli-mirage/orm/schema';
 import Db from 'ember-cli-mirage/db';
 import { module, test } from 'qunit';
 
-module('Integration | ORM | belongsTo create with association', function(hooks) {
+module('Integration | ORM | belongsTo create with association', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     this.schema = new Schema(new Db(), {
       user: Model.extend(),

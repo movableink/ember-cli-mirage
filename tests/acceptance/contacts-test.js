@@ -1,4 +1,10 @@
-import { click, fillIn, currentRouteName, findAll, visit } from '@ember/test-helpers';
+import {
+  click,
+  fillIn,
+  currentRouteName,
+  findAll,
+  visit
+} from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from '../helpers/setup-mirage';
@@ -34,9 +40,13 @@ module('Acceptance | Contacts', function(hooks) {
   });
 
   test('If the server errors on /contacts, the first error message should show', async function(assert) {
-    this.server.get('/contacts', {
-      errors: ['improper auth']
-    }, 404);
+    this.server.get(
+      '/contacts',
+      {
+        errors: ['improper auth']
+      },
+      404
+    );
 
     await visit('/');
 

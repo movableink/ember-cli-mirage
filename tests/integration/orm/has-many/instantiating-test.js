@@ -6,7 +6,9 @@ import { module, test } from 'qunit';
 
 var schema, child1, child2;
 
-module('Integration | ORM | hasMany instantiating with params', function(hooks) {
+module('Integration | ORM | hasMany instantiating with params', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     let db = new Db({
       users: [],
@@ -34,7 +36,11 @@ module('Integration | ORM | hasMany instantiating with params', function(hooks) 
   test('children have fks added to their attrs', function(assert) {
     let newChild = schema.homeAddresses.new();
     assert.deepEqual(newChild.attrs, { userId: null });
-    assert.deepEqual(child1.attrs, { id: '1', name: '123 Hyrule Way', userId: null });
+    assert.deepEqual(child1.attrs, {
+      id: '1',
+      name: '123 Hyrule Way',
+      userId: null
+    });
   });
 
   test('the parent accepts an array of saved children ids', function(assert) {

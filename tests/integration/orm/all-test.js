@@ -7,10 +7,7 @@ import { module, test } from 'qunit';
 module('Integration | ORM | #all', function() {
   test('it can return all models', function(assert) {
     let db = new Db({
-      users: [
-        { id: 1, name: 'Link' },
-        { id: 2, name: 'Zelda' }
-      ]
+      users: [{ id: 1, name: 'Link' }, { id: 2, name: 'Zelda' }]
     });
     let User = Model.extend();
     let schema = new Schema(db, {
@@ -19,7 +16,10 @@ module('Integration | ORM | #all', function() {
 
     let users = schema.users.all();
     assert.ok(users instanceof Collection, 'it returns a collection');
-    assert.ok(users.models[0] instanceof User, 'each member of the collection is a model');
+    assert.ok(
+      users.models[0] instanceof User,
+      'each member of the collection is a model'
+    );
     assert.equal(users.models.length, 2);
     assert.deepEqual(users.models[1].attrs, { id: '2', name: 'Zelda' });
   });

@@ -9,10 +9,9 @@ var User = Model.extend();
 
 module('Integration | ORM | #find', function(hooks) {
   hooks.beforeEach(function() {
-    let db = new Db({ users: [
-      { id: 1, name: 'Link' },
-      { id: 2, name: 'Zelda' }
-    ] });
+    let db = new Db({
+      users: [{ id: 1, name: 'Link' }, { id: 2, name: 'Zelda' }]
+    });
 
     schema = new Schema(db, {
       user: User

@@ -22,9 +22,7 @@ import _ from 'lodash-es';
   where the children array may be undefined.
 */
 class HasManyHelper {
-
   constructor(opts) {
-
     let { ownKey, ownModel, otherKey, otherModel } = _.defaults({}, opts, {
       ownKey: 'homeAddresses',
       ownModel: 'user',
@@ -55,13 +53,17 @@ class HasManyHelper {
   }
 
   savedParentNoChildren() {
-    let insertedUser = this.db[pluralize(this.ownModel)].insert({ name: 'Link' });
+    let insertedUser = this.db[pluralize(this.ownModel)].insert({
+      name: 'Link'
+    });
 
     return [this.schema[pluralize(this.ownModel)].find(insertedUser.id), []];
   }
 
   savedParentNewChildren() {
-    let insertedUser = this.db[pluralize(this.ownModel)].insert({ name: 'Link' });
+    let insertedUser = this.db[pluralize(this.ownModel)].insert({
+      name: 'Link'
+    });
 
     let user = this.schema[pluralize(this.ownModel)].find(insertedUser.id);
     let newHomeAddress = user[`new${singularize(capitalize(this.ownKey))}`]();
@@ -70,21 +72,35 @@ class HasManyHelper {
   }
 
   savedParentSavedChildren() {
-    let insertedUser = this.db[pluralize(this.ownModel)].insert({ name: 'Link' });
-    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({ name: '123 Hyrule Way', [`${camelize(this.otherKey)}Id`]: insertedUser.id });
+    let insertedUser = this.db[pluralize(this.ownModel)].insert({
+      name: 'Link'
+    });
+    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({
+      name: '123 Hyrule Way',
+      [`${camelize(this.otherKey)}Id`]: insertedUser.id
+    });
 
     let user = this.schema[pluralize(this.ownModel)].find(insertedUser.id);
-    let homeAddress = this.schema[pluralize(this.otherModel)].find(insertedHomeAddress.id);
+    let homeAddress = this.schema[pluralize(this.otherModel)].find(
+      insertedHomeAddress.id
+    );
 
     return [user, [homeAddress]];
   }
 
   savedParentMixedChildren() {
-    let insertedUser = this.db[pluralize(this.ownModel)].insert({ name: 'Link' });
-    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({ name: '123 Hyrule Way', [`${camelize(this.otherKey)}Id`]: insertedUser.id });
+    let insertedUser = this.db[pluralize(this.ownModel)].insert({
+      name: 'Link'
+    });
+    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({
+      name: '123 Hyrule Way',
+      [`${camelize(this.otherKey)}Id`]: insertedUser.id
+    });
 
     let user = this.schema[pluralize(this.ownModel)].find(insertedUser.id);
-    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(insertedHomeAddress.id);
+    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(
+      insertedHomeAddress.id
+    );
     let newHomeAddress = user[`new${singularize(capitalize(this.ownKey))}`]();
 
     return [user, [savedHomeAddress, newHomeAddress]];
@@ -104,19 +120,31 @@ class HasManyHelper {
   }
 
   newParentSavedChildren() {
-    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({ name: '123 Hyrule Way' });
-    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(insertedHomeAddress.id);
-    let newUser = this.schema[pluralize(this.ownModel)].new({ [this.ownKey]: [savedHomeAddress] });
+    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({
+      name: '123 Hyrule Way'
+    });
+    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(
+      insertedHomeAddress.id
+    );
+    let newUser = this.schema[pluralize(this.ownModel)].new({
+      [this.ownKey]: [savedHomeAddress]
+    });
 
     return [newUser, [savedHomeAddress]];
   }
 
   newParentMixedChildren() {
-    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({ name: '123 Hyrule Way' });
-    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(insertedHomeAddress.id);
+    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({
+      name: '123 Hyrule Way'
+    });
+    let savedHomeAddress = this.schema[pluralize(this.otherModel)].find(
+      insertedHomeAddress.id
+    );
     let newHomeAddress = this.schema[pluralize(this.otherModel)].new();
 
-    let newUser = this.schema[pluralize(this.ownModel)].new({ [this.ownKey]: [savedHomeAddress, newHomeAddress] });
+    let newUser = this.schema[pluralize(this.ownModel)].new({
+      [this.ownKey]: [savedHomeAddress, newHomeAddress]
+    });
 
     return [newUser, [savedHomeAddress, newHomeAddress]];
   }
@@ -124,7 +152,9 @@ class HasManyHelper {
   // Just a saved unassociated child. The id is high so as not to
   // interfere with any other children
   savedChild() {
-    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({ name: 'foo' });
+    let insertedHomeAddress = this.db[pluralize(this.otherModel)].insert({
+      name: 'foo'
+    });
 
     return this.schema[pluralize(this.otherModel)].find(insertedHomeAddress.id);
   }
@@ -132,74 +162,73 @@ class HasManyHelper {
   newChild() {
     return this.schema[pluralize(this.otherModel)].new({ name: 'Newbie' });
   }
-
 }
 
 HasManyHelper.forEachScenario = function(fn) {
-  [
-    [true, true],
-    [true, false],
-    [false, true],
-    [false, false]
-  ].forEach(([useDefaultOwnKey, useDefaultOtherKey]) => {
+  [[true, true], [true, false], [false, true], [false, false]].forEach(
+    ([useDefaultOwnKey, useDefaultOtherKey]) => {
+      let accessor = 'homeAddresses';
+      let idsAccessor = 'homeAddressIds';
+      let createAccessor = 'createHomeAddress';
+      let newAccessor = 'newHomeAddress';
+      let otherAccessor = 'user';
+      let otherIdAccessor = 'userId';
 
-    let accessor = 'homeAddresses';
-    let idsAccessor = 'homeAddressIds';
-    let createAccessor = 'createHomeAddress';
-    let newAccessor = 'newHomeAddress';
-    let otherAccessor = 'user';
-    let otherIdAccessor = 'userId';
+      let opts = {};
+      if (!useDefaultOwnKey) {
+        opts.ownKey = 'altHomeAddresses';
+        accessor = 'altHomeAddresses';
+        idsAccessor = 'altHomeAddressIds';
+        createAccessor = 'createAltHomeAddress';
+        newAccessor = 'newAltHomeAddress';
+      }
+      if (!useDefaultOtherKey) {
+        opts.otherKey = 'altUser';
+        otherAccessor = 'altUser';
+        otherIdAccessor = 'altUserId';
+      }
 
-    let opts = {};
-    if (!useDefaultOwnKey) {
-      opts.ownKey = 'altHomeAddresses';
-      accessor = 'altHomeAddresses';
-      idsAccessor = 'altHomeAddressIds';
-      createAccessor = 'createAltHomeAddress';
-      newAccessor = 'newAltHomeAddress';
-    }
-    if (!useDefaultOtherKey) {
-      opts.otherKey = 'altUser';
-      otherAccessor = 'altUser';
-      otherIdAccessor = 'altUserId';
-    }
+      [
+        'savedParentNoChildren',
+        'savedParentNewChildren',
+        'savedParentSavedChildren',
+        'savedParentMixedChildren',
+        'newParentNoChildren',
+        'newParentNewChildren',
+        'newParentSavedChildren',
+        'newParentMixedChildren'
+      ].forEach(state => {
+        let title = `${state} with ${
+          useDefaultOwnKey ? 'default' : 'non-default'
+        } own key and ${
+          useDefaultOtherKey ? 'default' : 'non-default'
+        } other key`;
+        fn({
+          go() {
+            let helper = new HasManyHelper(opts);
 
-    [
-      'savedParentNoChildren',
-      'savedParentNewChildren',
-      'savedParentSavedChildren',
-      'savedParentMixedChildren',
-      'newParentNoChildren',
-      'newParentNewChildren',
-      'newParentSavedChildren',
-      'newParentMixedChildren'
-    ].forEach((state) => {
-      let title = `${state} with ${useDefaultOwnKey ? 'default' : 'non-default'} own key and ${useDefaultOtherKey ? 'default' : 'non-default'} other key`;
-      fn({
-        go() {
-          let helper = new HasManyHelper(opts);
-
-          let [parent, children] = helper[state]();
-          return {
-            parent,
-            children,
-            title,
-            accessor,
-            idsAccessor,
-            createAccessor,
-            newAccessor,
-            otherAccessor,
-            otherIdAccessor,
-            helper
-          };
-        },
-        title,
-        state,
-        useDefaultOwnKey,
-        useDefaultOtherKey
+            let [parent, children] = helper[state]();
+            return {
+              parent,
+              children,
+              title,
+              accessor,
+              idsAccessor,
+              createAccessor,
+              newAccessor,
+              otherAccessor,
+              otherIdAccessor,
+              helper
+            };
+          },
+          title,
+          state,
+          useDefaultOwnKey,
+          useDefaultOtherKey
+        });
       });
-    });
-  });
+    }
+  );
 };
 
 export default HasManyHelper;

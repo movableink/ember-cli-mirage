@@ -27,6 +27,9 @@ module('Unit | Model', function() {
     };
 
     assert.equal(ModelClass.findBelongsToAssociation('article'), null);
-    assert.deepEqual(ModelClass.findBelongsToAssociation('author'), authorAssociationMock);
+    assert.deepEqual(
+      ModelClass.findBelongsToAssociation('author'),
+      authorAssociationMock
+    );
   });
 });

@@ -29,10 +29,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -50,10 +47,7 @@ module('Integration | Server Config', function(hooks) {
     let done = assert.async();
     let { server } = this;
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     server.db.loadData({
       contacts
     });
@@ -71,10 +65,7 @@ module('Integration | Server Config', function(hooks) {
     let done = assert.async();
     let { server } = this;
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     server.db.loadData({
       contacts
     });
@@ -92,10 +83,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -112,10 +100,7 @@ module('Integration | Server Config', function(hooks) {
     let done = assert.async();
     let { server } = this;
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     server.db.loadData({
       contacts
     });
@@ -132,10 +117,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -153,10 +135,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -173,10 +152,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -193,10 +169,7 @@ module('Integration | Server Config', function(hooks) {
     assert.expect(1);
     let done = assert.async();
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     this.server.db.loadData({
       contacts
     });
@@ -214,10 +187,7 @@ module('Integration | Server Config', function(hooks) {
     let done = assert.async();
     let { server } = this;
 
-    let contacts = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Zelda' }
-    ];
+    let contacts = [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }];
     server.config({
       namespace: 'api',
       urlPrefix: 'http://localhost:3000',

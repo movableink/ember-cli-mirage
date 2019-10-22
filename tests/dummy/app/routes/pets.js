@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-
   actions: {
     createPet() {
       let controller = this.controllerFor('pets');
@@ -20,8 +19,10 @@ export default Route.extend({
   },
 
   model() {
-    return this.store.findAll('pet').catch((reason) => {
-      let errorMsg = reason.responseJSON ? reason.responseJSON.errors[0] : reason.errors[0];
+    return this.store.findAll('pet').catch(reason => {
+      let errorMsg = reason.responseJSON
+        ? reason.responseJSON.errors[0]
+        : reason.errors[0];
       this.set('error', errorMsg);
     });
   }

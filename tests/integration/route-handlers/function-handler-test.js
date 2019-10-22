@@ -12,8 +12,7 @@ module('Integration | Route handlers | Function handler', function(hooks) {
     this.server = new Server({
       environment: 'development',
       models: {
-        user: Model.extend({
-        })
+        user: Model.extend({})
       },
       serializers: {
         sparseUser: Serializer.extend({
@@ -24,7 +23,10 @@ module('Integration | Route handlers | Function handler', function(hooks) {
     this.server.timing = 0;
     this.server.logging = false;
 
-    this.functionHandler = new FunctionRouteHandler(this.server.schema, this.server.serializerOrRegistry);
+    this.functionHandler = new FunctionRouteHandler(
+      this.server.schema,
+      this.server.serializerOrRegistry
+    );
     this.schema = this.server.schema;
   });
 
@@ -37,7 +39,11 @@ module('Integration | Route handlers | Function handler', function(hooks) {
     let done = assert.async();
 
     this.server.get('/users', function() {
-      return new Response(200, { 'Content-Type': 'text/csv' }, 'firstname,lastname\nbob,dylon');
+      return new Response(
+        200,
+        { 'Content-Type': 'text/csv' },
+        'firstname,lastname\nbob,dylon'
+      );
     });
 
     $.ajax({ method: 'GET', url: '/users' }).done(function(res) {
@@ -52,7 +58,13 @@ module('Integration | Route handlers | Function handler', function(hooks) {
 
     this.server.get('/users', function() {
       return new Promise(resolve => {
-        resolve(new Response(200, { 'Content-Type': 'text/csv' }, 'firstname,lastname\nbob,dylan'));
+        resolve(
+          new Response(
+            200,
+            { 'Content-Type': 'text/csv' },
+            'firstname,lastname\nbob,dylan'
+          )
+        );
       });
     });
 
@@ -75,7 +87,7 @@ module('Integration | Route handlers | Function handler', function(hooks) {
     });
 
     $.ajax({ method: 'GET', url: '/users' }).done(function(res) {
-      assert.deepEqual(res, { users: [ { id: user.id, name: 'Sam' } ] });
+      assert.deepEqual(res, { users: [{ id: user.id, name: 'Sam' }] });
       done();
     });
   });
@@ -117,9 +129,7 @@ module('Integration | Route handlers | Function handler', function(hooks) {
     let json = this.functionHandler.serialize(users);
 
     assert.deepEqual(json, {
-      users: [
-        { id: '1', name: 'Sam' }
-      ]
+      users: [{ id: '1', name: 'Sam' }]
     });
   });
 
@@ -163,7 +173,11 @@ module('Integration | Route handlers | Function handler', function(hooks) {
   test('#serialize on a Collection takes an optional serializer type', function(assert) {
     this.server.schema.users.create({ name: 'Sam', tall: true, evil: false });
     this.server.schema.users.create({ name: 'Sam', tall: true, evil: false });
-    this.server.schema.users.create({ name: 'Ganondorf', tall: true, evil: true });
+    this.server.schema.users.create({
+      name: 'Ganondorf',
+      tall: true,
+      evil: true
+    });
 
     let users = this.schema.users.all().models;
     let uniqueNames = _uniqBy(users, 'name');

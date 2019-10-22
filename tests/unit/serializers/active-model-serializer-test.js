@@ -67,4 +67,3 @@ module('Unit | Serializers | ActiveModelSerializer', function(hooks) {
     });
   });
 });
-

@@ -17,8 +17,7 @@ module('Integration | ORM | belongsTo #createAssociation', function(hooks) {
     'newChildNoParent',
     'newChildNewParent',
     'newChildSavedParent'
-  ].forEach((state) => {
-
+  ].forEach(state => {
     test(`a ${state} can create an associated parent`, function(assert) {
       let [address] = this.helper[state]();
 
@@ -27,8 +26,11 @@ module('Integration | ORM | belongsTo #createAssociation', function(hooks) {
       assert.ok(ganon.id, 'the parent was persisted');
       assert.deepEqual(address.user, ganon);
       assert.equal(address.userId, ganon.id);
-      assert.equal(this.helper.schema.addresses.find(address.id).userId, ganon.id, 'the child was persisted');
+      assert.equal(
+        this.helper.schema.addresses.find(address.id).userId,
+        ganon.id,
+        'the child was persisted'
+      );
     });
-
   });
 });

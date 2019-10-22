@@ -72,9 +72,7 @@ module('Integration | Serializers | Base | Full Request', function(hooks) {
         author: {
           id: '1',
           first: 'Link',
-          posts: [
-            { id: '1', title: 'Lorem ipsum' }
-          ]
+          posts: [{ id: '1', title: 'Lorem ipsum' }]
         }
       });
       done();

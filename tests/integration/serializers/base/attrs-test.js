@@ -42,10 +42,7 @@ module('Integration | Serializers | Base | Attrs List', function(hooks) {
     let result = this.registry.serialize(collection);
 
     assert.deepEqual(result, {
-      wordSmiths: [
-        { id: '1', name: 'Link' },
-        { id: '2', name: 'Zelda' }
-      ]
+      wordSmiths: [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }]
     });
   });
 });

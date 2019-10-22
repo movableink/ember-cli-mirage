@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-
   actions: {
     createContact() {
       let controller = this.controllerFor('contacts');
@@ -13,7 +12,7 @@ export default Route.extend({
     },
 
     saveContact(contact) {
-      return contact.save().then((contact) => {
+      return contact.save().then(contact => {
         this.transitionTo('contact', contact);
       });
     },
@@ -24,5 +23,4 @@ export default Route.extend({
       });
     }
   }
-
 });

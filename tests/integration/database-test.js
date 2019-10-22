@@ -16,9 +16,7 @@ module('Integration | Database', function(hooks) {
         author: Factory
       },
       fixtures: {
-        authors: [
-          { id: 1, name: 'Zelda' }
-        ]
+        authors: [{ id: 1, name: 'Zelda' }]
       }
     });
   });
@@ -34,7 +32,6 @@ module('Integration | Database', function(hooks) {
 
     let { authors } = this.server.db;
     assert.equal(authors.length, 2);
-    assert.deepEqual(authors.map((a) => a.id), ['1', '2']);
+    assert.deepEqual(authors.map(a => a.id), ['1', '2']);
   });
 });
-

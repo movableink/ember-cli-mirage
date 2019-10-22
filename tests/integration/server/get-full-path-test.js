@@ -51,7 +51,10 @@ module('Integration | Server | Get full path', function(hooks) {
     let { server } = this;
     server.urlPrefix = 'http://localhost:3000/';
 
-    assert.equal(server._getFullPath('/contacts'), 'http://localhost:3000/contacts');
+    assert.equal(
+      server._getFullPath('/contacts'),
+      'http://localhost:3000/contacts'
+    );
   });
 
   test('it works with a configured urlPrefix without a trailing slash', function(assert) {
@@ -59,7 +62,10 @@ module('Integration | Server | Get full path', function(hooks) {
     let { server } = this;
     server.urlPrefix = 'http://localhost:3000';
 
-    assert.equal(server._getFullPath('/contacts'), 'http://localhost:3000/contacts');
+    assert.equal(
+      server._getFullPath('/contacts'),
+      'http://localhost:3000/contacts'
+    );
   });
 
   test('it works with a configured urlPrefix as an empty string', function(assert) {
@@ -76,7 +82,10 @@ module('Integration | Server | Get full path', function(hooks) {
     server.namespace = 'api';
     server.urlPrefix = 'http://localhost:3000';
 
-    assert.equal(server._getFullPath('/contacts'), 'http://localhost:3000/api/contacts');
+    assert.equal(
+      server._getFullPath('/contacts'),
+      'http://localhost:3000/api/contacts'
+    );
   });
 
   test('it works with a configured namespace with a leading slash and a urlPrefix', function(assert) {
@@ -85,7 +94,10 @@ module('Integration | Server | Get full path', function(hooks) {
     server.namespace = '/api';
     server.urlPrefix = 'http://localhost:3000';
 
-    assert.equal(server._getFullPath('/contacts'), 'http://localhost:3000/api/contacts');
+    assert.equal(
+      server._getFullPath('/contacts'),
+      'http://localhost:3000/api/contacts'
+    );
   });
 
   test('it works with a configured namespace and a urlPrefix as empty strings', function(assert) {

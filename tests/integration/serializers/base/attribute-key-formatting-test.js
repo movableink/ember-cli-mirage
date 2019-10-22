@@ -4,7 +4,9 @@ import schemaHelper from '../schema-helper';
 import { camelize } from 'ember-cli-mirage/utils/inflector';
 import { module, test } from 'qunit';
 
-module('Integration | Serializers | Base | Attribute Key Formatting', function(hooks) {
+module('Integration | Serializers | Base | Attribute Key Formatting', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     this.schema = schemaHelper.setup();
     this.registry = new SerializerRegistry(this.schema, {
@@ -41,8 +43,16 @@ module('Integration | Serializers | Base | Attribute Key Formatting', function(h
   });
 
   test(`keyForAttribute also formats the models in a collections`, function(assert) {
-    this.schema.wordSmiths.create({ id: 1, 'first-name': 'Link', 'last-name': 'Jackson' });
-    this.schema.wordSmiths.create({ id: 2, 'first-name': 'Zelda', 'last-name': 'Brown' });
+    this.schema.wordSmiths.create({
+      id: 1,
+      'first-name': 'Link',
+      'last-name': 'Jackson'
+    });
+    this.schema.wordSmiths.create({
+      id: 2,
+      'first-name': 'Zelda',
+      'last-name': 'Brown'
+    });
     let wordSmiths = this.schema.wordSmiths.all();
 
     let result = this.registry.serialize(wordSmiths);

@@ -9,10 +9,10 @@ module('Unit | Serializers | RestSerializer', function(hooks) {
 
   test('it hyphenates camelized words', function(assert) {
     let payload = {
-      'person': {
-        'id': 1,
-        'firstName': 'Rick',
-        'lastName': 'Sanchez'
+      person: {
+        id: 1,
+        firstName: 'Rick',
+        lastName: 'Sanchez'
       }
     };
     let jsonApiDoc = this.serializer.normalize(payload);

@@ -3,7 +3,6 @@ import BaseShorthandRouteHandler from './base';
 import { camelize } from 'ember-cli-mirage/utils/inflector';
 
 export default class PostShorthandRouteHandler extends BaseShorthandRouteHandler {
-
   /*
     Push a new model of type *camelizedModelName* to the db.
 
@@ -19,8 +18,10 @@ export default class PostShorthandRouteHandler extends BaseShorthandRouteHandler
       `The route handler for ${request.url} is trying to access the ${camelizedModelName} model, but that model doesn't exist. Create it using 'ember g mirage-model ${modelName}'.`
     );
 
-    let attrs = this._getAttrsForRequest(request, modelClass.camelizedModelName);
+    let attrs = this._getAttrsForRequest(
+      request,
+      modelClass.camelizedModelName
+    );
     return modelClass.create(attrs);
   }
-
 }

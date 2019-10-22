@@ -4,7 +4,6 @@ import { dasherize, pluralize, camelize } from '../utils/inflector';
 import _, { get as _get } from 'lodash-es';
 
 export default Serializer.extend({
-
   keyForModel(modelName) {
     return dasherize(modelName);
   },
@@ -26,20 +25,20 @@ export default Serializer.extend({
     let hashWithRoot = { data: resourceHash };
     let addToIncludes = this.getAddToIncludesForResource(resource);
 
-    return [ hashWithRoot, addToIncludes ];
+    return [hashWithRoot, addToIncludes];
   },
 
   getHashForIncludedResource(resource) {
     let serializer = this.serializerFor(resource.modelName);
     let hash = serializer.getHashForResource(resource);
-    let hashWithRoot = { included: (this.isModel(resource) ? [ hash ] : hash) };
+    let hashWithRoot = { included: this.isModel(resource) ? [hash] : hash };
     let addToIncludes = [];
 
     if (!this.hasQueryParamIncludes()) {
       addToIncludes = this.getAddToIncludesForResource(resource);
     }
 
-    return [ hashWithRoot, addToIncludes ];
+    return [hashWithRoot, addToIncludes];
   },
 
   getHashForResource(resource) {
@@ -48,7 +47,7 @@ export default Serializer.extend({
     if (this.isModel(resource)) {
       hash = this._getResourceObjectForModel(resource);
     } else {
-      hash = resource.models.map((m) => this._getResourceObjectForModel(m));
+      hash = resource.models.map(m => this._getResourceObjectForModel(m));
     }
 
     return hash;
@@ -67,15 +66,21 @@ export default Serializer.extend({
       relationshipPaths = serializer.getKeysForIncluded();
     }
 
-    return this.getAddToIncludesForResourceAndPaths(resource, relationshipPaths);
+    return this.getAddToIncludesForResourceAndPaths(
+      resource,
+      relationshipPaths
+    );
   },
 
   getAddToIncludesForResourceAndPaths(resource, relationshipPaths) {
     let includes = [];
 
-    relationshipPaths.forEach((path) => {
+    relationshipPaths.forEach(path => {
       let relationshipNames = path.split('.');
-      let newIncludes = this.getIncludesForResourceAndPath(resource, ...relationshipNames);
+      let newIncludes = this.getIncludesForResourceAndPath(
+        resource,
+        ...relationshipNames
+      );
       includes.push(newIncludes);
     });
 
@@ -95,13 +100,12 @@ export default Serializer.extend({
       let relationship = resource[nameForCurrentResource];
 
       if (this.isModel(relationship)) {
-        modelsToAdd = [ relationship ];
+        modelsToAdd = [relationship];
       } else if (this.isCollection(relationship)) {
         modelsToAdd = relationship.models;
       }
-
     } else {
-      resource.models.forEach((model) => {
+      resource.models.forEach(model => {
         let relationship = model[nameForCurrentResource];
 
         if (this.isModel(relationship)) {
@@ -115,8 +119,10 @@ export default Serializer.extend({
     includes = includes.concat(modelsToAdd);
 
     if (names.length) {
-      modelsToAdd.forEach((model) => {
-        includes = includes.concat(this.getIncludesForResourceAndPath(model, ...names));
+      modelsToAdd.forEach(model => {
+        includes = includes.concat(
+          this.getIncludesForResourceAndPath(model, ...names)
+        );
       });
     }
 
@@ -133,7 +139,7 @@ export default Serializer.extend({
       attributes: attrs
     };
 
-    model.associationKeys.forEach((key) => {
+    model.associationKeys.forEach(key => {
       let relationship = model[key];
       let relationshipKey = this.keyForRelationship(key);
       let relationshipHash;
@@ -143,7 +149,6 @@ export default Serializer.extend({
         let serializer = this.serializerFor(model.modelName);
         let links = serializer.links(model);
         relationshipHash = { links: links[key] };
-
       } else {
         let data = null;
 
@@ -153,7 +158,7 @@ export default Serializer.extend({
             id: relationship.id
           };
         } else if (this.isCollection(relationship)) {
-          data = relationship.models.map((model) => {
+          data = relationship.models.map(model => {
             return {
               type: this.typeKeyForModel(model),
               id: model.id
@@ -181,7 +186,7 @@ export default Serializer.extend({
   },
 
   getQueryParamIncludes() {
-    return (_get(this, 'request.queryParams.include'));
+    return _get(this, 'request.queryParams.include');
   },
 
   hasQueryParamIncludes() {
@@ -191,5 +196,4 @@ export default Serializer.extend({
   typeKeyForModel(model) {
     return dasherize(pluralize(model.modelName));
   }
-
 });

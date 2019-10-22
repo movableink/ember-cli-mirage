@@ -17,8 +17,7 @@ module('Integration | ORM | belongsTo #newAssociation', function(hooks) {
     'newChildNoParent',
     'newChildNewParent',
     'newChildSavedParent'
-  ].forEach((state) => {
-
+  ].forEach(state => {
     test(`a ${state} can build a new associated parent`, function(assert) {
       let [address] = this.helper[state]();
 
@@ -33,6 +32,5 @@ module('Integration | ORM | belongsTo #newAssociation', function(hooks) {
       assert.ok(ganon.id, 'saving the child persists the parent');
       assert.equal(address.userId, ganon.id, 'the childs fk was updated');
     });
-
   });
 });

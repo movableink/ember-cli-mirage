@@ -13,8 +13,7 @@ module('Integration | ORM | belongsTo #setAssociationId', function(hooks) {
     'newChildNoParent',
     'newChildNewParent',
     'newChildSavedParent'
-  ].forEach((state) => {
-
+  ].forEach(state => {
     test(`a ${state} can update its association to a saved parent via parentId`, function(assert) {
       let [address] = this.helper[state]();
       let savedUser = this.helper.savedParent();
@@ -24,14 +23,9 @@ module('Integration | ORM | belongsTo #setAssociationId', function(hooks) {
       assert.equal(address.userId, savedUser.id);
       assert.deepEqual(address.user, savedUser);
     });
-
   });
 
-  [
-    'savedChildSavedParent',
-    'newChildSavedParent'
-  ].forEach((state) => {
-
+  ['savedChildSavedParent', 'newChildSavedParent'].forEach(state => {
     test(`a ${state} can clear its association via a null parentId`, function(assert) {
       let [address] = this.helper[state]();
 
@@ -40,7 +34,5 @@ module('Integration | ORM | belongsTo #setAssociationId', function(hooks) {
       assert.equal(address.userId, null);
       assert.deepEqual(address.user, null);
     });
-
   });
 });
-

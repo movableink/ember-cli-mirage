@@ -45,9 +45,7 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
       { id: 1, title: 'Amazing', location: 'Hyrule' },
       { id: 2, title: 'Photo', location: 'Goron City' }
     ];
-    this.projectOwners = [
-      { id: 1, name: 'Nintendo' }
-    ];
+    this.projectOwners = [{ id: 1, name: 'Nintendo' }];
     this.server.db.loadData({
       authors: this.authors,
       posts: this.posts,
@@ -65,7 +63,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('undefined shorthand returns the collection of models', function(assert) {
     let request = { url: '/authors' };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors'
+    );
 
     let authors = handler.handle(request);
 
@@ -76,7 +79,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('undefined shorthand ignores query params', function(assert) {
     let request = { url: '/authors?foo=bar' };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors'
+    );
 
     let authors = handler.handle(request);
 
@@ -87,7 +95,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('undefined shorthand can return a single model', function(assert) {
     let request = { url: '/authors/2', params: { id: 2 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors/:id');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors/:id'
+    );
 
     let author = handler.handle(request);
 
@@ -98,7 +111,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('undefined shorthand returns a 404 if a singular resource does not exist', function(assert) {
     let request = { url: '/authors/99', params: { id: 99 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors/:id');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors/:id'
+    );
 
     let author = handler.handle(request);
 
@@ -108,7 +126,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('undefined shorthand ignores query params for a singular resource', function(assert) {
     let request = { url: '/authors/2?foo=bar', params: { id: 2 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors/:id');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors/:id'
+    );
 
     let author = handler.handle(request);
 
@@ -118,19 +141,35 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
   });
 
   test('undefined shorthand with coalesce true returns the appropriate models', function(assert) {
-    let request = { url: '/authors?ids[]=1&ids[]=3', queryParams: { ids: [1, 3] } };
+    let request = {
+      url: '/authors?ids[]=1&ids[]=3',
+      queryParams: { ids: [1, 3] }
+    };
     let options = { coalesce: true };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors', options);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors',
+      options
+    );
 
     let authors = handler.handle(request);
 
     assert.equal(authors.models.length, 2);
-    assert.deepEqual(authors.models.map((author) => author.name), ['Link', 'Epona']);
+    assert.deepEqual(authors.models.map(author => author.name), [
+      'Link',
+      'Epona'
+    ]);
   });
 
   test('string shorthand returns the correct collection of models', function(assert) {
     let request = { url: '/people' };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, 'author');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      'author'
+    );
 
     let authors = handler.handle(request);
 
@@ -141,7 +180,11 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('string shorthand with an id returns the correct model', function(assert) {
     let request = { url: '/people/2', params: { id: 2 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, 'author');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      'author'
+    );
 
     let author = handler.handle(request);
 
@@ -152,7 +195,11 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
 
   test('string shorthand with an id 404s if the model is not found', function(assert) {
     let request = { url: '/people/99', params: { id: 99 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, 'author');
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      'author'
+    );
 
     let author = handler.handle(request);
 
@@ -161,20 +208,37 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
   });
 
   test('string shorthand with coalesce returns the correct models', function(assert) {
-    let request = { url: '/people?ids[]=1&ids[]=3', queryParams: { ids: [1, 3] } };
+    let request = {
+      url: '/people?ids[]=1&ids[]=3',
+      queryParams: { ids: [1, 3] }
+    };
     let options = { coalesce: true };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, 'author', '/people', options);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      'author',
+      '/people',
+      options
+    );
 
     let authors = handler.handle(request);
 
     assert.equal(authors.models.length, 2);
-    assert.deepEqual(authors.models.map((author) => author.name), ['Link', 'Epona']);
+    assert.deepEqual(authors.models.map(author => author.name), [
+      'Link',
+      'Epona'
+    ]);
   });
 
   test('array shorthand returns the correct models', function(assert) {
     let url = '/home';
     let request = { url };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, ['authors', 'photos'], url);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      ['authors', 'photos'],
+      url
+    );
 
     let models = handler.handle(request);
 
@@ -190,7 +254,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
   test('array shorthand for a singular resource errors', function(assert) {
     let url = '/authors/1';
     let request = { url, params: { id: 1 } };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, ['author', 'posts'], url);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      ['author', 'posts'],
+      url
+    );
 
     assert.throws(function() {
       handler.handle(request);
@@ -200,7 +269,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
   test('shorthand for list of models with a dash in their name', function(assert) {
     let url = '/project-owners';
     let request = { url };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, url);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      url
+    );
     let models = handler.handle(request);
 
     assert.equal(models.models.length, 1);
@@ -211,7 +285,12 @@ module('Integration | Route Handlers | GET shorthand', function(hooks) {
   test('if a shorthand tries to access an unknown type it throws an error', function(assert) {
     let url = '/foobars';
     let request = { url };
-    let handler = new GetShorthandRouteHandler(this.schema, this.serializer, undefined, url);
+    let handler = new GetShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      url
+    );
 
     assert.throws(function() {
       handler.handle(request);

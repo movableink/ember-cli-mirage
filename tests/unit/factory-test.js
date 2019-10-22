@@ -53,7 +53,11 @@ module('Unit | Factory', function() {
 
     assert.deepEqual(p.build(), { species: 'human' });
     assert.deepEqual(m.build(), { species: 'human', gender: 'male' });
-    assert.deepEqual(s.build(), { species: 'human', gender: 'male', name: 'Sam' });
+    assert.deepEqual(s.build(), {
+      species: 'human',
+      gender: 'male',
+      name: 'Sam'
+    });
   });
 
   test('it can use sequences', function(assert) {
@@ -228,11 +232,17 @@ module('Unit | Factory', function() {
     });
 
     let b = new BazFactory();
-    assert.throws(function() {
-      b.build(1);
-    }, function(e) {
-      return e.toString() === 'Error: Cyclic dependency in properties ["foo","bar"]';
-    });
+    assert.throws(
+      function() {
+        b.build(1);
+      },
+      function(e) {
+        return (
+          e.toString() ===
+          'Error: Cyclic dependency in properties ["foo","bar"]'
+        );
+      }
+    );
   });
 
   test('#build skips invoking `afterCreate`', function(assert) {
@@ -277,7 +287,11 @@ module('Unit | Factory', function() {
 
     let callbacks = PostFactory.extractAfterCreateCallbacks();
     assert.equal(callbacks.length, 3);
-    assert.deepEqual(callbacks.map((cb) => cb()), ['from base', 'from published', 'from withComments']);
+    assert.deepEqual(callbacks.map(cb => cb()), [
+      'from base',
+      'from published',
+      'from withComments'
+    ]);
   });
 
   test('extractAfterCreateCallbacks filters traits from which the afterCreate callbacks will be extracted from', function(assert) {
@@ -301,27 +315,50 @@ module('Unit | Factory', function() {
       }
     });
 
-    assert.equal(PostFactory.extractAfterCreateCallbacks({ traits: [] }).length, 1);
+    assert.equal(
+      PostFactory.extractAfterCreateCallbacks({ traits: [] }).length,
+      1
+    );
     assert.deepEqual(
-      PostFactory.extractAfterCreateCallbacks({ traits: [] }).map((cb) => cb()),
+      PostFactory.extractAfterCreateCallbacks({ traits: [] }).map(cb => cb()),
       ['from base']
     );
 
-    assert.equal(PostFactory.extractAfterCreateCallbacks({ traits: ['withComments'] }).length, 2);
+    assert.equal(
+      PostFactory.extractAfterCreateCallbacks({ traits: ['withComments'] })
+        .length,
+      2
+    );
     assert.deepEqual(
-      PostFactory.extractAfterCreateCallbacks({ traits: ['withComments'] }).map((cb) => cb()),
+      PostFactory.extractAfterCreateCallbacks({ traits: ['withComments'] }).map(
+        cb => cb()
+      ),
       ['from base', 'from withComments']
     );
 
-    assert.equal(PostFactory.extractAfterCreateCallbacks({ traits: ['withComments', 'published'] }).length, 3);
+    assert.equal(
+      PostFactory.extractAfterCreateCallbacks({
+        traits: ['withComments', 'published']
+      }).length,
+      3
+    );
     assert.deepEqual(
-      PostFactory.extractAfterCreateCallbacks({ traits: ['withComments', 'published'] }).map((cb) => cb()),
+      PostFactory.extractAfterCreateCallbacks({
+        traits: ['withComments', 'published']
+      }).map(cb => cb()),
       ['from base', 'from withComments', 'from published']
     );
 
-    assert.equal(PostFactory.extractAfterCreateCallbacks({ traits: ['withComments', 'otherTrait'] }).length, 2);
+    assert.equal(
+      PostFactory.extractAfterCreateCallbacks({
+        traits: ['withComments', 'otherTrait']
+      }).length,
+      2
+    );
     assert.deepEqual(
-      PostFactory.extractAfterCreateCallbacks({ traits: ['withComments', 'otherTrait'] }).map((cb) => cb()),
+      PostFactory.extractAfterCreateCallbacks({
+        traits: ['withComments', 'otherTrait']
+      }).map(cb => cb()),
       ['from base', 'from withComments']
     );
   });

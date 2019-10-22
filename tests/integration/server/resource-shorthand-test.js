@@ -27,10 +27,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' },
-        { id: 2, name: 'Zelda' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }, { id: 2, name: 'Zelda' }]
     });
 
     this.server.resource('contacts');
@@ -40,7 +37,9 @@ module('Integration | Server | Resource shorthand', function(hooks) {
       url: '/contacts'
     }).done(function(res, status, xhr) {
       assert.equal(xhr.status, 200);
-      assert.deepEqual(res, { contacts: [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }] });
+      assert.deepEqual(res, {
+        contacts: [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }]
+      });
       done();
     });
   });
@@ -50,10 +49,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' },
-        { id: 2, name: 'Zelda' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }, { id: 2, name: 'Zelda' }]
     });
 
     this.server.resource('contacts');
@@ -96,9 +92,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts');
@@ -124,9 +118,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts');
@@ -152,9 +144,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts');
@@ -183,10 +173,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     let done = assert.async();
 
     server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' },
-        { id: 2, name: 'Zelda' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }, { id: 2, name: 'Zelda' }]
     });
 
     server.resource('contacts', { only: ['index'] });
@@ -205,9 +192,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     assert.expect(5);
 
     server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts', { only: ['index'] });
@@ -218,7 +203,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
       method: 'GET',
       url: '/contacts/1'
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to GET '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to GET '/contacts/1'"
+        ) !== -1
+      );
       doneForShow();
     });
 
@@ -233,7 +222,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to POST '/contacts'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to POST '/contacts'"
+        ) !== -1
+      );
       doneForCreate();
     });
 
@@ -248,7 +241,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to PUT '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to PUT '/contacts/1'"
+        ) !== -1
+      );
       doneForPut();
     });
 
@@ -263,7 +260,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to PATCH '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to PATCH '/contacts/1'"
+        ) !== -1
+      );
       doneForPatch();
     });
 
@@ -273,7 +274,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
       method: 'DELETE',
       url: '/contacts/1'
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to DELETE '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to DELETE '/contacts/1'"
+        ) !== -1
+      );
       doneForDelete();
     });
   });
@@ -283,9 +288,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     assert.expect(2);
 
     server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts', { except: ['create', 'update', 'delete'] });
@@ -316,9 +319,7 @@ module('Integration | Server | Resource shorthand', function(hooks) {
     assert.expect(4);
 
     server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.resource('contacts', { except: ['create', 'update', 'delete'] });
@@ -334,7 +335,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to POST '/contacts'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to POST '/contacts'"
+        ) !== -1
+      );
       doneForCreate();
     });
 
@@ -349,7 +354,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to PUT '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to PUT '/contacts/1'"
+        ) !== -1
+      );
       doneForPut();
     });
 
@@ -364,7 +373,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
         }
       })
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to PATCH '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to PATCH '/contacts/1'"
+        ) !== -1
+      );
       doneForPatch();
     });
 
@@ -374,7 +387,11 @@ module('Integration | Server | Resource shorthand', function(hooks) {
       method: 'DELETE',
       url: '/contacts/1'
     }).fail((xhr, textStatus, error) => {
-      assert.ok(error.message.indexOf("Mirage: Your Ember app tried to DELETE '/contacts/1'") !== -1);
+      assert.ok(
+        error.message.indexOf(
+          "Mirage: Your Ember app tried to DELETE '/contacts/1'"
+        ) !== -1
+      );
       doneForDelete();
     });
   });

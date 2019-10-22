@@ -3,7 +3,6 @@ import BaseShorthandRouteHandler from './base';
 import { pluralize, camelize } from 'ember-cli-mirage/utils/inflector';
 
 export default class DeleteShorthandRouteHandler extends BaseShorthandRouteHandler {
-
   /*
     Remove the model from the db of type *camelizedModelName*.
 
@@ -33,12 +32,12 @@ export default class DeleteShorthandRouteHandler extends BaseShorthandRouteHandl
     let id = this._getIdForRequest(request);
 
     let parent = modelClasses[0].find(id);
-    let childTypes = modelClasses.slice(1)
-      .map((modelClass) => pluralize(modelClass.camelizedModelName));
+    let childTypes = modelClasses
+      .slice(1)
+      .map(modelClass => pluralize(modelClass.camelizedModelName));
 
     // Delete related children
-    childTypes.forEach((type) => parent[type].destroy());
+    childTypes.forEach(type => parent[type].destroy());
     parent.destroy();
   }
-
 }

@@ -15,7 +15,6 @@ import Db from 'ember-cli-mirage/db';
   where the parent may be undefined.
 */
 class BelongsToHelper {
-
   constructor() {
     this.db = new Db();
 
@@ -45,7 +44,10 @@ class BelongsToHelper {
 
   savedChildSavedParent() {
     let insertedUser = this.db.users.insert({ name: 'some user' });
-    let insertedAddress = this.db.addresses.insert({ name: 'foo', userId: insertedUser.id });
+    let insertedAddress = this.db.addresses.insert({
+      name: 'foo',
+      userId: insertedUser.id
+    });
     let address = this.schema.addresses.find(insertedAddress.id);
     let user = this.schema.users.find(insertedUser.id);
 
@@ -85,7 +87,6 @@ class BelongsToHelper {
   newParent() {
     return this.schema.users.new({ name: 'Newbie' });
   }
-
 }
 
 export default BelongsToHelper;

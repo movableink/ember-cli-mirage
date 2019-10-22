@@ -7,7 +7,6 @@ import {
 } from '../utils/inflector';
 
 export default Serializer.extend({
-
   keyForModel(type) {
     return underscore(type);
   },
@@ -41,7 +40,7 @@ export default Serializer.extend({
     if (attrs.id) {
       jsonApiPayload.data.id = attrs.id;
     }
-    Object.keys(attrs).forEach((key) => {
+    Object.keys(attrs).forEach(key => {
       if (key !== 'id') {
         jsonApiPayload.data.attributes[dasherize(key)] = attrs[key];
       }
@@ -49,5 +48,4 @@ export default Serializer.extend({
 
     return jsonApiPayload;
   }
-
 });

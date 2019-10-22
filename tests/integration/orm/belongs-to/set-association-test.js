@@ -13,8 +13,7 @@ module('Integration | ORM | belongsTo #setAssociation', function(hooks) {
     'newChildNoParent',
     'newChildNewParent',
     'newChildSavedParent'
-  ].forEach((state) => {
-
+  ].forEach(state => {
     test(`a ${state} can update its association to a saved parent`, function(assert) {
       let [address] = this.helper[state]();
       let savedUser = this.helper.savedParent();
@@ -43,6 +42,5 @@ module('Integration | ORM | belongsTo #setAssociation', function(hooks) {
       assert.equal(address.userId, null);
       assert.deepEqual(address.user, null);
     });
-
   });
 });

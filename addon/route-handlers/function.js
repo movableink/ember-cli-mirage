@@ -1,7 +1,6 @@
 import BaseRouteHandler from './base';
 
 export default class FunctionRouteHandler extends BaseRouteHandler {
-
   constructor(schema, serializerOrRegistry, userFunction, path) {
     super();
     this.schema = schema;
@@ -22,7 +21,9 @@ export default class FunctionRouteHandler extends BaseRouteHandler {
     let serializer;
 
     if (serializerType) {
-      serializer = this.serializerOrRegistry.serializerFor(serializerType, { explicit: true });
+      serializer = this.serializerOrRegistry.serializerFor(serializerType, {
+        explicit: true
+      });
     } else {
       serializer = this.serializerOrRegistry;
     }

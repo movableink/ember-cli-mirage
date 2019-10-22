@@ -11,7 +11,7 @@ let Factory = function() {
     let object = {};
     let topLevelAttrs = _assign({}, this.attrs);
     delete topLevelAttrs.afterCreate;
-    Object.keys(topLevelAttrs).forEach((attr) => {
+    Object.keys(topLevelAttrs).forEach(attr => {
       if (Factory.isTrait.call(this, attr)) {
         delete topLevelAttrs[attr];
       }
@@ -25,7 +25,7 @@ let Factory = function() {
         return _mapValues(attrs, buildSingleValue);
       };
 
-      buildSingleValue = (value) => {
+      buildSingleValue = value => {
         if (Array.isArray(value)) {
           return value.map(buildSingleValue);
         } else if (_isPlainObject(value)) {
@@ -43,7 +43,6 @@ let Factory = function() {
       } else {
         object[key] = buildSingleValue(value);
       }
-
     });
 
     return object;
@@ -85,18 +84,22 @@ Factory.extractAfterCreateCallbacks = function({ traits } = {}) {
     traitCandidates = Object.keys(attrs);
   }
 
-  traitCandidates.filter((attr) => {
-    return this.isTrait(attr) && attrs[attr].extension.afterCreate;
-  }).forEach((attr) => {
-    afterCreateCallbacks.push(attrs[attr].extension.afterCreate);
-  });
+  traitCandidates
+    .filter(attr => {
+      return this.isTrait(attr) && attrs[attr].extension.afterCreate;
+    })
+    .forEach(attr => {
+      afterCreateCallbacks.push(attrs[attr].extension.afterCreate);
+    });
 
   return afterCreateCallbacks;
 };
 
 Factory.isTrait = function(attrName) {
   let { attrs } = this;
-  return _isPlainObject(attrs[attrName]) && attrs[attrName].__isTrait__ === true;
+  return (
+    _isPlainObject(attrs[attrName]) && attrs[attrName].__isTrait__ === true
+  );
 };
 
 function sortAttrs(attrs, sequence) {

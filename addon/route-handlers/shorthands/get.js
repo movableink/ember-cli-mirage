@@ -4,7 +4,6 @@ import { Response } from 'ember-cli-mirage';
 import { singularize, camelize } from 'ember-cli-mirage/utils/inflector';
 
 export default class GetShorthandRouteHandler extends BaseShorthandRouteHandler {
-
   /*
     Retrieve a model/collection from the db.
 
@@ -29,7 +28,11 @@ export default class GetShorthandRouteHandler extends BaseShorthandRouteHandler 
       } else {
         return model;
       }
-    } else if (this.options.coalesce && request.queryParams && request.queryParams.ids) {
+    } else if (
+      this.options.coalesce &&
+      request.queryParams &&
+      request.queryParams.ids
+    ) {
       return modelClass.find(request.queryParams.ids);
     } else {
       return modelClass.all();
@@ -62,7 +65,6 @@ export default class GetShorthandRouteHandler extends BaseShorthandRouteHandler 
       model, adding the relationships there.`
     );
 
-    return modelClasses.map((modelClass) => modelClass.all());
+    return modelClasses.map(modelClass => modelClass.all());
   }
-
 }

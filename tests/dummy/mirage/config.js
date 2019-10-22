@@ -15,7 +15,7 @@ export default function() {
 
   // Pets
   this.get('/pets', function({ db }) {
-    return { pets: db.pets.filter((pet) => pet.alive) };
+    return { pets: db.pets.filter(pet => pet.alive) };
   });
 
   this.post('/pets', function({ db }, req) {
@@ -34,10 +34,9 @@ export default function() {
     return pet;
   });
 
-  this.delete('/pets/:id', function() { }, 200);
+  this.delete('/pets/:id', function() {}, 200);
 
   this.get('/word-smiths/:id');
-
 }
 
 export function testConfig() {

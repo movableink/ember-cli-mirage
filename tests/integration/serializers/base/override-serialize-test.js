@@ -3,7 +3,9 @@ import Serializer from 'ember-cli-mirage/serializer';
 import schemaHelper from '../schema-helper';
 import { module, test } from 'qunit';
 
-module('Integration | Serializers | Base | Overriding Serialize', function(hooks) {
+module('Integration | Serializers | Base | Overriding Serialize', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     this.schema = schemaHelper.setup();
   });
@@ -45,7 +47,11 @@ module('Integration | Serializers | Base | Overriding Serialize', function(hooks
       title: 'Link'
     });
 
-    let request = { url: '/word-smiths/1?foo=bar', params: { id: '1' }, queryParams: { foo: 'bar' } };
+    let request = {
+      url: '/word-smiths/1?foo=bar',
+      params: { id: '1' },
+      queryParams: { foo: 'bar' }
+    };
     let result = this.registry.serialize(wordSmith, request);
 
     assert.deepEqual(result, 'bar');

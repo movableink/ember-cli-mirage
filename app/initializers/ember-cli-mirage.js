@@ -6,7 +6,7 @@ import { assign as _assign } from 'lodash-es';
 
 export default {
   name: 'ember-cli-mirage',
-  initialize () {
+  initialize() {
     if (_shouldUseMirage(ENV.environment, ENV['ember-cli-mirage'])) {
       startMirage(ENV);
     }
@@ -16,7 +16,7 @@ export default {
 export function startMirage(env = ENV) {
   let environment = env.environment;
   let modules = readModules(env.modulePrefix);
-  let options = _assign(modules, {environment, baseConfig, testConfig});
+  let options = _assign(modules, { environment, baseConfig, testConfig });
 
   return new Server(options);
 }

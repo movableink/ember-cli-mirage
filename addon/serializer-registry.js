@@ -8,7 +8,6 @@ import assert from './assert';
 import { assign as _assign } from 'lodash-es';
 
 export default class SerializerRegistry {
-
   constructor(schema, serializerMap = {}) {
     this.schema = schema;
     this._serializerMap = serializerMap;
@@ -25,37 +24,47 @@ export default class SerializerRegistry {
       let serializer = this.serializerFor(response.modelName);
 
       return serializer.serialize(response, request);
-    } else if (Array.isArray(response) && response.filter(this._isCollection).length) {
+    } else if (
+      Array.isArray(response) &&
+      response.filter(this._isCollection).length
+    ) {
       return response.reduce((json, collection) => {
         let serializer = this.serializerFor(collection.modelName);
 
         if (serializer.embed) {
-          json[pluralize(collection.modelName)] = serializer.serialize(collection, request);
+          json[pluralize(collection.modelName)] = serializer.serialize(
+            collection,
+            request
+          );
         } else {
           json = _assign(json, serializer.serialize(collection, request));
         }
 
         return json;
       }, {});
-
     } else {
       return response;
     }
   }
 
   serializerFor(type, { explicit = false } = {}) {
-    let SerializerForResponse = this._serializerMap && (this._serializerMap[camelize(type)]);
+    let SerializerForResponse =
+      this._serializerMap && this._serializerMap[camelize(type)];
 
     if (explicit) {
-      assert(!!SerializerForResponse, `You passed in ${type} as an explicit serializer type but that serializer doesn't exist. Try running \`ember g mirage-serializer ${type}\`.`);
+      assert(
+        !!SerializerForResponse,
+        `You passed in ${type} as an explicit serializer type but that serializer doesn't exist. Try running \`ember g mirage-serializer ${type}\`.`
+      );
     } else {
-      SerializerForResponse = SerializerForResponse || this._serializerMap.application || Serializer;
+      SerializerForResponse =
+        SerializerForResponse || this._serializerMap.application || Serializer;
 
       assert(
-        !SerializerForResponse
-        || (SerializerForResponse.prototype.embed)
-        || (SerializerForResponse.prototype.root)
-        || (new SerializerForResponse() instanceof JsonApiSerializer),
+        !SerializerForResponse ||
+          SerializerForResponse.prototype.embed ||
+          SerializerForResponse.prototype.root ||
+          new SerializerForResponse() instanceof JsonApiSerializer,
         'You cannot have a serializer that sideloads (embed: false) and disables the root (root: false).'
       );
     }
@@ -77,10 +86,6 @@ export default class SerializerRegistry {
 
   registerSerializers(newSerializerMaps) {
     let currentSerializerMap = this._serializerMap || {};
-    this._serializerMap = _assign(
-      currentSerializerMap,
-      newSerializerMaps
-    );
+    this._serializerMap = _assign(currentSerializerMap, newSerializerMaps);
   }
-
 }

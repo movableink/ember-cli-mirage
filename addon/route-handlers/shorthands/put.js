@@ -3,7 +3,6 @@ import BaseShorthandRouteHandler from './base';
 import { camelize } from 'ember-cli-mirage/utils/inflector';
 
 export default class PutShorthandRouteHandler extends BaseShorthandRouteHandler {
-
   /*
     Update an object from the db, specifying the type.
 
@@ -19,9 +18,11 @@ export default class PutShorthandRouteHandler extends BaseShorthandRouteHandler 
     );
 
     let id = this._getIdForRequest(request);
-    let attrs = this._getAttrsForRequest(request, modelClass.camelizedModelName);
+    let attrs = this._getAttrsForRequest(
+      request,
+      modelClass.camelizedModelName
+    );
 
     return modelClass.find(id).update(attrs);
   }
-
 }

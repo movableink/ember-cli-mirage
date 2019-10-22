@@ -44,9 +44,17 @@ module('Integration | Server | Factories | afterCreate', function(hooks) {
 
     assert.equal(author.name, 'Sam');
     assert.deepEqual(this.server.db.posts.length, 1);
-    assert.deepEqual(this.server.db.posts[0], { id: '1', title: 'Lorem ipsum', authorId: '1' });
+    assert.deepEqual(this.server.db.posts[0], {
+      id: '1',
+      title: 'Lorem ipsum',
+      authorId: '1'
+    });
     assert.deepEqual(this.server.db.comments.length, 1);
-    assert.deepEqual(this.server.db.comments[0], { id: '1', text: 'Yo soy el nino', postId: '1' });
+    assert.deepEqual(this.server.db.comments[0], {
+      id: '1',
+      text: 'Yo soy el nino',
+      postId: '1'
+    });
   });
 
   // test('it works for db records', function(assert) {

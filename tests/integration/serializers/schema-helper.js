@@ -4,7 +4,6 @@ import Model from 'ember-cli-mirage/orm/model';
 import Db from 'ember-cli-mirage/db';
 
 export default {
-
   setup() {
     let db = new Db();
     this.schema = new Schema(db);
@@ -41,5 +40,4 @@ export default {
 
     return this.schema;
   }
-
 };

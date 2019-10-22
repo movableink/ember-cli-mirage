@@ -15,9 +15,7 @@ module('Integration | Route Handlers | PUT shorthand', function(hooks) {
     this.server.timing = 0;
     this.server.logging = false;
 
-    this.authors = [
-      { id: 1, firstName: 'Ganon' }
-    ];
+    this.authors = [{ id: 1, firstName: 'Ganon' }];
     this.server.db.loadData({
       authors: this.authors
     });
@@ -41,8 +39,17 @@ module('Integration | Route Handlers | PUT shorthand', function(hooks) {
   });
 
   test('undefined shorthand updates the record and returns the model', function(assert) {
-    let handler = new PutShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors/:id');
-    let request = { requestBody: JSON.stringify(this.body), url: '/authors/1', params: { id: '1' } };
+    let handler = new PutShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors/:id'
+    );
+    let request = {
+      requestBody: JSON.stringify(this.body),
+      url: '/authors/1',
+      params: { id: '1' }
+    };
 
     let model = handler.handle(request);
 
@@ -53,8 +60,17 @@ module('Integration | Route Handlers | PUT shorthand', function(hooks) {
   });
 
   test('query params are ignored', function(assert) {
-    let handler = new PutShorthandRouteHandler(this.schema, this.serializer, 'author');
-    let request = { requestBody: JSON.stringify(this.body), url: '/authors/1?foo=bar', params: { id: '1' }, queryParams: { foo: 'bar' } };
+    let handler = new PutShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      'author'
+    );
+    let request = {
+      requestBody: JSON.stringify(this.body),
+      url: '/authors/1?foo=bar',
+      params: { id: '1' },
+      queryParams: { foo: 'bar' }
+    };
 
     let model = handler.handle(request);
 
@@ -65,8 +81,17 @@ module('Integration | Route Handlers | PUT shorthand', function(hooks) {
   });
 
   test('string shorthand updates the record of the specified type and returns the model', function(assert) {
-    let handler = new PutShorthandRouteHandler(this.schema, this.serializer, undefined, '/authors/:id');
-    let request = { requestBody: JSON.stringify(this.body), url: '/authors/1', params: { id: '1' } };
+    let handler = new PutShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/authors/:id'
+    );
+    let request = {
+      requestBody: JSON.stringify(this.body),
+      url: '/authors/1',
+      params: { id: '1' }
+    };
 
     let model = handler.handle(request);
 
@@ -77,8 +102,17 @@ module('Integration | Route Handlers | PUT shorthand', function(hooks) {
   });
 
   test('if a shorthand tries to access an unknown type it throws an error', function(assert) {
-    let handler = new PutShorthandRouteHandler(this.schema, this.serializer, undefined, '/foobars/:id');
-    let request = { requestBody: JSON.stringify(this.body), url: '/foobars/1', params: { id: '1' } };
+    let handler = new PutShorthandRouteHandler(
+      this.schema,
+      this.serializer,
+      undefined,
+      '/foobars/:id'
+    );
+    let request = {
+      requestBody: JSON.stringify(this.body),
+      url: '/foobars/1',
+      params: { id: '1' }
+    };
 
     assert.throws(function() {
       handler.handle(request);

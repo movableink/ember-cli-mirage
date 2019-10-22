@@ -7,7 +7,6 @@ import DbCollection from './db-collection';
  * @public
  */
 class Db {
-
   constructor(initialData) {
     this._collections = [];
 
@@ -41,19 +40,25 @@ class Db {
         get() {
           let recordsCopy = newCollection.all();
 
-          ['insert', 'find', 'findBy', 'where', 'update', 'remove', 'firstOrCreate']
-            .forEach(function(method) {
-              recordsCopy[method] = function() {
-                return newCollection[method](...arguments);
-              };
-            });
+          [
+            'insert',
+            'find',
+            'findBy',
+            'where',
+            'update',
+            'remove',
+            'firstOrCreate'
+          ].forEach(function(method) {
+            recordsCopy[method] = function() {
+              return newCollection[method](...arguments);
+            };
+          });
 
           return recordsCopy;
         }
       });
 
       this._collections.push(newCollection);
-
     } else if (initialData) {
       this[name].insert(initialData);
     }
@@ -67,7 +72,7 @@ class Db {
    * @public
    */
   createCollections(...collections) {
-    collections.forEach((c) => this.createCollection(c));
+    collections.forEach(c => this.createCollection(c));
   }
 
   /**
@@ -75,7 +80,7 @@ class Db {
    * @public
    */
   emptyData() {
-    this._collections.forEach((c) => c.remove());
+    this._collections.forEach(c => c.remove());
   }
 }
 

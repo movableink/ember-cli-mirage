@@ -24,7 +24,6 @@ function isNumber(n) {
  *  @public
  */
 class DbCollection {
-
   constructor(name, initialData) {
     this.name = name;
     this._records = [];
@@ -57,7 +56,7 @@ class DbCollection {
     } else {
       // Need to sort in order to ensure IDs inserted in the correct order
       let sorted = _sortBy(data, 'id');
-      return _map(sorted, (x) => this._insertRecord(x));
+      return _map(sorted, x => this._insertRecord(x));
     }
   }
 
@@ -163,7 +162,7 @@ class DbCollection {
       attrs = target;
       let changedRecords = [];
 
-      this._records.forEach((record) => {
+      this._records.forEach(record => {
         let oldRecord = _assign({}, record);
 
         this._updateRecord(record, attrs);
@@ -174,7 +173,6 @@ class DbCollection {
       });
 
       return changedRecords;
-
     } else if (typeof target === 'number' || typeof target === 'string') {
       let id = target;
       let record = this._findRecord(id);
@@ -182,22 +180,20 @@ class DbCollection {
       this._updateRecord(record, attrs);
 
       return record;
-
     } else if (Array.isArray(target)) {
       let ids = target;
       records = this._findRecords(ids);
 
-      records.forEach((record) => {
+      records.forEach(record => {
         this._updateRecord(record, attrs);
       });
 
       return records;
-
     } else if (typeof target === 'object') {
       let query = target;
       records = this._findRecordsWhere(query);
 
-      records.forEach((record) => {
+      records.forEach(record => {
         this._updateRecord(record, attrs);
       });
 
@@ -223,22 +219,19 @@ class DbCollection {
     if (typeof target === 'undefined') {
       this._records = [];
       this.identityManager.reset();
-
     } else if (typeof target === 'number' || typeof target === 'string') {
       let record = this._findRecord(target);
       let index = this._records.indexOf(record);
       this._records.splice(index, 1);
-
     } else if (Array.isArray(target)) {
       records = this._findRecords(target);
-      records.forEach((record) =>  {
+      records.forEach(record => {
         let index = this._records.indexOf(record);
         this._records.splice(index, 1);
       });
-
     } else if (typeof target === 'object') {
       records = this._findRecordsWhere(target);
-      records.forEach((record) =>  {
+      records.forEach(record => {
         let index = this._records.indexOf(record);
         this._records.splice(index, 1);
       });
@@ -260,7 +253,7 @@ class DbCollection {
   _findRecord(id) {
     id = id.toString();
 
-    let [record] = this._records.filter((obj) => obj.id === id);
+    let [record] = this._records.filter(obj => obj.id === id);
 
     return record;
   }
@@ -299,7 +292,8 @@ class DbCollection {
       });
     }
 
-    let queryFunction = typeof query === 'object' ? defaultQueryFunction : query;
+    let queryFunction =
+      typeof query === 'object' ? defaultQueryFunction : query;
 
     return records.filter(queryFunction);
   }
@@ -332,7 +326,8 @@ class DbCollection {
    * @private
    */
   _updateRecord(record, attrs) {
-    let targetId = (attrs && attrs.hasOwnProperty('id')) ? attrs.id.toString() : null;
+    let targetId =
+      attrs && attrs.hasOwnProperty('id') ? attrs.id.toString() : null;
     let currentId = record.id;
 
     if (targetId && currentId !== targetId) {
@@ -361,7 +356,9 @@ class IdentityManager {
 
   set(n) {
     if (this._ids[n]) {
-      throw new Error(`Attempting to use the ID ${n}, but it's already been used`);
+      throw new Error(
+        `Attempting to use the ID ${n}, but it's already been used`
+      );
     }
 
     if (isNumber(n) && +n >= this._nextId) {

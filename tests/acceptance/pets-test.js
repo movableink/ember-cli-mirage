@@ -1,4 +1,10 @@
-import { click, fillIn, currentRouteName, findAll, visit } from '@ember/test-helpers';
+import {
+  click,
+  fillIn,
+  currentRouteName,
+  findAll,
+  visit
+} from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from '../helpers/setup-mirage';

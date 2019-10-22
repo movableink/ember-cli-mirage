@@ -13,7 +13,10 @@ module('Unit | Db', function() {
   test('it can load data on instantiation', function(assert) {
     db = new Db({
       users: [{ id: 1, name: 'Link' }],
-      addresses: [{ id: 1, name: '123 Hyrule Way' }, { id: 2, name: 'Lorem ipsum' }]
+      addresses: [
+        { id: 1, name: '123 Hyrule Way' },
+        { id: 2, name: 'Lorem ipsum' }
+      ]
     });
 
     assert.equal(db.users.length, 1);
@@ -23,7 +26,10 @@ module('Unit | Db', function() {
   test('it can empty its data', function(assert) {
     db = new Db({
       users: [{ id: 1, name: 'Link' }],
-      addresses: [{ id: 1, name: '123 Hyrule Way' }, { id: 2, name: 'Lorem ipsum' }]
+      addresses: [
+        { id: 1, name: '123 Hyrule Way' },
+        { id: 2, name: 'Lorem ipsum' }
+      ]
     });
 
     db.emptyData();
@@ -145,10 +151,7 @@ module('Unit | Db #insert', function(hooks) {
     db.contacts.insert({ name: 'Link' });
     db.contacts.insert({ name: 'Ganon' });
 
-    let records = [
-      { id: '1', name: 'Link' },
-      { id: '2', name: 'Ganon' }
-    ];
+    let records = [{ id: '1', name: 'Link' }, { id: '2', name: 'Ganon' }];
 
     assert.deepEqual(db.contacts, records);
   });
@@ -166,14 +169,24 @@ module('Unit | Db #insert', function(hooks) {
 
     let contacts = db.contacts.insert([{ name: 'Zelda' }, { name: 'Ganon' }]);
 
-    assert.deepEqual(db.contacts, [{ id: '1', name: 'Link' }, { id: '2', name: 'Zelda' }, { id: '3', name: 'Ganon' }]);
-    assert.deepEqual(contacts, [{ id: '2', name: 'Zelda' }, { id: '3', name: 'Ganon' }]);
+    assert.deepEqual(db.contacts, [
+      { id: '1', name: 'Link' },
+      { id: '2', name: 'Zelda' },
+      { id: '3', name: 'Ganon' }
+    ]);
+    assert.deepEqual(contacts, [
+      { id: '2', name: 'Zelda' },
+      { id: '3', name: 'Ganon' }
+    ]);
   });
 
   test('it does not add ids to array data if present', function(assert) {
     db.contacts.insert([{ id: 2, name: 'Link' }, { id: 1, name: 'Ganon' }]);
 
-    assert.deepEqual(db.contacts, [{ id: '1', name: 'Ganon' }, { id: '2', name: 'Link' }]);
+    assert.deepEqual(db.contacts, [
+      { id: '1', name: 'Ganon' },
+      { id: '2', name: 'Link' }
+    ]);
   });
 
   test('it can insert a record with an id of 0', function(assert) {
@@ -234,13 +247,13 @@ module('Unit | Db #findBy', function(hooks) {
   });
 
   test('returns a record that matches the given name', function(assert) {
-    let contact = db.contacts.findBy({ 'name': 'Link' });
+    let contact = db.contacts.findBy({ name: 'Link' });
 
     assert.deepEqual(contact, { id: '2', name: 'Link' });
   });
 
   test('returns a copy not a reference', function(assert) {
-    let contact = db.contacts.findBy({ 'name': 'Link' });
+    let contact = db.contacts.findBy({ name: 'Link' });
 
     contact.name = 'blah';
 
@@ -248,19 +261,19 @@ module('Unit | Db #findBy', function(hooks) {
   });
 
   test('returns the first record matching the criteria', function(assert) {
-    let contact = db.contacts.findBy({ 'name': 'Epona' });
+    let contact = db.contacts.findBy({ name: 'Epona' });
 
     assert.deepEqual(contact, { id: '3', name: 'Epona', race: 'Horse' });
   });
 
   test('returns a record only matching multiple criteria', function(assert) {
-    let contact = db.contacts.findBy({ 'name': 'Epona', 'race': 'Centaur' });
+    let contact = db.contacts.findBy({ name: 'Epona', race: 'Centaur' });
 
     assert.deepEqual(contact, { id: '4', name: 'Epona', race: 'Centaur' });
   });
 
   test('returns null when no record is found', function(assert) {
-    let contact = db.contacts.findBy({ 'name': 'Fi' });
+    let contact = db.contacts.findBy({ name: 'Fi' });
 
     assert.equal(contact, null);
   });
@@ -306,7 +319,10 @@ module('Unit | Db #find', function(hooks) {
   test('returns multiple record that matches an array of ids', function(assert) {
     let contacts = db.contacts.find([1, 2]);
 
-    assert.deepEqual(contacts, [{ id: '1', name: 'Zelda' }, { id: '2', name: 'Link' }]);
+    assert.deepEqual(contacts, [
+      { id: '1', name: 'Zelda' },
+      { id: '2', name: 'Link' }
+    ]);
   });
 
   test('returns a record whose id is a string that start with numbers', function(assert) {
@@ -322,7 +338,10 @@ module('Unit | Db #find', function(hooks) {
   test('returns multiple record that match an array of ids', function(assert) {
     let contacts = db.contacts.find([1, 2]);
 
-    assert.deepEqual(contacts, [{ id: '1', name: 'Zelda' }, { id: '2', name: 'Link' }]);
+    assert.deepEqual(contacts, [
+      { id: '1', name: 'Zelda' },
+      { id: '2', name: 'Link' }
+    ]);
   });
 
   test('returns an empty array when it doesnt find multiple ids', function(assert) {
@@ -337,9 +356,9 @@ module('Unit | Db #where', function(hooks) {
     db = new Db();
     db.createCollection('contacts');
     db.contacts.insert([
-      { name: 'Link',  evil: false, age: 17 },
+      { name: 'Link', evil: false, age: 17 },
       { name: 'Zelda', evil: false, age: 17 },
-      { name: 'Ganon', evil: true,  age: 45 }
+      { name: 'Ganon', evil: true, age: 45 }
     ]);
   });
 
@@ -350,25 +369,19 @@ module('Unit | Db #where', function(hooks) {
   test('returns an array of records that match the query', function(assert) {
     let result = db.contacts.where({ evil: true });
 
-    assert.deepEqual(result, [
-      { id: '3', name: 'Ganon', evil: true, age: 45 }
-    ]);
+    assert.deepEqual(result, [{ id: '3', name: 'Ganon', evil: true, age: 45 }]);
   });
 
   test('it coerces query params to strings', function(assert) {
     let result = db.contacts.where({ age: '45' });
 
-    assert.deepEqual(result, [
-      { id: '3', name: 'Ganon', evil: true, age: 45 }
-    ]);
+    assert.deepEqual(result, [{ id: '3', name: 'Ganon', evil: true, age: 45 }]);
   });
 
   test('returns a copy, not a referecne', function(assert) {
     let result = db.contacts.where({ evil: true });
 
-    assert.deepEqual(result, [
-      { id: '3', name: 'Ganon', evil: true, age: 45 }
-    ]);
+    assert.deepEqual(result, [{ id: '3', name: 'Ganon', evil: true, age: 45 }]);
 
     result[0].evil = false;
 
@@ -388,9 +401,7 @@ module('Unit | Db #where', function(hooks) {
       return record.age === 45;
     });
 
-    assert.deepEqual(result, [
-      { id: '3', name: 'Ganon', evil: true, age: 45 }
-    ]);
+    assert.deepEqual(result, [{ id: '3', name: 'Ganon', evil: true, age: 45 }]);
   });
 });
 
@@ -423,11 +434,20 @@ module('Unit | Db #update', function(hooks) {
     ];
 
     assert.deepEqual(
-      actualContacts, expectedContacts, [actualContacts.map(function(r) {
-        return r.id;
-      }).join(','), expectedContacts.map(function(r) {
-        return r.id;
-      }).join(',')].join(';')
+      actualContacts,
+      expectedContacts,
+      [
+        actualContacts
+          .map(function(r) {
+            return r.id;
+          })
+          .join(','),
+        expectedContacts
+          .map(function(r) {
+            return r.id;
+          })
+          .join(',')
+      ].join(';')
     );
   });
 
@@ -551,9 +571,7 @@ module('Unit | Db #remove', function(hooks) {
   test('it can remove multiple records by query', function(assert) {
     db.contacts.remove({ evil: false });
 
-    assert.deepEqual(db.contacts, [
-      { id: '3', name: 'Ganon', evil: true }
-    ]);
+    assert.deepEqual(db.contacts, [{ id: '3', name: 'Ganon', evil: true }]);
   });
 
   test('it can add a record after removing all records', function(assert) {
@@ -561,9 +579,7 @@ module('Unit | Db #remove', function(hooks) {
     db.contacts.insert({ name: 'Foo' });
 
     assert.equal(db.contacts.length, 1);
-    assert.deepEqual(db.contacts, [
-      { id: '1', name: 'Foo' }
-    ]);
+    assert.deepEqual(db.contacts, [{ id: '1', name: 'Foo' }]);
   });
 });
 

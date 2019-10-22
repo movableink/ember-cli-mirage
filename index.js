@@ -42,7 +42,8 @@ module.exports = {
     }
 
     this.app = app;
-    this.addonConfig = this.app.project.config(app.env)['ember-cli-mirage'] || {};
+    this.addonConfig =
+      this.app.project.config(app.env)['ember-cli-mirage'] || {};
     this.addonBuildConfig = this.app.options['ember-cli-mirage'] || {};
 
     // Call super after initializing config so we can use _shouldIncludeFiles for the node assets
@@ -52,8 +53,14 @@ module.exports = {
       this.mirageDirectory = this.addonBuildConfig.directory;
     } else if (this.addonConfig.directory) {
       this.mirageDirectory = this.addonConfig.directory;
-    } else if (app.project.pkg['ember-addon'] && !app.project.pkg['ember-addon'].paths) {
-      this.mirageDirectory = path.resolve(app.project.root, path.join('tests', 'dummy', 'mirage'));
+    } else if (
+      app.project.pkg['ember-addon'] &&
+      !app.project.pkg['ember-addon'].paths
+    ) {
+      this.mirageDirectory = path.resolve(
+        app.project.root,
+        path.join('tests', 'dummy', 'mirage')
+      );
     } else {
       this.mirageDirectory = path.join(this.app.project.root, '/mirage');
     }
@@ -77,13 +84,18 @@ module.exports = {
     // this conditional can be removed when we no longer support
     // versions older than 2.5.0
     if (this._eachProjectAddonInvoke) {
-      lintedMirageTrees = this._eachProjectAddonInvoke('lintTree', ['mirage', mirageTree]);
+      lintedMirageTrees = this._eachProjectAddonInvoke('lintTree', [
+        'mirage',
+        mirageTree
+      ]);
     } else {
-      lintedMirageTrees = this.project.addons.map(function(addon) {
-        if (addon.lintTree) {
-          return addon.lintTree('mirage', mirageTree);
-        }
-      }).filter(Boolean);
+      lintedMirageTrees = this.project.addons
+        .map(function(addon) {
+          if (addon.lintTree) {
+            return addon.lintTree('mirage', mirageTree);
+          }
+        })
+        .filter(Boolean);
     }
 
     var lintedMirage = mergeTrees(lintedMirageTrees, {
@@ -97,7 +109,7 @@ module.exports = {
   },
 
   treeForApp(appTree) {
-    var trees = [ appTree ];
+    var trees = [appTree];
     var mirageFilesTree = new Funnel(this.mirageDirectory, {
       destDir: 'mirage'
     });
@@ -116,13 +128,21 @@ module.exports = {
     }
 
     var environment = this.app.env;
-    var enabledInProd = environment === 'production' && this.addonConfig.enabled;
+    var enabledInProd =
+      environment === 'production' && this.addonConfig.enabled;
     var explicitExcludeFiles = this.addonConfig.excludeFilesFromBuild;
     if (enabledInProd && explicitExcludeFiles) {
-      throw new Error('Mirage was explicitly enabled in production, but its files were excluded '
-                      + 'from the build. Please, use only ENV[\'ember-cli-mirage\'].enabled in '
-                      + 'production environment.');
+      throw new Error(
+        'Mirage was explicitly enabled in production, but its files were excluded ' +
+          "from the build. Please, use only ENV['ember-cli-mirage'].enabled in " +
+          'production environment.'
+      );
     }
-    return enabledInProd || (environment && environment !== 'production' && explicitExcludeFiles !== true);
+    return (
+      enabledInProd ||
+      (environment &&
+        environment !== 'production' &&
+        explicitExcludeFiles !== true)
+    );
   }
 };

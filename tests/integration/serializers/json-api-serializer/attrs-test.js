@@ -4,7 +4,9 @@ import SerializerRegistry from 'ember-cli-mirage/serializer-registry';
 import { Model, JSONAPISerializer } from 'ember-cli-mirage';
 import { module, test } from 'qunit';
 
-module('Integration | Serializers | JSON API Serializer | Attrs List', function(hooks) {
+module('Integration | Serializers | JSON API Serializer | Attrs List', function(
+  hooks
+) {
   hooks.beforeEach(function() {
     this.schema = new Schema(new Db(), {
       wordSmith: Model,
@@ -52,19 +54,22 @@ module('Integration | Serializers | JSON API Serializer | Attrs List', function(
     let result = registry.serialize(collection);
 
     assert.deepEqual(result, {
-      data: [{
-        type: 'word-smiths',
-        id: '1',
-        attributes: {
-          'first-name': 'Link'
+      data: [
+        {
+          type: 'word-smiths',
+          id: '1',
+          attributes: {
+            'first-name': 'Link'
+          }
+        },
+        {
+          type: 'word-smiths',
+          id: '2',
+          attributes: {
+            'first-name': 'Zelda'
+          }
         }
-      }, {
-        type: 'word-smiths',
-        id: '2',
-        attributes: {
-          'first-name': 'Zelda'
-        }
-      }]
+      ]
     });
   });
 
@@ -78,7 +83,11 @@ module('Integration | Serializers | JSON API Serializer | Attrs List', function(
       })
     });
 
-    let link = this.schema.wordSmiths.create({ id: 1, firstName: 'Link', age: 123 });
+    let link = this.schema.wordSmiths.create({
+      id: 1,
+      firstName: 'Link',
+      age: 123
+    });
     assert.deepEqual(registry.serialize(link), {
       data: {
         type: 'word-smiths',
@@ -89,13 +98,17 @@ module('Integration | Serializers | JSON API Serializer | Attrs List', function(
       }
     });
 
-    let photo = this.schema.photographs.create({ id: 1, title: 'Lorem ipsum', createdAt: '2010-01-01' });
+    let photo = this.schema.photographs.create({
+      id: 1,
+      title: 'Lorem ipsum',
+      createdAt: '2010-01-01'
+    });
     assert.deepEqual(registry.serialize(photo), {
       data: {
         type: 'photographs',
         id: '1',
         attributes: {
-          'title': 'Lorem ipsum'
+          title: 'Lorem ipsum'
         }
       }
     });

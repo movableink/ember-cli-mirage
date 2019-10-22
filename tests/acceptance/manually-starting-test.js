@@ -27,6 +27,11 @@ module('Acceptance: Manually starting Mirage', function(hooks) {
     await visit('/1');
 
     assert.equal(currentRouteName(), 'contact');
-    assert.dom(find('p:first')).hasText(`The contact is ${contact.name}`, 'The manually started server works');
+    assert
+      .dom(find('p:first'))
+      .hasText(
+        `The contact is ${contact.name}`,
+        'The manually started server works'
+      );
   });
 });

@@ -27,9 +27,7 @@ module('Integration | Server | Shorthand sanity check', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     this.server.get('/contacts');
@@ -72,9 +70,7 @@ module('Integration | Server | Shorthand sanity check', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.put('/contacts/:id');
@@ -100,9 +96,7 @@ module('Integration | Server | Shorthand sanity check', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.patch('/contacts/:id');
@@ -128,9 +122,7 @@ module('Integration | Server | Shorthand sanity check', function(hooks) {
     let done = assert.async();
 
     this.server.db.loadData({
-      contacts: [
-        { id: 1, name: 'Link' }
-      ]
+      contacts: [{ id: 1, name: 'Link' }]
     });
 
     server.del('/contacts/:id');

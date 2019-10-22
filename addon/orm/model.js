@@ -15,7 +15,6 @@ import Collection from './collection';
   Constructor
 */
 class Model {
-
   constructor(schema, modelName, attrs, fks) {
     assert(schema, 'A model requires a schema');
     assert(modelName, 'A model requires a modelName');
@@ -46,7 +45,6 @@ class Model {
 
       // Ensure the id getter/setter is set
       this._definePlainAttribute('id');
-
     } else {
       this._schema.db[collection].update(this.attrs.id, this.attrs);
     }
@@ -170,19 +168,27 @@ class Model {
   _setupAttrs(attrs) {
     // Verify no undefined associations are passed in
     Object.keys(attrs)
-      .filter((key) => {
+      .filter(key => {
         let value = attrs[key];
-        return (value instanceof Model || value instanceof Collection);
+        return value instanceof Model || value instanceof Collection;
       })
-      .forEach((key) => {
+      .forEach(key => {
         let modelOrCollection = attrs[key];
 
-        assert(this.associationKeys.indexOf(key) > -1, `You're trying to create a ${this.modelName} model and you passed in a ${modelOrCollection.toString()} under the ${key} key, but you haven't defined that key as an association on your model.`);
+        assert(
+          this.associationKeys.indexOf(key) > -1,
+          `You're trying to create a ${
+            this.modelName
+          } model and you passed in a ${modelOrCollection.toString()} under the ${key} key, but you haven't defined that key as an association on your model.`
+        );
       });
 
     // Filter out association keys
     let hash = Object.keys(attrs).reduce((memo, key) => {
-      if (this.associationKeys.indexOf(key) === -1 && this.associationIdKeys.indexOf(key) === -1) {
+      if (
+        this.associationKeys.indexOf(key) === -1 &&
+        this.associationIdKeys.indexOf(key) === -1
+      ) {
         memo[key] = attrs[key];
       }
       return memo;
@@ -197,7 +203,10 @@ class Model {
 
     // define plain getter/setters for non-association keys
     Object.keys(hash).forEach(function(attr) {
-      if (this.associationKeys.indexOf(attr) === -1 && this.associationIdKeys.indexOf(attr) === -1) {
+      if (
+        this.associationKeys.indexOf(attr) === -1 &&
+        this.associationIdKeys.indexOf(attr) === -1
+      ) {
         this._definePlainAttribute(attr);
       }
     }, this);
@@ -210,7 +219,6 @@ class Model {
    * @private
    */
   _definePlainAttribute(attr) {
-
     // Ensure the property hasn't already been defined
     let existingProperty = Object.getOwnPropertyDescriptor(this, attr);
     if (existingProperty && existingProperty.get) {
@@ -242,7 +250,11 @@ class Model {
   _setupRelationships(attrs) {
     // Only want association keys and fks
     let hash = Object.keys(attrs).reduce((memo, attr) => {
-      if (this.associationKeys.indexOf(attr) > -1 || this.associationIdKeys.indexOf(attr) > -1 || this.fks.indexOf(attr) > -1) {
+      if (
+        this.associationKeys.indexOf(attr) > -1 ||
+        this.associationIdKeys.indexOf(attr) > -1 ||
+        this.fks.indexOf(attr) > -1
+      ) {
         memo[attr] = attrs[attr];
       }
       return memo;
@@ -259,7 +271,7 @@ class Model {
    * @private
    */
   _saveAssociations() {
-    Object.keys(this.belongsToAssociations).forEach((key) => {
+    Object.keys(this.belongsToAssociations).forEach(key => {
       let association = this.belongsToAssociations[key];
       let parent = this[key];
       if (parent && parent.isNew()) {
@@ -269,7 +281,7 @@ class Model {
       }
     });
 
-    Object.keys(this.hasManyAssociations).forEach((key) => {
+    Object.keys(this.hasManyAssociations).forEach(key => {
       let association = this.hasManyAssociations[key];
       let children = this[key];
       children.update(association.getForeignKey(), this.id);

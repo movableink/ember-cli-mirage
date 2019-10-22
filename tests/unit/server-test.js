@@ -88,7 +88,7 @@ module('Unit | Server #create', function() {
     server.shutdown();
   });
 
-  test('create fails when an expected factory isn\'t registered', function(assert) {
+  test("create fails when an expected factory isn't registered", function(assert) {
     let server = new Server({
       environment: 'test',
       factories: {
@@ -195,8 +195,18 @@ module('Unit | Server #create', function() {
     let link = server.create('friend');
     let youngLink = server.create('friend', { age: 10 });
 
-    assert.deepEqual(link, { id: '1', name: 'Link', age: 500, is_young: false });
-    assert.deepEqual(youngLink, { id: '2', name: 'Link', age: 10, is_young: true });
+    assert.deepEqual(link, {
+      id: '1',
+      name: 'Link',
+      age: 500,
+      is_young: false
+    });
+    assert.deepEqual(youngLink, {
+      id: '2',
+      name: 'Link',
+      age: 10,
+      is_young: true
+    });
 
     server.shutdown();
   });
@@ -240,8 +250,14 @@ module('Unit | Server #create', function() {
     let contact1 = server.create('contact');
     let contact2 = server.create('contact');
 
-    assert.deepEqual(contact1, { id: '1', address: { streetName: 'Main', streetAddress: 1000 } });
-    assert.deepEqual(contact2, { id: '2', address: { streetName: 'Main', streetAddress: 1001 } });
+    assert.deepEqual(contact1, {
+      id: '1',
+      address: { streetName: 'Main', streetAddress: 1000 }
+    });
+    assert.deepEqual(contact2, {
+      id: '2',
+      address: { streetName: 'Main', streetAddress: 1001 }
+    });
 
     server.shutdown();
   });
@@ -283,8 +299,14 @@ module('Unit | Server #create', function() {
     let contact1 = server.create('contact');
     let contact2 = server.create('contact');
 
-    assert.deepEqual(contact1, { id: '1', websites: ['http://example.com', 'http://placekitten.com/320/240'] });
-    assert.deepEqual(contact2, { id: '2', websites: ['http://example.com', 'http://placekitten.com/321/241'] });
+    assert.deepEqual(contact1, {
+      id: '1',
+      websites: ['http://example.com', 'http://placekitten.com/320/240']
+    });
+    assert.deepEqual(contact2, {
+      id: '2',
+      websites: ['http://example.com', 'http://placekitten.com/321/241']
+    });
 
     server.shutdown();
   });
@@ -310,8 +332,12 @@ module('Unit | Server #create', function() {
     let publishedArticle = server.create('article', 'published');
 
     assert.deepEqual(article, { id: '1', title: 'Lorem ipsum' });
-    assert.deepEqual(publishedArticle, { id: '2', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00' });
+    assert.deepEqual(publishedArticle, {
+      id: '2',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00'
+    });
 
     server.shutdown();
   });
@@ -339,13 +365,26 @@ module('Unit | Server #create', function() {
 
     let article = server.create('article');
     let publishedArticle = server.create('article', 'published');
-    let publishedArticleWithContent = server.create('article', 'published', 'withContent');
+    let publishedArticleWithContent = server.create(
+      'article',
+      'published',
+      'withContent'
+    );
 
     assert.deepEqual(article, { id: '1', title: 'Lorem ipsum' });
-    assert.deepEqual(publishedArticle, { id: '2', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00' });
-    assert.deepEqual(publishedArticleWithContent, { id: '3', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(publishedArticle, {
+      id: '2',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00'
+    });
+    assert.deepEqual(publishedArticleWithContent, {
+      id: '3',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
 
     server.shutdown();
   });
@@ -434,10 +473,20 @@ module('Unit | Server #create', function() {
     let overrides = {
       publishedAt: '2012-01-01 10:00:00'
     };
-    let publishedArticleWithContent = server.create('article', 'published', 'withContent', overrides);
+    let publishedArticleWithContent = server.create(
+      'article',
+      'published',
+      'withContent',
+      overrides
+    );
 
-    assert.deepEqual(publishedArticleWithContent, { id: '1', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(publishedArticleWithContent, {
+      id: '1',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
 
     server.shutdown();
   });
@@ -493,8 +542,7 @@ module('Unit | Server #create', function() {
         author: Model.extend({
           articles: hasMany()
         }),
-        category: Model.extend({
-        }),
+        category: Model.extend({}),
         article: Model.extend({
           author: belongsTo(),
           awesomeCategory: belongsTo('category')
@@ -509,12 +557,22 @@ module('Unit | Server #create', function() {
 
     let article = server.create('article', 'withCategory');
 
-    assert.deepEqual(article.attrs, { title: 'Lorem ipsum', id: '1', authorId: '1', awesomeCategoryId: '1' });
+    assert.deepEqual(article.attrs, {
+      title: 'Lorem ipsum',
+      id: '1',
+      authorId: '1',
+      awesomeCategoryId: '1'
+    });
     assert.equal(server.db.authors.length, 1);
     assert.equal(server.db.categories.length, 1);
 
     let anotherArticle = server.create('article', 'withCategory');
-    assert.deepEqual(anotherArticle.attrs, { title: 'Lorem ipsum', id: '2', authorId: '2', awesomeCategoryId: '2' });
+    assert.deepEqual(anotherArticle.attrs, {
+      title: 'Lorem ipsum',
+      id: '2',
+      authorId: '2',
+      awesomeCategoryId: '2'
+    });
     assert.equal(server.db.authors.length, 2);
     assert.equal(server.db.categories.length, 2);
   });
@@ -532,7 +590,9 @@ module('Unit | Server #create', function() {
       title: 'Lorem ipsum',
 
       withCategory: trait({
-        category: association('published', { publishedAt: '2016-01-01 12:00:00' })
+        category: association('published', {
+          publishedAt: '2016-01-01 12:00:00'
+        })
       })
     });
 
@@ -543,8 +603,7 @@ module('Unit | Server #create', function() {
         category: CategoryFactory
       },
       models: {
-        category: Model.extend({
-        }),
+        category: Model.extend({}),
         article: Model.extend({
           category: belongsTo('category')
         })
@@ -553,12 +612,18 @@ module('Unit | Server #create', function() {
 
     let article = server.create('article', 'withCategory');
 
-    assert.deepEqual(article.attrs, { title: 'Lorem ipsum', id: '1', categoryId: '1' });
+    assert.deepEqual(article.attrs, {
+      title: 'Lorem ipsum',
+      id: '1',
+      categoryId: '1'
+    });
     assert.equal(server.db.categories.length, 1);
-    assert.deepEqual(
-      server.db.categories[0],
-      { name: 'splendid software', id: '1', isPublished: true, publishedAt: '2016-01-01 12:00:00' }
-    );
+    assert.deepEqual(server.db.categories[0], {
+      name: 'splendid software',
+      id: '1',
+      isPublished: true,
+      publishedAt: '2016-01-01 12:00:00'
+    });
   });
 });
 
@@ -647,12 +712,27 @@ module('Unit | Server #createList', function(hooks) {
       article: ArticleFactory
     });
 
-    let articles = this.server.createList('article', 2, 'published', 'withContent');
+    let articles = this.server.createList(
+      'article',
+      2,
+      'published',
+      'withContent'
+    );
 
-    assert.deepEqual(articles[0], { id: '1', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
-    assert.deepEqual(articles[1], { id: '2', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(articles[0], {
+      id: '1',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
+    assert.deepEqual(articles[1], {
+      id: '2',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('createList respects traits with attr overrides', function(assert) {
@@ -674,12 +754,28 @@ module('Unit | Server #createList', function(hooks) {
     });
 
     let overrides = { publishedAt: '2012-01-01 10:00:00' };
-    let articles = this.server.createList('article', 2, 'published', 'withContent', overrides);
+    let articles = this.server.createList(
+      'article',
+      2,
+      'published',
+      'withContent',
+      overrides
+    );
 
-    assert.deepEqual(articles[0], { id: '1', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
-    assert.deepEqual(articles[1], { id: '2', title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(articles[0], {
+      id: '1',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
+    assert.deepEqual(articles[1], {
+      id: '2',
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('createList throws errors when using trait that is not defined and distinquishes between traits and non-traits', function(assert) {
@@ -818,8 +914,12 @@ module('Unit | Server #build', function(hooks) {
     let contact1 = this.server.build('contact');
     let contact2 = this.server.build('contact');
 
-    assert.deepEqual(contact1, { address: { streetName: 'Main', streetAddress: 1000 } });
-    assert.deepEqual(contact2, { address: { streetName: 'Main', streetAddress: 1001 } });
+    assert.deepEqual(contact1, {
+      address: { streetName: 'Main', streetAddress: 1000 }
+    });
+    assert.deepEqual(contact2, {
+      address: { streetName: 'Main', streetAddress: 1001 }
+    });
   });
 
   test('build allows for arrays of attr overrides', function(assert) {
@@ -837,8 +937,12 @@ module('Unit | Server #build', function(hooks) {
     let contact1 = this.server.build('contact');
     let contact2 = this.server.build('contact');
 
-    assert.deepEqual(contact1, { websites: ['http://example.com', 'http://placekitten.com/320/240'] });
-    assert.deepEqual(contact2, { websites: ['http://example.com', 'http://placekitten.com/321/241'] });
+    assert.deepEqual(contact1, {
+      websites: ['http://example.com', 'http://placekitten.com/320/240']
+    });
+    assert.deepEqual(contact2, {
+      websites: ['http://example.com', 'http://placekitten.com/321/241']
+    });
   });
 
   test('build allows to extend factory with trait', function(assert) {
@@ -859,8 +963,11 @@ module('Unit | Server #build', function(hooks) {
     let publishedArticle = this.server.build('article', 'published');
 
     assert.deepEqual(article, { title: 'Lorem ipsum' });
-    assert.deepEqual(publishedArticle, { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00' });
+    assert.deepEqual(publishedArticle, {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00'
+    });
   });
 
   test('build allows to extend factory with multiple traits', function(assert) {
@@ -883,13 +990,24 @@ module('Unit | Server #build', function(hooks) {
 
     let article = this.server.build('article');
     let publishedArticle = this.server.build('article', 'published');
-    let publishedArticleWithContent = this.server.build('article', 'published', 'withContent');
+    let publishedArticleWithContent = this.server.build(
+      'article',
+      'published',
+      'withContent'
+    );
 
     assert.deepEqual(article, { title: 'Lorem ipsum' });
-    assert.deepEqual(publishedArticle, { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00' });
-    assert.deepEqual(publishedArticleWithContent, { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(publishedArticle, {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00'
+    });
+    assert.deepEqual(publishedArticleWithContent, {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('build allows to extend with multiple traits and to apply attr overrides', function(assert) {
@@ -913,10 +1031,19 @@ module('Unit | Server #build', function(hooks) {
     let overrides = {
       publishedAt: '2012-01-01 10:00:00'
     };
-    let publishedArticleWithContent = this.server.build('article', 'published', 'withContent', overrides);
+    let publishedArticleWithContent = this.server.build(
+      'article',
+      'published',
+      'withContent',
+      overrides
+    );
 
-    assert.deepEqual(publishedArticleWithContent, { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(publishedArticleWithContent, {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('build allows to build objects with associations', function(assert) {
@@ -949,8 +1076,7 @@ module('Unit | Server #build', function(hooks) {
       author: Model.extend({
         articles: hasMany()
       }),
-      category: Model.extend({
-      }),
+      category: Model.extend({}),
       article: Model.extend({
         author: belongsTo(),
         awesomeCategory: belongsTo('category')
@@ -959,7 +1085,11 @@ module('Unit | Server #build', function(hooks) {
 
     let article = this.server.build('article', 'withCategory');
 
-    assert.deepEqual(article, { title: 'Lorem ipsum', authorId: '1', awesomeCategoryId: '1' });
+    assert.deepEqual(article, {
+      title: 'Lorem ipsum',
+      authorId: '1',
+      awesomeCategoryId: '1'
+    });
     assert.equal(this.server.db.authors.length, 1);
     assert.equal(this.server.db.categories.length, 1);
   });
@@ -977,7 +1107,9 @@ module('Unit | Server #build', function(hooks) {
       title: 'Lorem ipsum',
 
       withCategory: trait({
-        category: association('published', { publishedAt: '2016-01-01 12:00:00' })
+        category: association('published', {
+          publishedAt: '2016-01-01 12:00:00'
+        })
       })
     });
 
@@ -988,8 +1120,7 @@ module('Unit | Server #build', function(hooks) {
         category: CategoryFactory
       },
       models: {
-        category: Model.extend({
-        }),
+        category: Model.extend({}),
         article: Model.extend({
           category: belongsTo()
         })
@@ -1000,10 +1131,12 @@ module('Unit | Server #build', function(hooks) {
 
     assert.deepEqual(article, { title: 'Lorem ipsum', categoryId: '1' });
     assert.equal(server.db.categories.length, 1);
-    assert.deepEqual(
-      server.db.categories[0],
-      { name: 'splendid software', id: '1', isPublished: true, publishedAt: '2016-01-01 12:00:00' }
-    );
+    assert.deepEqual(server.db.categories[0], {
+      name: 'splendid software',
+      id: '1',
+      isPublished: true,
+      publishedAt: '2016-01-01 12:00:00'
+    });
   });
 
   test('build throws errors when using trait that is not defined and distinquishes between traits and non-traits', function(assert) {
@@ -1042,7 +1175,9 @@ module('Unit | Server #build', function(hooks) {
       title: 'Lorem ipsum',
 
       withCategory: trait({
-        category: association('published', { publishedAt: '2016-01-01 12:00:00' })
+        category: association('published', {
+          publishedAt: '2016-01-01 12:00:00'
+        })
       })
     });
 
@@ -1053,8 +1188,7 @@ module('Unit | Server #build', function(hooks) {
         category: CategoryFactory
       },
       models: {
-        category: Model.extend({
-        })
+        category: Model.extend({})
       }
     });
 
@@ -1076,7 +1210,9 @@ module('Unit | Server #build', function(hooks) {
       title: 'Lorem ipsum',
 
       withCategory: trait({
-        category: association('published', { publishedAt: '2016-01-01 12:00:00' })
+        category: association('published', {
+          publishedAt: '2016-01-01 12:00:00'
+        })
       })
     });
 
@@ -1179,12 +1315,25 @@ module('Unit | Server #buildList', function(hooks) {
       article: ArticleFactory
     });
 
-    let articles = this.server.buildList('article', 2, 'published', 'withContent');
+    let articles = this.server.buildList(
+      'article',
+      2,
+      'published',
+      'withContent'
+    );
 
-    assert.deepEqual(articles[0], { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
-    assert.deepEqual(articles[1], { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2010-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(articles[0], {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
+    assert.deepEqual(articles[1], {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2010-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('buildList respects traits with attr overrides', function(assert) {
@@ -1206,12 +1355,26 @@ module('Unit | Server #buildList', function(hooks) {
     });
 
     let overrides = { publishedAt: '2012-01-01 10:00:00' };
-    let articles = this.server.buildList('article', 2, 'published', 'withContent', overrides);
+    let articles = this.server.buildList(
+      'article',
+      2,
+      'published',
+      'withContent',
+      overrides
+    );
 
-    assert.deepEqual(articles[0], { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
-    assert.deepEqual(articles[1], { title: 'Lorem ipsum', isPublished: true,
-      publishedAt: '2012-01-01 10:00:00', content: 'content' });
+    assert.deepEqual(articles[0], {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
+    assert.deepEqual(articles[1], {
+      title: 'Lorem ipsum',
+      isPublished: true,
+      publishedAt: '2012-01-01 10:00:00',
+      content: 'content'
+    });
   });
 
   test('buildList throws errors when using trait that is not defined and distinquishes between traits and non-traits', function(assert) {
@@ -1262,9 +1425,11 @@ module('Unit | Server #defaultPassthroughs', function() {
     let server = new Server({ useDefaultPassthroughs: true });
 
     assert.expect(defaultPassthroughs.length);
-    defaultPassthroughs.forEach((passthroughUrl) => {
+    defaultPassthroughs.forEach(passthroughUrl => {
       let passthroughRequest = { method: 'GET', url: passthroughUrl };
-      let isPassedThrough = server.pretender.checkPassthrough(passthroughRequest);
+      let isPassedThrough = server.pretender.checkPassthrough(
+        passthroughRequest
+      );
 
       assert.ok(isPassedThrough);
     });
@@ -1276,9 +1441,11 @@ module('Unit | Server #defaultPassthroughs', function() {
     let server = new Server({ useDefaultPassthroughs: false });
 
     assert.expect(defaultPassthroughs.length);
-    defaultPassthroughs.forEach((passthroughUrl) => {
+    defaultPassthroughs.forEach(passthroughUrl => {
       let passthroughRequest = { method: 'GET', url: passthroughUrl };
-      let isPassedThrough = server.pretender.checkPassthrough(passthroughRequest);
+      let isPassedThrough = server.pretender.checkPassthrough(
+        passthroughRequest
+      );
 
       assert.ok(!isPassedThrough);
     });

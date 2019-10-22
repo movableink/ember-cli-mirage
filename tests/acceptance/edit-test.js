@@ -19,4 +19,3 @@ module('Acceptance | Edit', function(hooks) {
     assert.dom('p').hasText('The contact is Shiek');
   });
 });
-

@@ -114,7 +114,10 @@ module('Integration | ORM | Named associations test', function() {
     // Fks are set up correctly
     assert.deepEqual(schema._registry.user.foreignKeys, []);
     assert.deepEqual(schema._registry.project.foreignKeys, ['userId']);
-    assert.deepEqual(schema._registry.task.foreignKeys, ['userId', 'projectId']);
+    assert.deepEqual(schema._registry.task.foreignKeys, [
+      'userId',
+      'projectId'
+    ]);
 
     let user = schema.users.create();
     let project = user.createProject();
@@ -193,7 +196,10 @@ module('Integration | ORM | Named associations test', function() {
     });
 
     assert.deepEqual(schema._registry.user.foreignKeys, []);
-    assert.deepEqual(schema._registry.project.foreignKeys, ['adminId', 'specialUserId']);
+    assert.deepEqual(schema._registry.project.foreignKeys, [
+      'adminId',
+      'specialUserId'
+    ]);
 
     let project = schema.projects.create();
     let admin = project.createAdmin();
@@ -228,7 +234,10 @@ module('Integration | ORM | Named associations test', function() {
     });
 
     assert.deepEqual(schema._registry.user.foreignKeys, []);
-    assert.deepEqual(schema._registry.project.foreignKeys, ['mainUserId', 'specialUserId']);
+    assert.deepEqual(schema._registry.project.foreignKeys, [
+      'mainUserId',
+      'specialUserId'
+    ]);
   });
 
   test('multiple hasMany associations with one explicit inverse sets up the correct foreign keys', function(assert) {
@@ -241,6 +250,9 @@ module('Integration | ORM | Named associations test', function() {
     });
 
     assert.deepEqual(schema._registry.user.foreignKeys, []);
-    assert.deepEqual(schema._registry.project.foreignKeys, ['userId', 'specialUserId']);
+    assert.deepEqual(schema._registry.project.foreignKeys, [
+      'userId',
+      'specialUserId'
+    ]);
   });
 });

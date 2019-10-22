@@ -1,8 +1,5 @@
 // jscs:disable disallowVar, requireArrayDestructuring
-import {
-  uniq as _uniq,
-  flatten as _flatten
-} from 'lodash-es';
+import { uniq as _uniq, flatten as _flatten } from 'lodash-es';
 
 export default function(edges) {
   let nodes = _uniq(_flatten(edges));
@@ -12,9 +9,10 @@ export default function(edges) {
   let i = cursor;
 
   let visit = function(node, i, predecessors) {
-
     if (predecessors.indexOf(node) >= 0) {
-      throw new Error(`Cyclic dependency in properties ${JSON.stringify(predecessors)}`);
+      throw new Error(
+        `Cyclic dependency in properties ${JSON.stringify(predecessors)}`
+      );
     }
 
     if (visited[i]) {
@@ -48,5 +46,4 @@ export default function(edges) {
   }
 
   return sorted.reverse();
-
 }

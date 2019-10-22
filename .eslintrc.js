@@ -5,23 +5,24 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember', 'prettier'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended'
   ],
   env: {
     browser: true
   },
   rules: {
+    'no-prototype-builtins': 'off',
+
     // Get old code working with new Ember lint rules
     'ember/avoid-leaking-state-in-ember-objects': 'off',
     'ember/jquery-ember-run': 'off',
     'ember/no-attrs-in-components': 'off',
     'ember/no-invalid-debug-function-arguments': 'off',
-    'ember/no-jquery': 'off',
+    'ember/no-jquery': 'off'
   },
   overrides: [
     // node files
@@ -50,9 +51,13 @@ module.exports = {
         node: true
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-      })
+      rules: Object.assign(
+        {},
+        require('eslint-plugin-node').configs.recommended.rules,
+        {
+          // add your custom rules and overrides for node files here
+        }
+      )
     }
   ]
 };

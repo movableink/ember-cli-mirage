@@ -9,11 +9,13 @@ let User = Model.extend();
 
 module('Integration | ORM | #where', function(hooks) {
   hooks.beforeEach(function() {
-    let db = new Db({ users: [
-      { id: 1, name: 'Link', good: true },
-      { id: 2, name: 'Zelda', good: true },
-      { id: 3, name: 'Ganon', good: false }
-    ] });
+    let db = new Db({
+      users: [
+        { id: 1, name: 'Link', good: true },
+        { id: 2, name: 'Zelda', good: true },
+        { id: 3, name: 'Ganon', good: false }
+      ]
+    });
 
     schema = new Schema(db, {
       user: User
@@ -26,7 +28,11 @@ module('Integration | ORM | #where', function(hooks) {
     assert.ok(users instanceof Collection, 'it returns a collection');
     assert.equal(users.models.length, 1);
     assert.ok(users.models[0] instanceof User);
-    assert.deepEqual(users.models[0].attrs, { id: '3', name: 'Ganon', good: false });
+    assert.deepEqual(users.models[0].attrs, {
+      id: '3',
+      name: 'Ganon',
+      good: false
+    });
   });
 
   test('it returns models that match using a query function', function(assert) {
@@ -37,7 +43,11 @@ module('Integration | ORM | #where', function(hooks) {
     assert.ok(users instanceof Collection, 'it returns a collection');
     assert.equal(users.models.length, 1);
     assert.ok(users.models[0] instanceof User);
-    assert.deepEqual(users.models[0].attrs, { id: '3', name: 'Ganon', good: false });
+    assert.deepEqual(users.models[0].attrs, {
+      id: '3',
+      name: 'Ganon',
+      good: false
+    });
   });
 
   test('it returns an empty collection if no models match a query', function(assert) {

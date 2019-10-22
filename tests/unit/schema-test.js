@@ -22,8 +22,7 @@ module('Unit | Schema', function() {
 
     assert.equal(schema.modelFor('article'), null);
 
-    let authorModel = Model.extend({
-    });
+    let authorModel = Model.extend({});
     let articleModel = Model.extend({
       author: belongsTo()
     });

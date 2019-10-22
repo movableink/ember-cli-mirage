@@ -2,7 +2,6 @@ import ActiveModelSerializer from './active-model-serializer';
 import { camelize, singularize, pluralize } from '../utils/inflector';
 
 export default ActiveModelSerializer.extend({
-
   keyForModel(type) {
     return camelize(type);
   },

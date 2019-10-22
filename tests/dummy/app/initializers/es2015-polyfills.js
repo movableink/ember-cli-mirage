@@ -5,7 +5,9 @@ export function initialize(/* container, application */) {
     Array.from = (function() {
       let toStr = Object.prototype.toString;
       let isCallable = function(fn) {
-        return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+        return (
+          typeof fn === 'function' || toStr.call(fn) === '[object Function]'
+        );
       };
       let toInteger = function(value) {
         let number = Number(value);
@@ -24,7 +26,7 @@ export function initialize(/* container, application */) {
       };
 
       // The length property of the from method is 1.
-      return function from(arrayLike/* , mapFn, thisArg */) {
+      return function from(arrayLike /* , mapFn, thisArg */) {
         // 1. Let C be the this value.
         let C = this;
         let T, kValue;
@@ -34,7 +36,9 @@ export function initialize(/* container, application */) {
 
         // 3. ReturnIfAbrupt(items).
         if (arrayLike == null) {
-          throw new TypeError('Array.from requires an array-like object - not null or undefined');
+          throw new TypeError(
+            'Array.from requires an array-like object - not null or undefined'
+          );
         }
 
         // 4. If mapfn is undefined, then let mapping be false.
@@ -43,7 +47,9 @@ export function initialize(/* container, application */) {
           // 5. else
           // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
           if (!isCallable(mapFn)) {
-            throw new TypeError('Array.from: when provided, the second argument must be a function');
+            throw new TypeError(
+              'Array.from: when provided, the second argument must be a function'
+            );
           }
 
           // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
@@ -67,7 +73,10 @@ export function initialize(/* container, application */) {
         while (k < len) {
           kValue = items[k];
           if (mapFn) {
-            A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+            A[k] =
+              typeof T === 'undefined'
+                ? mapFn(kValue, k)
+                : mapFn.call(T, kValue, k);
           } else {
             A[k] = kValue;
           }
@@ -78,7 +87,7 @@ export function initialize(/* container, application */) {
         // 20. Return A.
         return A;
       };
-    }());
+    })();
   }
 }
 

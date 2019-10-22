@@ -1,13 +1,13 @@
 import { pluralize, camelize, dasherize } from '../utils/inflector';
-import { toCollectionName, toModelName } from 'ember-cli-mirage/utils/normalize-name';
+import {
+  toCollectionName,
+  toModelName
+} from 'ember-cli-mirage/utils/normalize-name';
 import Association from './associations/association';
 import Collection from './collection';
 import assert from '../assert';
 
-import {
-  forIn as _forIn,
-  includes as _includes
-} from 'lodash-es';
+import { forIn as _forIn, includes as _includes } from 'lodash-es';
 
 /**
  * @class Schema
@@ -15,7 +15,6 @@ import {
  * @public
  */
 export default class Schema {
-
   constructor(db, modelsMap = {}) {
     assert(db, 'A schema requires a db');
 
@@ -49,21 +48,25 @@ export default class Schema {
     ModelClass = ModelClass.extend();
 
     // Store model & fks in registry
-    this._registry[camelizedModelName] = this._registry[camelizedModelName] || { class: null, foreignKeys: [] }; // we may have created this key before, if another model added fks to it
+    this._registry[camelizedModelName] = this._registry[camelizedModelName] || {
+      class: null,
+      foreignKeys: []
+    }; // we may have created this key before, if another model added fks to it
     this._registry[camelizedModelName].class = ModelClass;
 
     // Set up associations
-    ModelClass.prototype.hasManyAssociations = {};   // a registry of the model's hasMany associations. Key is key from model definition, value is association instance itself
+    ModelClass.prototype.hasManyAssociations = {}; // a registry of the model's hasMany associations. Key is key from model definition, value is association instance itself
     ModelClass.prototype.belongsToAssociations = {}; // a registry of the model's belongsTo associations. Key is key from model definition, value is association instance itself
-    ModelClass.prototype.associationKeys = [];       // ex: address.user, user.addresses
-    ModelClass.prototype.associationIdKeys = [];     // ex: address.user_id, user.address_ids. may or may not be a fk.
+    ModelClass.prototype.associationKeys = []; // ex: address.user, user.addresses
+    ModelClass.prototype.associationIdKeys = []; // ex: address.user_id, user.address_ids. may or may not be a fk.
 
     let fksAddedFromThisModel = {};
     for (let associationProperty in ModelClass.prototype) {
       if (ModelClass.prototype[associationProperty] instanceof Association) {
         let association = ModelClass.prototype[associationProperty];
         association.key = associationProperty;
-        association.modelName = association.modelName || toModelName(associationProperty);
+        association.modelName =
+          association.modelName || toModelName(associationProperty);
         association.ownerModelName = modelName;
 
         // Update the registry with this association's foreign keys. This is
@@ -82,7 +85,11 @@ export default class Schema {
         this._addForeignKeyToRegistry(fkHolder, fk);
 
         // Augment the Model's class with any methods added by this association
-        association.addMethodsToModelClass(ModelClass, associationProperty, this);
+        association.addMethodsToModelClass(
+          ModelClass,
+          associationProperty,
+          this
+        );
       }
     }
 
@@ -95,13 +102,13 @@ export default class Schema {
     // Create the entity methods
     this[collection] = {
       camelizedModelName,
-      new: (attrs) => this.new(camelizedModelName, attrs),
-      create: (attrs) => this.create(camelizedModelName, attrs),
-      all: (attrs) => this.all(camelizedModelName, attrs),
-      find: (attrs) => this.find(camelizedModelName, attrs),
-      findBy: (attrs) => this.findBy(camelizedModelName, attrs),
-      where: (attrs) => this.where(camelizedModelName, attrs),
-      first: (attrs) => this.first(camelizedModelName, attrs)
+      new: attrs => this.new(camelizedModelName, attrs),
+      create: attrs => this.create(camelizedModelName, attrs),
+      all: attrs => this.all(camelizedModelName, attrs),
+      find: attrs => this.find(camelizedModelName, attrs),
+      findBy: attrs => this.findBy(camelizedModelName, attrs),
+      where: attrs => this.where(camelizedModelName, attrs),
+      first: attrs => this.first(camelizedModelName, attrs)
     };
 
     return this;
@@ -160,7 +167,11 @@ export default class Schema {
     if (Array.isArray(ids)) {
       assert(
         records.length === ids.length,
-        `Couldn't find all ${pluralize(type)} with ids: (${ids.join(',')}) (found ${records.length} results, but was looking for ${ids.length})`
+        `Couldn't find all ${pluralize(type)} with ids: (${ids.join(
+          ','
+        )}) (found ${records.length} results, but was looking for ${
+          ids.length
+        })`
       );
     }
 
@@ -231,7 +242,10 @@ export default class Schema {
    * @private
    */
   _addForeignKeyToRegistry(type, fk) {
-    this._registry[type] = this._registry[type] || { class: null, foreignKeys: [] };
+    this._registry[type] = this._registry[type] || {
+      class: null,
+      foreignKeys: []
+    };
 
     let fks = this._registry[type].foreignKeys;
     if (!_includes(fks, fk)) {
