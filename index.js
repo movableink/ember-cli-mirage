@@ -43,8 +43,13 @@ module.exports = {
 
     this.app = app;
     this.addonConfig =
-      this.app.project.config(app.env)['@movable/ember-cli-mirage'] || {};
-    this.addonBuildConfig = this.app.options['@movable/ember-cli-mirage'] || {};
+      this.app.project.config(app.env)['@movable/ember-cli-mirage'] ||
+      this.app.project.config(app.env)['ember-cli-mirage'] ||
+      {};
+    this.addonBuildConfig =
+      this.app.options['@movable/ember-cli-mirage'] ||
+      this.app.options['ember-cli-mirage'] ||
+      {};
 
     // Call super after initializing config so we can use _shouldIncludeFiles for the node assets
     this._super.included.apply(this, arguments);
