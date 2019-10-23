@@ -4,7 +4,7 @@ We are currently stuck on `@movable/ember-cli-mirage@0.2.9`. This is a custom fo
 
 ***
 
-[![Build Status](https://travis-ci.com/movableink/ember-cli-mirage.svg?branch=master)](https://travis-ci.com/movableink/ember-cli-mirage)
+[![Build Status](https://github.com/movableink/ember-cli-mirage/workflows/Lint%20and%20Test/badge.svg)](https://github.com/movableink/ember-cli-mirage/actions?workflow=Lint+and+Test)
 [![npm version](https://badge.fury.io/js/%40movable%2Fember-cli-mirage.svg)](https://badge.fury.io/js/%40movable%2Fember-cli-mirage)
 
 # Ember CLI Mirage
