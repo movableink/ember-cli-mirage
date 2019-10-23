@@ -65,7 +65,7 @@ module.exports = {
       this.mirageDirectory = path.join(this.app.project.root, '/mirage');
     }
 
-    if (!this._shouldIncludeFiles()) {
+    if (this._shouldIncludeFiles()) {
       app.import('vendor/movable-ember-cli-mirage/alias-ember-cli-mirage.js');
     }
   },
