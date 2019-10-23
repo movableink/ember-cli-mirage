@@ -5,9 +5,9 @@ import Server from '@movable/ember-cli-mirage/server';
 import { assign as _assign } from 'lodash-es';
 
 export default {
-  name: '@movable/ember-cli-mirage',
+  name: 'ember-cli-mirage',
   initialize() {
-    if (_shouldUseMirage(ENV.environment, ENV['@movable/ember-cli-mirage'])) {
+    if (_shouldUseMirage(ENV.environment, ENV['ember-cli-mirage'])) {
       startMirage(ENV);
     }
   }

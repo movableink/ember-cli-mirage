@@ -12,10 +12,10 @@ module.exports = {
     return {
       __root__: function(options) {
         if (
-          !!self.project.config()['@movable/ember-cli-mirage'] &&
-          !!self.project.config()['@movable/ember-cli-mirage'].directory
+          !!self.project.config()['ember-cli-mirage'] &&
+          !!self.project.config()['ember-cli-mirage'].directory
         ) {
-          return self.project.config()['@movable/ember-cli-mirage'].directory;
+          return self.project.config()['ember-cli-mirage'].directory;
         } else if (options.inAddon) {
           return path.join('tests', 'dummy', 'mirage');
         } else {
